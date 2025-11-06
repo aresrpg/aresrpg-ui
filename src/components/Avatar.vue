@@ -1,0 +1,69 @@
+<template>
+  <div class="avatar" :class="[`avatar-${size}`, { online: status === 'online', offline: status === 'offline' }]">
+    <img v-if="src" :src="src" :alt="alt" class="avatar-img" />
+    <div v-else class="avatar-placeholder">
+      <i v-if="icon" :class="icon"></i>
+      <span v-else>{{ initials }}</span>
+    </div>
+    <span v-if="status" class="avatar-status"></span>
+  </div>
+</template>
+
+<script setup>
+import { computed } from 'vue'
+
+const props = defineProps({
+  src: { type: String, default: '' },
+  alt: { type: String, default: 'Avatar' },
+  icon: { type: String, default: '' },
+  name: { type: String, default: '' },
+  size: { type: String, default: 'md', validator: v => ['sm', 'md', 'lg', 'xl'].includes(v) },
+  status: { type: String, default: '', validator: v => ['', 'online', 'offline'].includes(v) }
+})
+
+const initials = computed(() => {
+  if (!props.name) return '?'
+  return props.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)
+})
+</script>
+
+<style scoped>
+.avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 2px solid var(--glass-border);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.avatar-sm { width: 32px; height: 32px; font-size: var(--font-size-xs); }
+.avatar-md { width: 48px; height: 48px; font-size: var(--font-size-sm); }
+.avatar-lg { width: 64px; height: 64px; font-size: var(--font-size-base); }
+.avatar-xl { width: 96px; height: 96px; font-size: var(--font-size-lg); }
+.avatar-img { width: 100%; height: 100%; object-fit: cover; }
+.avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-primary);
+  color: var(--color-text-primary);
+  font-weight: 700;
+}
+.avatar-status {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 25%;
+  height: 25%;
+  border-radius: 50%;
+  border: 2px solid var(--color-bg-primary);
+}
+.avatar.online .avatar-status { background: var(--color-success); }
+.avatar.offline .avatar-status { background: var(--color-text-tertiary); }
+</style>
