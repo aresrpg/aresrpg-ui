@@ -5,6 +5,7 @@
       :key="theme"
       :class="['theme-button', { active: currentTheme === theme }]"
       :title="`Switch to ${theme} theme`"
+      :aria-label="`Switch to ${capitalizeTheme(theme)} theme`"
       @click="setTheme(theme)"
     >
       <span :class="`theme-icon theme-icon-${theme}`">

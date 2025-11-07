@@ -6,7 +6,7 @@
         class="modal-overlay"
         @click="handleOverlayClick"
       >
-        <div class="modal" @click.stop>
+        <div class="modal" :class="`modal-${size}`" @click.stop>
           <div v-if="$slots.header || title" class="modal-header">
             <h3 class="modal-title">
               <slot name="header">{{ title }}</slot>
@@ -14,6 +14,7 @@
             <button
               v-if="closable"
               class="modal-close"
+              aria-label="Close modal"
               @click="close"
             >
               <i class="bx bx-x"></i>
@@ -40,6 +41,7 @@
  * @param {string} title - Modal title
  * @param {boolean} closable - Show close button
  * @param {boolean} closeOnOverlay - Close when clicking overlay
+ * @param {string} size - Modal size (sm/md/lg/xl/full)
  */
 const props = defineProps({
   modelValue: {
@@ -57,6 +59,11 @@ const props = defineProps({
   closeOnOverlay: {
     type: Boolean,
     default: true
+  },
+  size: {
+    type: String,
+    default: 'md',
+    validator: (value) => ['sm', 'md', 'lg', 'xl', 'full'].includes(value)
   }
 })
 
@@ -102,10 +109,19 @@ function handleOverlayClick() {
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
-  max-width: 500px;
   width: 100%;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05),
               0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Modal sizes */
+.modal-sm { max-width: 400px; }
+.modal-md { max-width: 500px; }
+.modal-lg { max-width: 700px; }
+.modal-xl { max-width: 900px; }
+.modal-full {
+  max-width: calc(100vw - var(--spacing-xl) * 2);
+  max-height: calc(100vh - var(--spacing-xl) * 2);
 }
 
 .modal-header {
