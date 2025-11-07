@@ -57,13 +57,19 @@ const initials = computed(() => {
 }
 .avatar-status {
   position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 25%;
-  height: 25%;
+  bottom: -2px;
+  right: -2px;
+  width: 35%;
+  height: 35%;
   border-radius: 50%;
-  border: 2px solid var(--color-bg-primary);
+  border: 3px solid var(--color-bg-primary);
 }
-.avatar.online .avatar-status { background: var(--color-success); }
-.avatar.offline .avatar-status { background: var(--color-text-tertiary); }
+.avatar.online .avatar-status {
+  background: var(--color-success);
+  box-shadow: 0 0 0 2px var(--color-success-light), 0 0 8px var(--color-success);
+}
+.avatar.offline .avatar-status {
+  background: var(--color-text-tertiary);
+  box-shadow: 0 0 0 2px rgba(128, 128, 128, 0.3);
+}
 </style>

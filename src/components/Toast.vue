@@ -1,13 +1,12 @@
 <template>
-  <Teleport to="body">
-    <Transition name="toast-slide">
-      <div
-        v-if="modelValue"
-        class="toast"
-        :class="`toast-${variant}`"
-        role="alert"
-        aria-live="polite"
-      >
+  <Transition name="toast-slide">
+    <div
+      v-if="modelValue"
+      class="toast"
+      :class="`toast-${variant}`"
+      role="alert"
+      aria-live="polite"
+    >
         <i class="toast-icon" :class="iconClass"></i>
         <div class="toast-content">
           <strong v-if="title" class="toast-title">{{ title }}</strong>
@@ -23,7 +22,6 @@
         </button>
       </div>
     </Transition>
-  </Teleport>
 </template>
 
 <script setup>
@@ -76,10 +74,7 @@ function close() {
 
 <style scoped>
 .toast {
-  position: fixed;
-  top: var(--spacing-lg);
-  right: var(--spacing-lg);
-  z-index: 9999;
+  position: relative;
   display: flex;
   align-items: flex-start;
   gap: var(--spacing-md);

@@ -19,6 +19,8 @@ import Tabs from './components/Tabs.vue'
 import Toast from './components/Toast.vue'
 import Skeleton from './components/Skeleton.vue'
 import EmptyState from './components/EmptyState.vue'
+import ProgressBar from './components/ProgressBar.vue'
+import Chart from './components/Chart.vue'
 
 // Import composables
 import { useTheme } from './composables/useTheme.js'
@@ -41,7 +43,9 @@ const components = {
   Tabs,
   Toast,
   Skeleton,
-  EmptyState
+  EmptyState,
+  ProgressBar,
+  Chart
 }
 
 /**
@@ -74,6 +78,8 @@ export {
   Toast,
   Skeleton,
   EmptyState,
+  ProgressBar,
+  Chart,
   useTheme
 }
 

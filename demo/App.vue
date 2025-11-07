@@ -542,6 +542,67 @@
             </div>
           </section>
 
+          <!-- ProgressBar Section -->
+          <section class="section">
+            <h2 class="section-title">
+              <i class="bx bx-slider"></i>
+              Progress Bars
+            </h2>
+            <div class="component-demo">
+              <h3 class="demo-subtitle">Variants</h3>
+              <div style="display: flex; flex-direction: column; gap: var(--spacing-md); width: 100%;">
+                <ProgressBar :value="progressValue" label="Primary Progress" variant="primary" :show-value="true" />
+                <ProgressBar :value="45" label="Success Progress" variant="success" :show-value="true" />
+                <ProgressBar :value="85" label="Gradient Progress" variant="gradient" :show-value="true" />
+                <ProgressBar :value="60" label="Striped Progress" variant="primary" :striped="true" :show-value="true" />
+              </div>
+            </div>
+          </section>
+
+          <!-- Chart Section -->
+          <section class="section">
+            <h2 class="section-title">
+              <i class="bx bx-line-chart"></i>
+              Charts
+            </h2>
+            <div class="component-demo">
+              <h3 class="demo-subtitle">Chart Types</h3>
+              <div class="grid">
+                <Chart
+                  :data="chartData"
+                  :labels="chartLabels"
+                  type="bar"
+                  title="Bar Chart"
+                  subtitle="Monthly Stats"
+                  :height="250"
+                  gradient-start="#FFCA28"
+                  gradient-end="#FF6F00"
+                />
+                <Chart
+                  :data="chartData"
+                  :labels="chartLabels"
+                  type="line"
+                  title="Line Chart"
+                  subtitle="Growth Trend"
+                  :height="250"
+                  :show-points="true"
+                  gradient-start="#3b82f6"
+                  gradient-end="#1d4ed8"
+                />
+                <Chart
+                  :data="chartData"
+                  :labels="chartLabels"
+                  type="area"
+                  title="Area Chart"
+                  subtitle="Performance Over Time"
+                  :height="250"
+                  gradient-start="#00ff41"
+                  gradient-end="#008f11"
+                />
+              </div>
+            </div>
+          </section>
+
           <!-- EmptyState Section -->
           <section class="section">
             <h2 class="section-title">
@@ -583,7 +644,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { Button, Card, Input, Badge, Modal, ThemeSwitcher, Navbar, Sidebar, Dropdown, Tooltip, Avatar, Alert, Toggle, Tabs, Toast, Skeleton, EmptyState } from '../src/index.js'
+import { Button, Card, Input, Badge, Modal, ThemeSwitcher, Navbar, Sidebar, Dropdown, Tooltip, Avatar, Alert, Toggle, Tabs, Toast, Skeleton, EmptyState, ProgressBar, Chart } from '../src/index.js'
 
 const showModal = ref(false)
 const showConfirmModal = ref(false)
@@ -624,6 +685,13 @@ const tabsList = [
 // Toast state
 const toasts = ref([])
 let toastId = 0
+
+// Progress bar state
+const progressValue = ref(65)
+
+// Chart state
+const chartData = ref([30, 45, 28, 60, 75, 50, 85, 70])
+const chartLabels = ref(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'])
 
 const sidebarItems = [
   { label: 'Dashboard', icon: 'bx bx-home', active: true },
