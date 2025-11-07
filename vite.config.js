@@ -5,23 +5,37 @@ import { fileURLToPath } from 'url'
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
-export default defineConfig({
-  plugins: [vue()],
-  build: {
-    lib: {
-      entry: resolve(__dirname, 'src/index.js'),
-      name: 'AresRPGUI',
-      fileName: (format) => `aresrpg-ui.${format === 'es' ? 'js' : 'umd.cjs'}`
-    },
-    rollupOptions: {
-      external: ['vue'],
-      output: {
-        globals: {
-          vue: 'Vue'
-        },
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name === 'style.css') return 'style.css'
-          return assetInfo.name
+export default defineConfig(({ mode }) => {
+  // Demo build for GitHub Pages
+  if (mode === 'demo') {
+    return {
+      plugins: [vue()],
+      base: '/aresrpg-ui/',
+      build: {
+        outDir: 'dist-demo'
+      }
+    }
+  }
+
+  // Library build (default)
+  return {
+    plugins: [vue()],
+    build: {
+      lib: {
+        entry: resolve(__dirname, 'src/index.js'),
+        name: 'AresRPGUI',
+        fileName: (format) => `aresrpg-ui.${format === 'es' ? 'js' : 'umd.cjs'}`
+      },
+      rollupOptions: {
+        external: ['vue'],
+        output: {
+          globals: {
+            vue: 'Vue'
+          },
+          assetFileNames: (assetInfo) => {
+            if (assetInfo.name === 'style.css') return 'style.css'
+            return assetInfo.name
+          }
         }
       }
     }
