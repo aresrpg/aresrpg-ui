@@ -96,8 +96,9 @@ function capitalizeTheme(theme) {
 .theme-button.active {
   background: var(--gradient-primary);
   border-color: transparent;
-  color: var(--color-text-primary);
+  color: #ffffff;
   box-shadow: var(--glow-primary);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .theme-icon {

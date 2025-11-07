@@ -6,6 +6,18 @@
     <div class="gradient-orb orb-3"></div>
     <div class="gradient-orb orb-4"></div>
 
+    <!-- Toast Container -->
+    <div class="toast-container">
+      <Toast
+        v-for="toast in toasts"
+        :key="toast.id"
+        v-model="toast.show"
+        :variant="toast.variant"
+        :title="toast.title"
+        :message="toast.message"
+      />
+    </div>
+
     <!-- Layout Container -->
     <div class="layout">
       <!-- Sidebar -->
@@ -481,6 +493,76 @@
             </div>
           </section>
 
+          <!-- Toast Section -->
+          <section class="section">
+            <h2 class="section-title">
+              <i class="bx bx-message-square-dots"></i>
+              Toast Notifications
+            </h2>
+            <div class="component-demo">
+              <h3 class="demo-subtitle">Toast Variants</h3>
+              <div class="demo-group">
+                <Button variant="success" @click="showToast('success', 'Success!', 'Operation completed successfully.')">
+                  <i class="bx bx-check"></i>
+                  Show Success Toast
+                </Button>
+                <Button variant="error" @click="showToast('error', 'Error!', 'Something went wrong.')">
+                  <i class="bx bx-x"></i>
+                  Show Error Toast
+                </Button>
+                <Button variant="primary" @click="showToast('info', 'Info', 'Here is some information.')">
+                  <i class="bx bx-info-circle"></i>
+                  Show Info Toast
+                </Button>
+                <Button variant="gradient" @click="showToast('warning', 'Warning', 'Please be careful!')">
+                  <i class="bx bx-error"></i>
+                  Show Warning Toast
+                </Button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Skeleton Section -->
+          <section class="section">
+            <h2 class="section-title">
+              <i class="bx bx-loader-alt"></i>
+              Skeleton Loaders
+            </h2>
+            <div class="component-demo">
+              <h3 class="demo-subtitle">Loading States</h3>
+              <div class="demo-group" style="flex-direction: column; width: 100%;">
+                <Skeleton variant="text" width="60%" />
+                <Skeleton variant="text" width="80%" />
+                <Skeleton variant="text" width="40%" />
+                <div style="margin-top: var(--spacing-md);"></div>
+                <Skeleton variant="rectangle" width="100%" height="200px" />
+                <div style="margin-top: var(--spacing-md);"></div>
+                <Skeleton variant="circle" width="64px" height="64px" />
+              </div>
+            </div>
+          </section>
+
+          <!-- EmptyState Section -->
+          <section class="section">
+            <h2 class="section-title">
+              <i class="bx bx-folder-open"></i>
+              Empty States
+            </h2>
+            <div class="component-demo">
+              <h3 class="demo-subtitle">No Data State</h3>
+              <EmptyState
+                icon="bx bx-inbox"
+                title="No items found"
+                description="Your inbox is empty. Start by adding some items."
+              >
+                <Button variant="gradient">
+                  <i class="bx bx-plus"></i>
+                  Add Item
+                </Button>
+              </EmptyState>
+            </div>
+          </section>
+
           <!-- Footer -->
           <footer class="footer">
             <p>Built with Vue 3 + Vite</p>
@@ -501,7 +583,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { Button, Card, Input, Badge, Modal, ThemeSwitcher, Navbar, Sidebar, Dropdown, Tooltip, Avatar, Alert, Toggle, Tabs } from '../src/index.js'
+import { Button, Card, Input, Badge, Modal, ThemeSwitcher, Navbar, Sidebar, Dropdown, Tooltip, Avatar, Alert, Toggle, Tabs, Toast, Skeleton, EmptyState } from '../src/index.js'
 
 const showModal = ref(false)
 const showConfirmModal = ref(false)
@@ -539,6 +621,10 @@ const tabsList = [
   { label: 'Tab 3', icon: 'bx bx-cog' }
 ]
 
+// Toast state
+const toasts = ref([])
+let toastId = 0
+
 const sidebarItems = [
   { label: 'Dashboard', icon: 'bx bx-home', active: true },
   { label: 'Components', icon: 'bx bx-layout', badge: '14' },
@@ -565,12 +651,38 @@ function confirmAction() {
   console.log('Action confirmed!')
   showConfirmModal.value = false
 }
+
+function showToast(variant, title, message) {
+  const id = toastId++
+  toasts.value.push({
+    id,
+    variant,
+    title,
+    message,
+    show: true
+  })
+}
 </script>
 
 <style scoped>
 .app {
   min-height: 100vh;
   position: relative;
+}
+
+.toast-container {
+  position: fixed;
+  top: var(--spacing-lg);
+  right: var(--spacing-lg);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  pointer-events: none;
+}
+
+.toast-container > * {
+  pointer-events: auto;
 }
 
 .layout {
