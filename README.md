@@ -38,6 +38,12 @@ A beautiful, theme-switchable Vue 3 component library featuring glassmorphism ef
 - 🌐 **SSR Compatible**: Works with Nuxt and other SSR frameworks
 - ♿ **Accessible**: WCAG 2.1 AA compliant with proper ARIA labels
 
+## 🖼️ Preview
+
+<p align="center">
+  <img src="screenshots/hero.png" alt="AresRPG UI Preview" width="800">
+</p>
+
 ## 📦 Installation
 
 ```bash
