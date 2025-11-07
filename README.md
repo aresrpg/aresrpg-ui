@@ -1,10 +1,23 @@
-# AresRPG UI
+<h1 align=center>@aresrpg/ui</h1>
 
-> Glassmorphism Vue 3 component library for modern gaming UIs
+<p align=center>
+  <img src="https://img.shields.io/badge/Made%20with-Vue%203-42b883?style=for-the-badge&logo=vue.js" alt="Made with Vue 3">
+  <img src="https://img.shields.io/badge/Powered%20By-Glassmorphism-8b5cf6?style=for-the-badge" alt="Powered by Glassmorphism">
+  <img src="https://img.shields.io/badge/license-MIT-yellow?style=for-the-badge" alt="MIT License">
+  <img src="https://img.shields.io/npm/v/@aresrpg/ui?style=for-the-badge&color=orange" alt="npm version">
+</p>
+
+<p align=center>Glassmorphism Vue 3 component library for modern gaming UIs</p>
+
+<p align=center>
+  <img src="screenshots/hero.png" alt="AresRPG UI Hero" width="100%">
+</p>
+
+---
 
 A beautiful, theme-switchable Vue 3 component library featuring glassmorphism effects, animated gradient backgrounds, and a gaming-focused design aesthetic.
 
-## Features
+## ✨ Features
 
 - 🎨 **4 Built-in Themes**: Dark (default), White, Blue, Matrix
 - 💎 **True Glassmorphism**: Animated gradient mesh backgrounds with backdrop blur
@@ -14,13 +27,38 @@ A beautiful, theme-switchable Vue 3 component library featuring glassmorphism ef
 - 🎯 **TypeScript Ready**: Full JSDoc annotations
 - 🌐 **SSR Compatible**: Works with Nuxt and other SSR frameworks
 
-## Installation
+## 🎨 Themes Showcase
+
+<table>
+  <tr>
+    <td width="50%">
+      <p align="center"><strong>Dark Theme</strong></p>
+      <img src="screenshots/theme-dark.png" alt="Dark Theme" width="100%">
+    </td>
+    <td width="50%">
+      <p align="center"><strong>White Theme</strong></p>
+      <img src="screenshots/theme-white.png" alt="White Theme" width="100%">
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <p align="center"><strong>Blue Theme</strong></p>
+      <img src="screenshots/theme-blue.png" alt="Blue Theme" width="100%">
+    </td>
+    <td width="50%">
+      <p align="center"><strong>Matrix Theme</strong></p>
+      <img src="screenshots/theme-matrix.png" alt="Matrix Theme" width="100%">
+    </td>
+  </tr>
+</table>
+
+## 📦 Installation
 
 ```bash
 npm install @aresrpg/ui
 ```
 
-## Quick Start
+## 🚀 Quick Start
 
 ### Global Registration
 
@@ -62,7 +100,7 @@ import '@aresrpg/ui/style.css'
 </template>
 ```
 
-## Theme System
+## 🎨 Theme System
 
 ### Available Themes
 
@@ -107,7 +145,26 @@ console.log(themes) // ['dark', 'white', 'blue', 'matrix']
 </script>
 ```
 
-## Components
+## 📚 Components
+
+### Component Previews
+
+<table>
+  <tr>
+    <td width="33%">
+      <p align="center"><strong>Buttons</strong></p>
+      <img src="screenshots/components-buttons.png" alt="Buttons Component" width="100%">
+    </td>
+    <td width="33%">
+      <p align="center"><strong>Cards</strong></p>
+      <img src="screenshots/components-cards.png" alt="Cards Component" width="100%">
+    </td>
+    <td width="33%">
+      <p align="center"><strong>Inputs</strong></p>
+      <img src="screenshots/components-inputs.png" alt="Inputs Component" width="100%">
+    </td>
+  </tr>
+</table>
 
 ### Button
 
@@ -270,7 +327,18 @@ Theme switcher component with all available themes.
 
 Shows buttons for all available themes (dark, white, blue, matrix) with icons and labels.
 
-## Composables
+### Additional Components
+
+- **Navbar**: Responsive navigation bar with glassmorphism
+- **Sidebar**: Collapsible sidebar navigation
+- **Dropdown**: Dropdown menu with animations
+- **Tooltip**: Hover tooltips with customizable positioning
+- **Avatar**: User avatar with size variants
+- **Alert**: Alert messages with variants
+- **Toggle**: Toggle switch component
+- **Tabs**: Tab navigation component
+
+## 🛠️ Composables
 
 ### useTheme()
 
@@ -287,7 +355,7 @@ const {
 } = useTheme()
 ```
 
-## Customization
+## 🎨 Customization
 
 ### CSS Variables
 
@@ -317,7 +385,7 @@ Add a new theme by defining CSS variables:
 
 Then add your theme to the themes array in `useTheme()`.
 
-## Development
+## 🔧 Development
 
 ```bash
 # Install dependencies
@@ -333,16 +401,22 @@ npm run build
 npm run preview
 ```
 
-## Browser Support
+## 🌐 Browser Support
 
 - Chrome/Edge (latest)
 - Firefox (latest)
 - Safari 15.4+ (backdrop-filter support)
 
-## License
+## 📄 License
 
-MIT
+MIT © [AresRPG](https://github.com/aresrpg)
 
-## Credits
+## 🤝 Contributing
 
-Built by the AresRPG team for modern gaming UIs.
+Contributions are welcome! Feel free to open issues or submit pull requests.
+
+## 🔗 Links
+
+- [GitHub Repository](https://github.com/aresrpg/aresrpg-ui)
+- [npm Package](https://www.npmjs.com/package/@aresrpg/ui)
+- [AresRPG Main Project](https://github.com/aresrpg/aresrpg)
