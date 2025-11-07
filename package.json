@@ -18,14 +18,18 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "postversion": "git push --follow-tags"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "peerDependencies": {
     "vue": "^3.3.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.0.0",
-    "vite": "^5.0.0",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "vite": "^7.2.1",
     "vue": "^3.4.0"
   },
   "keywords": [
@@ -38,5 +42,13 @@
     "gaming"
   ],
   "author": "AresRPG",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aresrpg/aresrpg-ui.git"
+  },
+  "homepage": "https://github.com/aresrpg/aresrpg-ui#readme",
+  "bugs": {
+    "url": "https://github.com/aresrpg/aresrpg-ui/issues"
+  }
 }
