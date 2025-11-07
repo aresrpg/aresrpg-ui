@@ -10,12 +10,22 @@
 <p align=center>Glassmorphism Vue 3 component library for modern gaming UIs</p>
 
 <p align=center>
+  <a href="https://aresrpg.github.io/aresrpg-ui/" target="_blank">
+    <strong>🎮 Live Demo</strong>
+  </a>
+  &nbsp;•&nbsp;
+  <a href="#-installation">Installation</a>
+  &nbsp;•&nbsp;
+  <a href="#-components">Components</a>
+</p>
+
+<p align=center>
   <img src="screenshots/hero.png" alt="AresRPG UI Hero" width="100%">
 </p>
 
 ---
 
-A beautiful, theme-switchable Vue 3 component library featuring glassmorphism effects, animated gradient backgrounds, and a gaming-focused design aesthetic.
+A beautiful, theme-switchable Vue 3 component library featuring glassmorphism effects, animated gradient backgrounds, and a gaming-focused design aesthetic. Try all 4 themes (Dark, White, Blue, Matrix) in the [live demo](https://aresrpg.github.io/aresrpg-ui/)!
 
 ## ✨ Features
 
@@ -26,31 +36,6 @@ A beautiful, theme-switchable Vue 3 component library featuring glassmorphism ef
 - 📦 **Zero Dependencies**: Only requires Vue 3 as peer dependency
 - 🎯 **TypeScript Ready**: Full JSDoc annotations
 - 🌐 **SSR Compatible**: Works with Nuxt and other SSR frameworks
-
-## 🎨 Themes Showcase
-
-<table>
-  <tr>
-    <td width="50%">
-      <p align="center"><strong>Dark Theme</strong></p>
-      <img src="screenshots/theme-dark.png" alt="Dark Theme" width="100%">
-    </td>
-    <td width="50%">
-      <p align="center"><strong>White Theme</strong></p>
-      <img src="screenshots/theme-white.png" alt="White Theme" width="100%">
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      <p align="center"><strong>Blue Theme</strong></p>
-      <img src="screenshots/theme-blue.png" alt="Blue Theme" width="100%">
-    </td>
-    <td width="50%">
-      <p align="center"><strong>Matrix Theme</strong></p>
-      <img src="screenshots/theme-matrix.png" alt="Matrix Theme" width="100%">
-    </td>
-  </tr>
-</table>
 
 ## 📦 Installation
 
