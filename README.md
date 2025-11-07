@@ -1,6 +1,10 @@
 <h1 align=center>@aresrpg/ui</h1>
 
 <p align=center>
+  <img src="https://user-images.githubusercontent.com/11330271/208825167-77d7bc78-17d0-4f33-ad35-d108b6fac730.gif" alt="AresRPG Dragon" width="200">
+</p>
+
+<p align=center>
   <img src="https://img.shields.io/badge/Made%20with-Vue%203-42b883?style=for-the-badge&logo=vue.js" alt="Made with Vue 3">
   <img src="https://img.shields.io/badge/Powered%20By-Glassmorphism-8b5cf6?style=for-the-badge" alt="Powered by Glassmorphism">
   <img src="https://img.shields.io/badge/license-MIT-yellow?style=for-the-badge" alt="MIT License">
@@ -19,23 +23,20 @@
   <a href="#-components">Components</a>
 </p>
 
-<p align=center>
-  <img src="screenshots/hero.png" alt="AresRPG UI Hero" width="100%">
-</p>
-
 ---
 
-A beautiful, theme-switchable Vue 3 component library featuring glassmorphism effects, animated gradient backgrounds, and a gaming-focused design aesthetic. Try all 4 themes (Dark, White, Blue, Matrix) in the [live demo](https://aresrpg.github.io/aresrpg-ui/)!
+A beautiful, theme-switchable Vue 3 component library featuring glassmorphism effects, animated gradient backgrounds, and a gaming-focused design aesthetic. Try all 5 themes (Dark, White, Blue, Matrix, Neumorphism) in the [live demo](https://aresrpg.github.io/aresrpg-ui/)!
 
 ## ✨ Features
 
-- 🎨 **4 Built-in Themes**: Dark (default), White, Blue, Matrix
+- 🎨 **5 Built-in Themes**: Dark (default), White, Blue, Matrix, Neumorphism
 - 💎 **True Glassmorphism**: Animated gradient mesh backgrounds with backdrop blur
 - ⚡ **Vue 3 + Vite**: Fast, modern, tree-shakeable
 - 🎮 **Gaming Aesthetic**: MMORPG-inspired design with angular borders and bold typography
 - 📦 **Zero Dependencies**: Only requires Vue 3 as peer dependency
 - 🎯 **TypeScript Ready**: Full JSDoc annotations
 - 🌐 **SSR Compatible**: Works with Nuxt and other SSR frameworks
+- ♿ **Accessible**: WCAG 2.1 AA compliant with proper ARIA labels
 
 ## 📦 Installation
 
@@ -93,10 +94,11 @@ import '@aresrpg/ui/style.css'
 - **white**: Clean professional look with Blue/Purple accents
 - **blue**: Ocean/Cyberpunk theme with Cyan accents
 - **matrix**: Terminal/Hacker theme with Green accents
+- **neumorphism**: Soft shadows and depth, minimalist design
 
-### Using Themes
+### Theme Switcher
 
-#### With ThemeSwitcher Component
+![Theme Switcher](screenshots/themeswitcher-component.png)
 
 ```vue
 <script setup>
@@ -108,7 +110,7 @@ import { ThemeSwitcher } from '@aresrpg/ui'
 </template>
 ```
 
-#### With useTheme Composable
+### Using Themes Programmatically
 
 ```vue
 <script setup>
@@ -126,74 +128,78 @@ toggleTheme()
 console.log(currentTheme.value) // 'matrix'
 
 // Get all available themes
-console.log(themes) // ['dark', 'white', 'blue', 'matrix']
+console.log(themes) // ['dark', 'white', 'blue', 'matrix', 'neumorphism']
 </script>
 ```
 
 ## 📚 Components
 
-### Component Previews
-
-<table>
-  <tr>
-    <td width="33%">
-      <p align="center"><strong>Buttons</strong></p>
-      <img src="screenshots/components-buttons.png" alt="Buttons Component" width="100%">
-    </td>
-    <td width="33%">
-      <p align="center"><strong>Cards</strong></p>
-      <img src="screenshots/components-cards.png" alt="Cards Component" width="100%">
-    </td>
-    <td width="33%">
-      <p align="center"><strong>Inputs</strong></p>
-      <img src="screenshots/components-inputs.png" alt="Inputs Component" width="100%">
-    </td>
-  </tr>
-</table>
-
 ### Button
 
-Glassmorphism button with multiple variants and sizes.
+![Button Component](screenshots/button-component.png)
+
+Glassmorphism button with multiple variants, sizes, and states.
 
 ```vue
-<Button variant="primary">Primary</Button>
-<Button variant="gradient">Gradient</Button>
-<Button variant="success">Success</Button>
-<Button variant="error">Error</Button>
-<Button variant="outline">Outline</Button>
+<script setup>
+import { Button } from '@aresrpg/ui'
+</script>
 
-<Button size="sm">Small</Button>
-<Button size="md">Medium</Button>
-<Button size="lg">Large</Button>
+<template>
+  <!-- Variants -->
+  <Button variant="primary">Primary</Button>
+  <Button variant="gradient">Gradient</Button>
+  <Button variant="success">Success</Button>
+  <Button variant="error">Error</Button>
+  <Button variant="outline">Outline</Button>
 
-<Button :disabled="true">Disabled</Button>
+  <!-- Sizes -->
+  <Button size="sm">Small</Button>
+  <Button size="md">Medium</Button>
+  <Button size="lg">Large</Button>
+
+  <!-- States -->
+  <Button :disabled="true">Disabled</Button>
+  <Button :loading="true">Loading</Button>
+</template>
 ```
 
 **Props:**
 - `variant`: 'primary' | 'gradient' | 'success' | 'error' | 'outline' (default: 'primary')
 - `size`: 'sm' | 'md' | 'lg' (default: 'md')
 - `disabled`: boolean (default: false)
+- `loading`: boolean (default: false)
 
 **Events:**
 - `@click`: Emitted when button is clicked
 
+---
+
 ### Card
+
+![Card Component](screenshots/card-component.png)
 
 Glassmorphism card with header, icon, and footer slots.
 
 ```vue
-<Card
-  title="Card Title"
-  description="Card description"
-  icon="bx bx-star"
-  :hoverable="true"
->
-  <p>Card content goes here</p>
+<script setup>
+import { Card, Button } from '@aresrpg/ui'
+</script>
 
-  <template #footer>
-    <Button size="sm">Action</Button>
-  </template>
-</Card>
+<template>
+  <Card
+    title="Card Title"
+    description="Card description"
+    icon="bx bx-star"
+    :hoverable="true"
+  >
+    <p>Card content goes here</p>
+
+    <template #footer>
+      <Button size="sm">Learn More</Button>
+    </template>
+  </Card>
+</template>
 ```
 
 **Props:**
@@ -210,13 +216,92 @@ Glassmorphism card with header, icon, and footer slots.
 - `header`: Full custom header
 - `footer`: Footer content
 
-### Modal
+---
 
-Glassmorphism modal with backdrop blur.
+### Input
+
+![Input Component](screenshots/input-component.png)
+
+Glassmorphism text input with validation states and icon support.
 
 ```vue
 <script setup>
 import { ref } from 'vue'
+import { Input } from '@aresrpg/ui'
+
+const username = ref('')
+const email = ref('')
+</script>
+
+<template>
+  <!-- Basic input -->
+  <Input
+    v-model="username"
+    type="text"
+    label="Username"
+    placeholder="Enter username..."
+  />
+
+  <!-- With validation states -->
+  <Input
+    v-model="email"
+    type="email"
+    label="Email"
+    :error="true"
+    error-message="Invalid email format"
+    prefix-icon="bx bx-envelope"
+  />
+
+  <!-- Success state -->
+  <Input
+    v-model="username"
+    label="Username"
+    :success="true"
+    success-message="Username available"
+  />
+
+  <!-- With helper text -->
+  <Input
+    label="Password"
+    type="password"
+    helper-text="Must be at least 8 characters"
+    suffix-icon="bx bx-lock"
+  />
+</template>
+```
+
+**Props:**
+- `modelValue`: string | number - v-model binding
+- `type`: 'text' | 'email' | 'password' | 'number' (default: 'text')
+- `label`: string - Input label
+- `placeholder`: string - Placeholder text
+- `disabled`: boolean (default: false)
+- `error`: boolean (default: false) - Show error state
+- `errorMessage`: string - Error message text
+- `success`: boolean (default: false) - Show success state
+- `successMessage`: string - Success message text
+- `helperText`: string - Helper text below input
+- `prefixIcon`: string - Icon class for prefix icon
+- `suffixIcon`: string - Icon class for suffix icon
+
+**Events:**
+- `@update:modelValue`: Emitted when input value changes
+- `@focus`: Emitted when input gains focus
+- `@blur`: Emitted when input loses focus
+
+---
+
+### Modal
+
+![Modal Component](screenshots/modal-component.png)
+
+Glassmorphism modal with backdrop blur and multiple size variants.
+
+```vue
+<script setup>
+import { ref } from 'vue'
+import { Modal, Button } from '@aresrpg/ui'
+
 const showModal = ref(false)
 </script>
 
@@ -226,10 +311,11 @@ const showModal = ref(false)
   <Modal
     v-model="showModal"
     title="Modal Title"
+    size="md"
     :closable="true"
     :close-on-overlay="true"
   >
-    <p>Modal content</p>
+    <p>Modal content goes here</p>
 
     <template #footer>
       <Button @click="showModal = false">Cancel</Button>
@@ -242,6 +328,7 @@ const showModal = ref(false)
 **Props:**
 - `modelValue`: boolean (required) - v-model binding for visibility
 - `title`: string - Modal title
+- `size`: 'sm' | 'md' | 'lg' | 'xl' | 'full' (default: 'md') - Modal size
 - `closable`: boolean (default: true) - Show close button
 - `closeOnOverlay`: boolean (default: true) - Close when clicking overlay
 
@@ -254,74 +341,501 @@ const showModal = ref(false)
 - `header`: Custom header content
 - `footer`: Footer content
 
-### Input
-
-Glassmorphism text input.
-
-```vue
-<script setup>
-import { ref } from 'vue'
-const username = ref('')
-</script>
-
-<template>
-  <Input
-    v-model="username"
-    type="text"
-    label="Username"
-    placeholder="Enter username..."
-    :disabled="false"
-  />
-</template>
-```
-
-**Props:**
-- `modelValue`: string | number - v-model binding
-- `type`: 'text' | 'email' | 'password' | 'number' (default: 'text')
-- `label`: string - Input label
-- `placeholder`: string - Placeholder text
-- `disabled`: boolean (default: false)
-
-**Events:**
-- `@update:modelValue`: Emitted when input value changes
-- `@focus`: Emitted when input gains focus
-- `@blur`: Emitted when input loses focus
+---
 
 ### Badge
+
+![Badge Component](screenshots/badge-component.png)
 
 Status badge with color variants.
 
 ```vue
-<Badge variant="primary">Primary</Badge>
-<Badge variant="success">Success</Badge>
-<Badge variant="error">Error</Badge>
-<Badge variant="warning">Warning</Badge>
-<Badge variant="info">Info</Badge>
+<script setup>
+import { Badge } from '@aresrpg/ui'
+</script>
+
+<template>
+  <Badge variant="primary">Primary</Badge>
+  <Badge variant="success">Success</Badge>
+  <Badge variant="error">Error</Badge>
+  <Badge variant="warning">Warning</Badge>
+  <Badge variant="info">Info</Badge>
+</template>
 ```
 
 **Props:**
 - `variant`: 'primary' | 'success' | 'error' | 'warning' | 'info' (default: 'primary')
 
-### ThemeSwitcher
+---
 
-Theme switcher component with all available themes.
+### Alert
+
+![Alert Component](screenshots/alert-component.png)
+
+Alert messages with icon and dismissible variants.
 
 ```vue
-<ThemeSwitcher />
+<script setup>
+import { ref } from 'vue'
+import { Alert } from '@aresrpg/ui'
+
+const showAlert = ref(true)
+</script>
+
+<template>
+  <Alert
+    v-model="showAlert"
+    variant="success"
+    title="Success!"
+    message="Your changes have been saved successfully."
+    :dismissible="true"
+  />
+
+  <Alert
+    variant="error"
+    title="Error"
+    message="Something went wrong. Please try again."
+  />
+
+  <Alert
+    variant="warning"
+    title="Warning"
+    message="This action cannot be undone."
+  />
+
+  <Alert
+    variant="info"
+    title="Info"
+    message="You have 3 new messages."
+  />
+</template>
 ```
 
-Shows buttons for all available themes (dark, white, blue, matrix) with icons and labels.
+**Props:**
+- `modelValue`: boolean - v-model for visibility (optional)
+- `variant`: 'success' | 'error' | 'warning' | 'info' (default: 'info')
+- `title`: string - Alert title
+- `message`: string - Alert message
+- `dismissible`: boolean (default: true) - Show dismiss button
 
-### Additional Components
+---
 
-- **Navbar**: Responsive navigation bar with glassmorphism
-- **Sidebar**: Collapsible sidebar navigation
-- **Dropdown**: Dropdown menu with animations
-- **Tooltip**: Hover tooltips with customizable positioning
-- **Avatar**: User avatar with size variants
-- **Alert**: Alert messages with variants
-- **Toggle**: Toggle switch component
-- **Tabs**: Tab navigation component
+### Toggle
+
+![Toggle Component](screenshots/toggle-component.png)
+
+Toggle switch component with label support.
+
+```vue
+<script setup>
+import { ref } from 'vue'
+import { Toggle } from '@aresrpg/ui'
+
+const enabled = ref(false)
+const darkMode = ref(true)
+</script>
+
+<template>
+  <!-- Basic toggle -->
+  <Toggle v-model="enabled" />
+
+  <!-- With label -->
+  <Toggle v-model="darkMode" label="Dark mode" />
+
+  <!-- Disabled -->
+  <Toggle v-model="enabled" label="Auto-save" :disabled="true" />
+</template>
+```
+
+**Props:**
+- `modelValue`: boolean - v-model binding
+- `label`: string - Toggle label
+- `disabled`: boolean (default: false)
+
+**Events:**
+- `@update:modelValue`: Emitted when toggle state changes
+
+---
+
+### Tabs
+
+![Tabs Component](screenshots/tabs-component.png)
+
+Tab navigation component with icon and badge support.
+
+```vue
+<script setup>
+import { ref } from 'vue'
+import { Tabs, Button } from '@aresrpg/ui'
+
+const activeTab = ref(0)
+
+const tabs = [
+  { label: 'Tab 1', icon: 'bx bx-home', badge: '3' },
+  { label: 'Tab 2', icon: 'bx bx-user' },
+  { label: 'Tab 3', icon: 'bx bx-cog' }
+]
+</script>
+
+<template>
+  <Tabs v-model="activeTab" :tabs="tabs">
+    <template #tab-0>
+      <h4>Tab 1 Content</h4>
+      <p>Content for the first tab</p>
+      <Button>Action Button</Button>
+    </template>
+
+    <template #tab-1>
+      <p>Content for tab 2</p>
+    </template>
+
+    <template #tab-2>
+      <p>Content for tab 3</p>
+    </template>
+  </Tabs>
+</template>
+```
+
+**Props:**
+- `modelValue`: number - v-model for active tab index
+- `tabs`: Array<{ label: string, icon?: string, badge?: string }> - Tab configuration
+
+**Events:**
+- `@update:modelValue`: Emitted when active tab changes
+
+---
+
+### Tooltip
+
+![Tooltip Component](screenshots/tooltip-component.png)
+
+Hover tooltips with customizable positioning.
+
+```vue
+<script setup>
+import { Tooltip, Button } from '@aresrpg/ui'
+</script>
+
+<template>
+  <Tooltip content="Tooltip text" position="top">
+    <Button>Top</Button>
+  </Tooltip>
+
+  <Tooltip content="Tooltip text" position="bottom">
+    <Button>Bottom</Button>
+  </Tooltip>
+
+  <Tooltip content="Tooltip text" position="left">
+    <Button>Left</Button>
+  </Tooltip>
+
+  <Tooltip content="Tooltip text" position="right">
+    <Button>Right</Button>
+  </Tooltip>
+</template>
+```
+
+**Props:**
+- `content`: string - Tooltip content
+- `position`: 'top' | 'bottom' | 'left' | 'right' (default: 'top')
+
+---
+
+### Avatar
+
+![Avatar Component](screenshots/avatar-component.png)
+
+User avatar with size variants and status indicators.
+
+```vue
+<script setup>
+import { Avatar } from '@aresrpg/ui'
+</script>
+
+<template>
+  <!-- Sizes -->
+  <Avatar size="sm" src="avatar.jpg" alt="User" />
+  <Avatar size="md" src="avatar.jpg" alt="User" />
+  <Avatar size="lg" src="avatar.jpg" alt="User" />
+  <Avatar size="xl" src="avatar.jpg" alt="User" />
+
+  <!-- With icons (when no src) -->
+  <Avatar icon="bx bx-user" />
+
+  <!-- With status indicators -->
+  <Avatar src="avatar.jpg" status="online" />
+  <Avatar src="avatar.jpg" status="away" />
+  <Avatar src="avatar.jpg" status="busy" />
+</template>
+```
+
+**Props:**
+- `src`: string - Avatar image URL
+- `alt`: string - Alt text for image
+- `size`: 'sm' | 'md' | 'lg' | 'xl' (default: 'md')
+- `icon`: string - Icon class (when no src provided)
+- `status`: 'online' | 'away' | 'busy' - Status indicator
+
+---
+
+### Dropdown
+
+![Dropdown Component](screenshots/dropdown-component.png)
+
+Dropdown menu with icons and animations.
+
+```vue
+<script setup>
+import { ref } from 'vue'
+import { Dropdown } from '@aresrpg/ui'
+
+const selected = ref(null)
+
+const options = [
+  { value: 'option1', label: 'Option 1', icon: 'bx bx-home' },
+  { value: 'option2', label: 'Option 2', icon: 'bx bx-user' },
+  { value: 'option3', label: 'Option 3', icon: 'bx bx-cog' },
+  { value: 'option4', label: 'Option 4', icon: 'bx bx-bell' }
+]
+</script>
+
+<template>
+  <Dropdown
+    v-model="selected"
+    :options="options"
+    placeholder="Select an option..."
+  />
+</template>
+```
+
+**Props:**
+- `modelValue`: any - v-model binding for selected value
+- `options`: Array<{ value: any, label: string, icon?: string }> - Dropdown options
+- `placeholder`: string - Placeholder text
+
+**Events:**
+- `@update:modelValue`: Emitted when selection changes
+
+---
+
+### Navbar
+
+![Navbar Component](screenshots/navbar-component.png)
+
+Responsive navigation bar with glassmorphism.
+
+```vue
+<script setup>
+import { Navbar } from '@aresrpg/ui'
+
+const navItems = [
+  { label: 'Overview', icon: 'bx bx-home', href: '#' },
+  { label: 'Components', icon: 'bx bx-grid', href: '#' },
+  { label: 'Docs', icon: 'bx bx-book', href: '#' }
+]
+</script>
+
+<template>
+  <Navbar brand="Dashboard" :items="navItems">
+    <template #actions>
+      <Button size="sm" variant="gradient">New</Button>
+      <Button size="sm" variant="outline" aria-label="Notifications">
+        <i class="bx bx-bell"></i>
+      </Button>
+    </template>
+  </Navbar>
+</template>
+```
+
+**Props:**
+- `brand`: string - Brand name or logo text
+- `items`: Array<{ label: string, icon?: string, href: string }> - Navigation items
+
+**Slots:**
+- `brand`: Custom brand content
+- `actions`: Action buttons in navbar
+
+---
+
+### Sidebar
+
+![Sidebar Component](screenshots/sidebar-component.png)
+
+Collapsible sidebar navigation with glassmorphism.
+
+```vue
+<script setup>
+import { ref } from 'vue'
+import { Sidebar } from '@aresrpg/ui'
+
+const collapsed = ref(false)
+
+const menuItems = [
+  { label: 'Dashboard', icon: 'bx bx-home', badge: null },
+  { label: 'Components', icon: 'bx bx-grid', badge: '14' },
+  { label: 'Themes', icon: 'bx bx-palette', badge: '5' },
+  { label: 'Documentation', icon: 'bx bx-book' },
+  { label: 'Settings', icon: 'bx bx-cog' }
+]
+</script>
+
+<template>
+  <Sidebar
+    v-model:collapsed="collapsed"
+    brand="AresRPG UI"
+    :items="menuItems"
+  >
+    <template #footer>
+      <div class="version">v0.1.0</div>
+      <Button variant="outline" size="sm">
+        <i class="bx bx-log-out"></i>
+        Logout
+      </Button>
+    </template>
+  </Sidebar>
+</template>
+```
+
+**Props:**
+- `collapsed`: boolean - v-model for collapsed state
+- `brand`: string - Brand name
+- `items`: Array<{ label: string, icon: string, badge?: string }> - Menu items
+
+**Slots:**
+- `brand`: Custom brand content
+- `footer`: Footer content
+
+---
+
+### Toast
+
+Toast notification component with auto-dismiss and variants.
+
+```vue
+<script setup>
+import { ref } from 'vue'
+import { Toast, Button } from '@aresrpg/ui'
+
+const showToast = ref(false)
+</script>
+
+<template>
+  <Button @click="showToast = true">Show Toast</Button>
+
+  <Toast
+    v-model="showToast"
+    variant="success"
+    title="Success"
+    message="Operation completed successfully!"
+    :duration="5000"
+    :closable="true"
+  />
+</template>
+```
+
+**Props:**
+- `modelValue`: boolean - v-model for visibility
+- `variant`: 'success' | 'error' | 'warning' | 'info' (default: 'info')
+- `title`: string - Toast title
+- `message`: string - Toast message
+- `duration`: number (default: 5000) - Auto-dismiss duration in ms (0 = no auto-dismiss)
+- `closable`: boolean (default: true) - Show close button
+
+**Events:**
+- `@update:modelValue`: Emitted when toast visibility changes
+- `@close`: Emitted when toast is closed
+
+---
+
+### Skeleton
+
+Skeleton loader component for loading states.
+
+```vue
+<script setup>
+import { Skeleton } from '@aresrpg/ui'
+</script>
+
+<template>
+  <!-- Text skeleton -->
+  <Skeleton variant="text" width="200px" />
+
+  <!-- Circle skeleton (for avatars) -->
+  <Skeleton variant="circle" width="40px" height="40px" />
+
+  <!-- Rectangle skeleton -->
+  <Skeleton variant="rectangle" width="100%" height="100px" />
+
+  <!-- Card skeleton -->
+  <Skeleton variant="card" width="300px" height="200px" />
+
+  <!-- Disable animation -->
+  <Skeleton variant="text" :animated="false" />
+</template>
+```
+
+**Props:**
+- `variant`: 'text' | 'circle' | 'rectangle' | 'card' (default: 'text')
+- `width`: string | number - Width in px or % (default: '100%')
+- `height`: string | number - Height in px or % (default: auto based on variant)
+- `animated`: boolean (default: true) - Enable shimmer animation
+
+---
+
+### EmptyState
+
+Empty state component for no-data scenarios.
+
+```vue
+<script setup>
+import { EmptyState, Button } from '@aresrpg/ui'
+</script>
+
+<template>
+  <!-- Basic empty state -->
+  <EmptyState
+    icon="bx bx-inbox"
+    title="No data"
+    message="There is nothing to display here."
+  />
+
+  <!-- With custom action -->
+  <EmptyState
+    icon="bx bx-search"
+    title="No results found"
+    message="Try adjusting your search or filter criteria."
+  >
+    <template #action>
+      <Button variant="gradient">Clear Filters</Button>
+    </template>
+  </EmptyState>
+
+  <!-- Custom content with slots -->
+  <EmptyState>
+    <template #title>
+      <h3>Custom Title</h3>
+    </template>
+    <template #message>
+      <p>Custom message content</p>
+    </template>
+    <template #action>
+      <Button>Take Action</Button>
+    </template>
+  </EmptyState>
+</template>
+```
+
+**Props:**
+- `icon`: string (default: 'bx bx-inbox') - Icon class
+- `title`: string (default: 'No data') - Title text
+- `message`: string (default: 'There is nothing to display here.') - Message text
+
+**Slots:**
+- `title`: Custom title content
+- `message`: Custom message content
+- `action`: Action button or custom content
+
+---
 
 ## 🛠️ Composables
 
@@ -404,4 +918,3 @@ Contributions are welcome! Feel free to open issues or submit pull requests.
 
 - [GitHub Repository](https://github.com/aresrpg/aresrpg-ui)
 - [npm Package](https://www.npmjs.com/package/@aresrpg/ui)
-- [AresRPG Main Project](https://github.com/aresrpg/aresrpg)

@@ -16,6 +16,9 @@ import Avatar from './components/Avatar.vue'
 import Alert from './components/Alert.vue'
 import Toggle from './components/Toggle.vue'
 import Tabs from './components/Tabs.vue'
+import Toast from './components/Toast.vue'
+import Skeleton from './components/Skeleton.vue'
+import EmptyState from './components/EmptyState.vue'
 
 // Import composables
 import { useTheme } from './composables/useTheme.js'
@@ -35,7 +38,10 @@ const components = {
   Avatar,
   Alert,
   Toggle,
-  Tabs
+  Tabs,
+  Toast,
+  Skeleton,
+  EmptyState
 }
 
 /**
@@ -65,6 +71,9 @@ export {
   Alert,
   Toggle,
   Tabs,
+  Toast,
+  Skeleton,
+  EmptyState,
   useTheme
 }
 

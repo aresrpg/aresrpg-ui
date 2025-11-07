@@ -41,17 +41,17 @@
               <i class="bx bx-plus"></i>
               New
             </Button>
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" aria-label="Notifications">
               <i class="bx bx-bell"></i>
             </Button>
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" aria-label="User profile">
               <i class="bx bx-user-circle"></i>
             </Button>
           </template>
         </Navbar>
 
         <!-- Content -->
-        <div class="content">
+        <main class="content">
           <!-- Sticky Theme Switcher -->
           <div class="theme-switcher-container">
             <ThemeSwitcher :sticky="true" />
@@ -493,7 +493,7 @@
               © 2024 AresRPG. MIT License.
             </p>
           </footer>
-        </div>
+        </main>
       </div>
     </div>
   </div>
