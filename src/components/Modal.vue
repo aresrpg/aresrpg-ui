@@ -3,16 +3,28 @@
     <Transition name="modal">
       <div
         v-if="modelValue"
+        ref="modalOverlay"
         class="modal-overlay"
         @click="handleOverlayClick"
+        @keydown.esc="handleEscape"
       >
-        <div class="modal" :class="`modal-${size}`" @click.stop>
+        <div
+          ref="modalEl"
+          class="modal"
+          :class="`modal-${size}`"
+          role="dialog"
+          aria-modal="true"
+          :aria-labelledby="title ? 'modal-title' : undefined"
+          @click.stop
+          @keydown.tab="handleTab"
+        >
           <div v-if="$slots.header || title" class="modal-header">
-            <h3 class="modal-title">
+            <h3 id="modal-title" class="modal-title">
               <slot name="header">{{ title }}</slot>
             </h3>
             <button
               v-if="closable"
+              ref="closeBtn"
               class="modal-close"
               aria-label="Close modal"
               @click="close"
@@ -35,8 +47,10 @@
 </template>
 
 <script setup>
+import { ref, watch, nextTick, onUnmounted } from 'vue'
+
 /**
- * Glass morphism modal component
+ * Glass morphism modal component with focus trap
  * @param {boolean} modelValue - v-model binding for visibility
  * @param {string} title - Modal title
  * @param {boolean} closable - Show close button
@@ -69,6 +83,56 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'close'])
 
+const modalEl = ref(null)
+const modalOverlay = ref(null)
+const closeBtn = ref(null)
+let previousActiveElement = null
+
+/**
+ * Get all focusable elements within the modal
+ */
+function getFocusableElements() {
+  if (!modalEl.value) return []
+
+  const selector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+  return Array.from(modalEl.value.querySelectorAll(selector))
+    .filter(el => !el.hasAttribute('disabled') && el.offsetParent !== null)
+}
+
+/**
+ * Handle Tab key for focus trap
+ */
+function handleTab(event) {
+  const focusableElements = getFocusableElements()
+  if (focusableElements.length === 0) return
+
+  const firstElement = focusableElements[0]
+  const lastElement = focusableElements[focusableElements.length - 1]
+
+  if (event.shiftKey) {
+    // Shift + Tab: going backwards
+    if (document.activeElement === firstElement) {
+      event.preventDefault()
+      lastElement.focus()
+    }
+  } else {
+    // Tab: going forwards
+    if (document.activeElement === lastElement) {
+      event.preventDefault()
+      firstElement.focus()
+    }
+  }
+}
+
+/**
+ * Handle Escape key to close modal
+ */
+function handleEscape() {
+  if (props.closable) {
+    close()
+  }
+}
+
 /**
  * Close the modal
  */
@@ -85,6 +149,46 @@ function handleOverlayClick() {
     close()
   }
 }
+
+/**
+ * Watch for modal visibility changes
+ */
+watch(() => props.modelValue, async (isOpen) => {
+  if (isOpen) {
+    // Store the currently focused element to restore later
+    previousActiveElement = document.activeElement
+
+    // Wait for next tick to ensure modal is rendered
+    await nextTick()
+
+    // Focus first focusable element or close button
+    const focusableElements = getFocusableElements()
+    if (focusableElements.length > 0) {
+      focusableElements[0].focus()
+    } else if (closeBtn.value) {
+      closeBtn.value.focus()
+    }
+
+    // Lock body scroll
+    document.body.style.overflow = 'hidden'
+  } else {
+    // Restore focus to previous element
+    if (previousActiveElement && previousActiveElement.focus) {
+      previousActiveElement.focus()
+    }
+    previousActiveElement = null
+
+    // Unlock body scroll
+    document.body.style.overflow = ''
+  }
+})
+
+/**
+ * Cleanup on unmount
+ */
+onUnmounted(() => {
+  document.body.style.overflow = ''
+})
 </script>
 
 <style scoped>

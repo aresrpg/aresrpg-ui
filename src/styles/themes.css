@@ -23,6 +23,36 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* ===== ACCESSIBILITY - KEYBOARD FOCUS (WCAG 2.4.7) ===== */
+*:focus {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+  transition: outline var(--transition-fast);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[role="button"]:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(var(--color-accent-primary-rgb, 255, 202, 40), 0.2);
+}
+
+/* Matrix theme needs higher contrast focus indicator */
+[data-theme="matrix"] *:focus-visible {
+  outline-color: var(--color-accent-primary);
+  box-shadow: 0 0 0 4px rgba(0, 255, 65, 0.3), 0 0 12px rgba(0, 255, 65, 0.5);
+}
+
 /* ===== THEME: DARK (Default - Gaming MMORPG) ===== */
 [data-theme="dark"] {
   --color-bg-primary: #121212;
@@ -531,4 +561,61 @@ html:not([data-theme]) {
   --color-accent-secondary: #EF6C00;
   --gradient-primary: linear-gradient(135deg, #FBC02D 0%, #EF6C00 100%);
   --glow-primary: 0 0 20px rgba(255, 202, 40, 0.2), 0 0 40px rgba(255, 202, 40, 0.1);
+}
+
+/* ===== MOBILE PERFORMANCE OPTIMIZATIONS ===== */
+@media (max-width: 768px) {
+  /* Reduce backdrop-filter blur for 60fps scrolling (20px → 10px) */
+  * {
+    will-change: auto !important;
+  }
+
+  *[style*="backdrop-filter"],
+  [class*="glass"],
+  [class*="btn"],
+  [class*="card"],
+  [class*="modal"],
+  [class*="sidebar"],
+  [class*="navbar"],
+  [class*="dropdown"] {
+    /* GPU acceleration */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
+  }
+
+  /* Override heavy backdrop-filter with lighter blur */
+  .sidebar,
+  .navbar,
+  .card,
+  .modal-overlay,
+  .modal-content,
+  .dropdown-menu,
+  .toast,
+  .btn,
+  .theme-button,
+  .mobile-menu-btn {
+    backdrop-filter: blur(10px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+  }
+
+  /* Simplify gradient orb animations on mobile */
+  .gradient-orb {
+    filter: blur(40px) !important;
+    opacity: 0.08 !important;
+    animation-duration: 30s !important;
+  }
+
+  /* Reduce box-shadow complexity */
+  *[style*="box-shadow"] {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+  }
+
+  /* Disable hover effects on mobile (saves repaints) */
+  *:hover {
+    transform: none !important;
+  }
 }

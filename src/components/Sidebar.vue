@@ -21,17 +21,48 @@
     <!-- Navigation Items -->
     <nav class="sidebar-nav">
       <slot name="nav">
-        <div
-          v-for="(item, index) in items"
-          :key="index"
-          class="nav-item"
-          :class="{ active: item.active, disabled: item.disabled }"
-          @click="handleItemClick(item, $event)"
-        >
-          <i v-if="item.icon" :class="item.icon"></i>
-          <span v-if="!isCollapsed" class="nav-label">{{ item.label }}</span>
-          <span v-if="item.badge && !isCollapsed" class="nav-badge">{{ item.badge }}</span>
-        </div>
+        <template v-for="(item, index) in items" :key="index">
+          <!-- Parent Item -->
+          <div
+            class="nav-item"
+            :class="{
+              active: item.active,
+              disabled: item.disabled,
+              'has-children': item.children && item.children.length > 0,
+              'expanded': expandedItems.includes(index)
+            }"
+            @click="handleItemClick(item, index, $event)"
+          >
+            <i v-if="item.icon" :class="item.icon"></i>
+            <span v-if="!isCollapsed" class="nav-label">{{ item.label }}</span>
+            <span v-if="item.badge && !isCollapsed" class="nav-badge">{{ item.badge }}</span>
+            <i
+              v-if="item.children && item.children.length > 0 && !isCollapsed"
+              class="nav-expand-icon bx"
+              :class="expandedItems.includes(index) ? 'bx-chevron-down' : 'bx-chevron-right'"
+            ></i>
+          </div>
+
+          <!-- Sub Items -->
+          <transition name="submenu">
+            <div
+              v-if="item.children && item.children.length > 0 && expandedItems.includes(index) && !isCollapsed"
+              class="nav-subitems"
+            >
+              <div
+                v-for="(child, childIndex) in item.children"
+                :key="`${index}-${childIndex}`"
+                class="nav-subitem"
+                :class="{ active: child.active, disabled: child.disabled }"
+                @click="handleSubItemClick(child, $event)"
+              >
+                <i v-if="child.icon" :class="child.icon"></i>
+                <span class="nav-label">{{ child.label }}</span>
+                <span v-if="child.badge" class="nav-badge">{{ child.badge }}</span>
+              </div>
+            </div>
+          </transition>
+        </template>
       </slot>
     </nav>
 
@@ -43,7 +74,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 /**
  * Glassmorphism Sidebar Component
@@ -106,23 +137,66 @@ const props = defineProps({
     type: String,
     default: 'left',
     validator: (value) => ['left', 'right'].includes(value)
+  },
+  open: {
+    type: Boolean,
+    default: false
   }
 })
 
-const emit = defineEmits(['item-click', 'collapse'])
+const emit = defineEmits(['item-click', 'collapse', 'update:open'])
 
 const isCollapsed = ref(props.collapsed)
-const isOpen = ref(false)
+const isOpen = ref(props.open)
+const expandedItems = ref([])
 
 function toggleCollapse() {
   isCollapsed.value = !isCollapsed.value
   emit('collapse', isCollapsed.value)
 }
 
-function handleItemClick(item, event) {
-  if (item.disabled) return
-  emit('item-click', { item, event })
+function toggleOpen() {
+  isOpen.value = !isOpen.value
+  emit('update:open', isOpen.value)
 }
+
+function handleItemClick(item, index, event) {
+  if (item.disabled) return
+
+  // Toggle expansion if item has children
+  if (item.children && item.children.length > 0) {
+    event.stopPropagation()
+    const expandedIndex = expandedItems.value.indexOf(index)
+    if (expandedIndex > -1) {
+      expandedItems.value.splice(expandedIndex, 1)
+    } else {
+      expandedItems.value.push(index)
+    }
+    return
+  }
+
+  emit('item-click', { item, event })
+  // Close sidebar on mobile after item click
+  if (window.innerWidth <= 768) {
+    isOpen.value = false
+    emit('update:open', false)
+  }
+}
+
+function handleSubItemClick(child, event) {
+  if (child.disabled) return
+  emit('item-click', { item: child, event })
+  // Close sidebar on mobile after item click
+  if (window.innerWidth <= 768) {
+    isOpen.value = false
+    emit('update:open', false)
+  }
+}
+
+// Watch for prop changes
+watch(() => props.open, (newValue) => {
+  isOpen.value = newValue
+})
 </script>
 
 <style scoped>
@@ -319,6 +393,106 @@ function handleItemClick(item, event) {
 
 .sidebar.collapsed .nav-badge {
   display: none;
+}
+
+/* Expand icon for items with children */
+.nav-expand-icon {
+  margin-left: auto;
+  font-size: 1.2em;
+  transition: transform var(--transition-fast);
+}
+
+.nav-item.expanded .nav-expand-icon {
+  transform: rotate(0deg);
+}
+
+/* Sub-items */
+.nav-subitems {
+  overflow: hidden;
+}
+
+.nav-subitem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md) var(--spacing-sm) var(--spacing-2xl);
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: var(--spacing-xs) 0;
+}
+
+.nav-subitem::before {
+  content: '';
+  position: absolute;
+  left: var(--spacing-lg);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background: var(--color-text-tertiary);
+  border-radius: 50%;
+  transition: var(--transition-fast);
+}
+
+.nav-subitem:hover {
+  background: var(--glass-bg-light);
+  color: var(--color-text-primary);
+  padding-left: calc(var(--spacing-2xl) + var(--spacing-xs));
+}
+
+.nav-subitem:hover::before {
+  background: var(--color-accent-primary);
+  transform: translateY(-50%) scale(1.3);
+}
+
+.nav-subitem.active {
+  background: var(--glass-bg-light);
+  color: var(--color-accent-primary);
+}
+
+.nav-subitem.active::before {
+  background: var(--color-accent-primary);
+  transform: translateY(-50%) scale(1.3);
+}
+
+.nav-subitem.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.nav-subitem i {
+  font-size: 1.2em;
+  min-width: 1.2em;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* Submenu transition */
+.submenu-enter-active,
+.submenu-leave-active {
+  transition: all var(--transition-base);
+}
+
+.submenu-enter-from,
+.submenu-leave-to {
+  opacity: 0;
+  max-height: 0;
+  transform: translateY(-10px);
+}
+
+.submenu-enter-to,
+.submenu-leave-from {
+  opacity: 1;
+  max-height: 500px;
+  transform: translateY(0);
 }
 
 /* Footer */

@@ -50,5 +50,8 @@
   "homepage": "https://github.com/aresrpg/aresrpg-ui#readme",
   "bugs": {
     "url": "https://github.com/aresrpg/aresrpg-ui/issues"
+  },
+  "dependencies": {
+    "lucide-vue-next": "^0.553.0"
   }
 }

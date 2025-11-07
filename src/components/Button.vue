@@ -98,19 +98,19 @@ function handleClick(event) {
 [data-theme="matrix"] .btn-success,
 [data-theme="matrix"] .btn-error,
 [data-theme="matrix"] .btn-primary {
-  color: #000000 !important;
+  color: var(--color-bg-primary) !important;
   text-shadow: 0 1px 3px rgba(0, 255, 65, 0.8) !important;
   font-weight: 900;
 }
 
 [data-theme="matrix"] .btn-outline {
   background: rgba(0, 0, 0, 0.5);
-  border-color: #00ff41;
+  border-color: var(--color-accent-primary);
 }
 
 [data-theme="matrix"] .btn-outline:hover {
-  background: #00ff41;
-  color: #000000 !important;
+  background: var(--color-accent-primary);
+  color: var(--color-bg-primary) !important;
   text-shadow: none !important;
 }
 

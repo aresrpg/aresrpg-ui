@@ -1,10 +1,5 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import AresRPGUI from '../src/index.js'
+import '../src/styles/themes.css'
 
-const app = createApp(App)
-
-// Install AresRPG UI library
-app.use(AresRPGUI)
-
-app.mount('#app')
+createApp(App).mount('#app')

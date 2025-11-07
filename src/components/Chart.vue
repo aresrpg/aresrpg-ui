@@ -177,20 +177,49 @@ const normalizedData = computed(() => {
   }))
 })
 
-// Line chart path
+/**
+ * Generate smooth curve path using Cardinal spline interpolation
+ * @param {Array} points - Array of {x, y} coordinate objects
+ * @param {number} tension - Curve tension (0 = straight, 0.5 = smooth, 1 = very curvy)
+ * @returns {string} SVG path string with cubic Bezier curves
+ */
+function cardinalSpline(points, tension = 0.5) {
+  if (points.length < 2) return ''
+
+  let path = `M ${points[0].x},${points[0].y}`
+
+  for (let i = 0; i < points.length - 1; i++) {
+    const p0 = points[Math.max(i - 1, 0)]
+    const p1 = points[i]
+    const p2 = points[i + 1]
+    const p3 = points[Math.min(i + 2, points.length - 1)]
+
+    // Calculate control points for cubic Bezier curve
+    const cp1x = p1.x + (p2.x - p0.x) / 6 * tension
+    const cp1y = p1.y + (p2.y - p0.y) / 6 * tension
+    const cp2x = p2.x - (p3.x - p1.x) / 6 * tension
+    const cp2y = p2.y - (p3.y - p1.y) / 6 * tension
+
+    path += ` C ${cp1x},${cp1y} ${cp2x},${cp2y} ${p2.x},${p2.y}`
+  }
+
+  return path
+}
+
+// Line chart path (with smooth curves)
 const linePath = computed(() => {
   if (normalizedData.value.length === 0) return ''
 
   const points = normalizedData.value.map((point, index) => {
     const x = padding + (index * (chartWidth.value / (normalizedData.value.length - 1)))
     const y = padding + chartHeight.value - (point.y * chartHeight.value)
-    return `${x},${y}`
+    return { x, y }
   })
 
-  return `M ${points.join(' L ')}`
+  return cardinalSpline(points, 0.75) // Increased tension for rounder curves
 })
 
-// Area chart path (includes baseline)
+// Area chart path (includes baseline with smooth curves)
 const areaPath = computed(() => {
   if (normalizedData.value.length === 0) return ''
 
@@ -200,7 +229,7 @@ const areaPath = computed(() => {
     return { x, y }
   })
 
-  const topPath = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x},${p.y}`).join(' ')
+  const topPath = cardinalSpline(points, 0.75) // Increased tension for rounder curves
   const bottomPath = [
     `L ${points[points.length - 1].x},${padding + chartHeight.value}`,
     `L ${points[0].x},${padding + chartHeight.value}`,

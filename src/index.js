@@ -21,6 +21,7 @@ import Skeleton from './components/Skeleton.vue'
 import EmptyState from './components/EmptyState.vue'
 import ProgressBar from './components/ProgressBar.vue'
 import Chart from './components/Chart.vue'
+import AuthForm from './components/AuthForm.vue'
 
 // Import composables
 import { useTheme } from './composables/useTheme.js'
@@ -45,7 +46,8 @@ const components = {
   Skeleton,
   EmptyState,
   ProgressBar,
-  Chart
+  Chart,
+  AuthForm
 }
 
 /**
@@ -80,6 +82,7 @@ export {
   EmptyState,
   ProgressBar,
   Chart,
+  AuthForm,
   useTheme
 }
 

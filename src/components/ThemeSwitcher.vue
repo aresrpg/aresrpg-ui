@@ -93,10 +93,19 @@ function capitalizeTheme(theme) {
   transform: translateY(-2px);
 }
 
+/* Theme-specific preview colors (static - represent each theme's signature color) */
+:root {
+  --theme-dark-icon: #FFCA28;
+  --theme-white-icon: #3b82f6;
+  --theme-blue-icon: #38bdf8;
+  --theme-matrix-icon: #00ff41;
+  --theme-neumorphism-icon: #8b5cf6;
+}
+
 .theme-button.active {
   background: var(--gradient-primary);
   border-color: transparent;
-  color: #ffffff;
+  color: var(--color-bg-primary);
   box-shadow: var(--glow-primary);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
@@ -111,23 +120,23 @@ function capitalizeTheme(theme) {
 }
 
 .theme-icon-dark i {
-  color: #FFCA28;
+  color: var(--theme-dark-icon);
 }
 
 .theme-icon-white i {
-  color: #3b82f6;
+  color: var(--theme-white-icon);
 }
 
 .theme-icon-blue i {
-  color: #38bdf8;
+  color: var(--theme-blue-icon);
 }
 
 .theme-icon-matrix i {
-  color: #00ff41;
+  color: var(--theme-matrix-icon);
 }
 
 .theme-icon-neumorphism i {
-  color: #667eea;
+  color: var(--theme-neumorphism-icon);
 }
 
 .theme-button.active .theme-icon i {

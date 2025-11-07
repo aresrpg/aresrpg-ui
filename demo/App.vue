@@ -20,8 +20,25 @@
 
     <!-- Layout Container -->
     <div class="layout">
+      <!-- Mobile Menu Button -->
+      <button
+        class="mobile-menu-btn"
+        aria-label="Toggle navigation menu"
+        @click="sidebarOpen = !sidebarOpen"
+      >
+        <i :class="sidebarOpen ? 'bx bx-x' : 'bx bx-menu'"></i>
+      </button>
+
+      <!-- Mobile Overlay -->
+      <div
+        v-if="sidebarOpen"
+        class="mobile-overlay"
+        @click="sidebarOpen = false"
+      ></div>
+
       <!-- Sidebar -->
       <Sidebar
+        v-model:open="sidebarOpen"
         title="AresRPG UI"
         icon="bx bx-game"
         :items="sidebarItems"
@@ -196,6 +213,20 @@
             </div>
           </section>
 
+          <!-- Auth Form Section -->
+          <section class="section">
+            <h2 class="section-title">
+              <i class="bx bx-lock-alt"></i>
+              Authentication Form
+            </h2>
+            <div class="component-demo">
+              <h3 class="demo-subtitle">Sign In / Sign Up</h3>
+              <div style="display: flex; justify-content: center;">
+                <AuthForm />
+              </div>
+            </div>
+          </section>
+
           <!-- Badges Section -->
           <section class="section">
             <h2 class="section-title">
@@ -340,17 +371,17 @@
               <h3 class="demo-subtitle">With Icons</h3>
               <div class="demo-group">
                 <Tooltip content="Click to edit">
-                  <Button variant="primary" size="sm">
+                  <Button variant="primary" size="sm" aria-label="Edit">
                     <i class="bx bx-edit"></i>
                   </Button>
                 </Tooltip>
                 <Tooltip content="Delete this item">
-                  <Button variant="error" size="sm">
+                  <Button variant="error" size="sm" aria-label="Delete">
                     <i class="bx bx-trash"></i>
                   </Button>
                 </Tooltip>
                 <Tooltip content="Download file">
-                  <Button variant="success" size="sm">
+                  <Button variant="success" size="sm" aria-label="Download">
                     <i class="bx bx-download"></i>
                   </Button>
                 </Tooltip>
@@ -367,10 +398,10 @@
             <div class="component-demo">
               <h3 class="demo-subtitle">Sizes</h3>
               <div class="demo-group">
-                <Avatar initials="SM" size="sm" />
-                <Avatar initials="MD" size="md" />
-                <Avatar initials="LG" size="lg" />
-                <Avatar initials="XL" size="xl" />
+                <Avatar name="Small Avatar" size="sm" />
+                <Avatar name="Medium Avatar" size="md" />
+                <Avatar name="Large Avatar" size="lg" />
+                <Avatar name="Extra Large" size="xl" />
               </div>
 
               <h3 class="demo-subtitle">With Icons</h3>
@@ -382,9 +413,9 @@
 
               <h3 class="demo-subtitle">Status Indicators</h3>
               <div class="demo-group">
-                <Avatar initials="ON" size="lg" status="online" />
-                <Avatar initials="OFF" size="lg" status="offline" />
-                <Avatar initials="NX" size="lg" />
+                <Avatar name="Online User" size="lg" status="online" />
+                <Avatar name="Offline User" size="lg" status="offline" />
+                <Avatar name="Nox Agent" size="lg" />
               </div>
             </div>
           </section>
@@ -644,8 +675,9 @@
 
 <script setup>
 import { ref } from 'vue'
-import { Button, Card, Input, Badge, Modal, ThemeSwitcher, Navbar, Sidebar, Dropdown, Tooltip, Avatar, Alert, Toggle, Tabs, Toast, Skeleton, EmptyState, ProgressBar, Chart } from '../src/index.js'
+import { Button, Card, Input, Badge, Modal, ThemeSwitcher, Navbar, Sidebar, Dropdown, Tooltip, Avatar, Alert, Toggle, Tabs, Toast, Skeleton, EmptyState, ProgressBar, Chart, AuthForm } from '../src/index.js'
 
+const sidebarOpen = ref(false)
 const showModal = ref(false)
 const showConfirmModal = ref(false)
 
@@ -901,8 +933,71 @@ function showToast(variant, title, message) {
   flex-wrap: wrap;
 }
 
+/* Mobile Menu Button */
+.mobile-menu-btn {
+  display: none;
+  position: fixed;
+  top: var(--spacing-md);
+  left: var(--spacing-md);
+  z-index: 100;
+  width: 48px;
+  height: 48px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  font-size: 1.5em;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu-btn:hover {
+  background: var(--glass-bg-medium);
+  color: var(--color-accent-primary);
+  transform: scale(1.05);
+}
+
+.mobile-menu-btn:active {
+  transform: scale(0.95);
+}
+
+/* Mobile Overlay */
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 49;
+  animation: fadeIn var(--transition-fast);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* Responsive */
 @media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobile-overlay {
+    display: block;
+  }
+
   .content {
     padding: var(--spacing-md);
   }
