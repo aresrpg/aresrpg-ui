@@ -27,10 +27,12 @@ export default defineConfig(({ mode }) => {
         fileName: (format) => `aresrpg-ui.${format === 'es' ? 'js' : 'umd.cjs'}`
       },
       rollupOptions: {
-        external: ['vue'],
+        external: ['vue', 'lucide-vue-next'],
         output: {
+          exports: 'named',
           globals: {
-            vue: 'Vue'
+            vue: 'Vue',
+            'lucide-vue-next': 'LucideVueNext'
           },
           assetFileNames: (assetInfo) => {
             if (assetInfo.name === 'style.css') return 'style.css'
