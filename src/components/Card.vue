@@ -1,39 +1,45 @@
 <template>
-  <div :class="['glass-card', { 'glass-card-hover': hoverable }]">
-    <div v-if="$slots.icon || icon" class="glass-card-icon">
+  <div
+    ref="cardRef"
+    :class="['card', { 'card-hover': hoverable, 'card-visible': isVisible }]"
+  >
+    <div v-if="$slots.icon || icon" class="card-icon">
       <slot name="icon">
         <i :class="icon"></i>
       </slot>
     </div>
 
-    <div v-if="$slots.header || title || description" class="glass-card-header">
-      <h3 v-if="title || $slots.title" class="glass-card-title">
+    <div v-if="$slots.header || title || description" class="card-header">
+      <h3 v-if="title || $slots.title" class="card-title">
         <slot name="title">{{ title }}</slot>
       </h3>
-      <p v-if="description || $slots.description" class="glass-card-description">
+      <p v-if="description || $slots.description" class="card-description">
         <slot name="description">{{ description }}</slot>
       </p>
     </div>
 
-    <div class="glass-card-content">
+    <div class="card-content">
       <slot />
     </div>
 
-    <div v-if="$slots.footer" class="glass-card-footer">
+    <div v-if="$slots.footer" class="card-footer">
       <slot name="footer" />
     </div>
   </div>
 </template>
 
 <script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
+
 /**
- * Glass morphism card component
+ * Refined glassmorphism card with subtle improvements
+ * Clean design with thin borders, better spacing, and refined shadows
  * @param {string} title - Card title
  * @param {string} description - Card description
  * @param {string} icon - Icon class (e.g., 'bx bx-star')
- * @param {boolean} hoverable - Enable hover effect
+ * @param {boolean} hoverable - Enable hover effects
  */
-defineProps({
+const props = defineProps({
   title: {
     type: String,
     default: ''
@@ -51,112 +57,139 @@ defineProps({
     default: true
   }
 })
+
+const cardRef = ref(null)
+const isVisible = ref(false)
+
+/**
+ * Subtle scroll-reveal animation using Intersection Observer
+ */
+function setupScrollReveal() {
+  if (!cardRef.value) return
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          isVisible.value = true
+          observer.unobserve(entry.target)
+        }
+      })
+    },
+    { threshold: 0.1 }
+  )
+
+  observer.observe(cardRef.value)
+
+  return () => {
+    if (cardRef.value) observer.unobserve(cardRef.value)
+  }
+}
+
+onMounted(() => {
+  const cleanup = setupScrollReveal()
+  onUnmounted(cleanup)
+})
 </script>
 
 <style scoped>
-.glass-card {
+.card {
   background: var(--glass-bg);
   backdrop-filter: blur(20px) saturate(180%);
-  border-radius: var(--radius-lg);
+  border-radius: 6px;
   border: 1px solid var(--glass-border);
-  padding: var(--spacing-lg);
-  transition: all var(--transition-base);
+  padding: 20px;
+  transition: all 0.2s ease;
   position: relative;
-  overflow: hidden;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05),
-              0 8px 32px 0 rgba(0, 0, 0, 0.37);
-}
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 
-.glass-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--gradient-border);
+  /* Subtle scroll-reveal animation - starts hidden */
   opacity: 0;
-  transition: opacity var(--transition-base);
+  transform: translateY(10px);
 }
 
-.glass-card::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, transparent 50%, rgba(255, 255, 255, 0.01) 100%);
-  pointer-events: none;
-  border-radius: var(--radius-lg);
-}
-
-.glass-card-hover:hover {
-  transform: translateY(-4px);
-  border-color: var(--glass-border-bright);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1),
-              0 16px 48px 0 rgba(0, 0, 0, 0.5),
-              var(--glow-primary);
-  backdrop-filter: blur(24px) saturate(200%);
-}
-
-.glass-card-hover:hover::before {
+/* Scroll-reveal animation - when visible */
+.card-visible {
   opacity: 1;
+  transform: translateY(0);
 }
 
-.glass-card-hover:hover::after {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, transparent 50%, rgba(255, 202, 40, 0.02) 100%);
+/* Subtle hover effect */
+.card-hover:hover {
+  border-color: var(--glass-border-bright);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
 }
 
-.glass-card-icon {
-  width: 48px;
-  height: 48px;
-  background: var(--gradient-glass);
-  border: 1px solid var(--glass-border-bright);
-  border-radius: var(--radius-md);
+/* Neumorphism theme overrides */
+[data-theme="neumorphism"] .card {
+  background: var(--color-bg-primary);
+  border: none;
+  box-shadow: 4px 4px 8px rgba(163, 177, 198, 0.35),
+              -4px -4px 8px rgba(255, 255, 255, 0.45);
+}
+
+[data-theme="neumorphism"] .card-hover:hover {
+  box-shadow: 3px 3px 6px rgba(163, 177, 198, 0.35),
+              -3px -3px 6px rgba(255, 255, 255, 0.45);
+  transform: translateY(0);
+}
+
+/* Card content */
+.card-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--glass-bg-medium);
+  border: 1px solid var(--glass-border);
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
-  margin-bottom: var(--spacing-md);
+  font-size: 20px;
+  margin-bottom: 12px;
   color: var(--color-accent-primary);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05),
-              0 0 20px rgba(255, 202, 40, 0.15);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
   backdrop-filter: blur(20px);
-  position: relative;
-  z-index: 1;
 }
 
-.glass-card-header {
-  margin-bottom: var(--spacing-md);
-  position: relative;
-  z-index: 1;
+[data-theme="neumorphism"] .card-icon {
+  background: var(--color-bg-primary);
+  border: none;
+  box-shadow: 2px 2px 4px rgba(163, 177, 198, 0.35),
+              -2px -2px 4px rgba(255, 255, 255, 0.45);
 }
 
-.glass-card-title {
+.card-header {
+  margin-bottom: 12px;
+}
+
+.card-title {
   font-size: var(--font-size-xl);
-  font-weight: 700;
-  margin-bottom: var(--spacing-xs);
+  font-weight: 600;
+  margin-bottom: 6px;
   text-transform: uppercase;
   color: var(--color-text-primary);
+  letter-spacing: 0.02em;
 }
 
-.glass-card-description {
+.card-description {
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
   margin: 0;
+  line-height: 1.5;
 }
 
-.glass-card-content {
-  position: relative;
-  z-index: 1;
+.card-content {
+  color: var(--color-text-primary);
 }
 
-.glass-card-footer {
+.card-footer {
   margin-top: var(--spacing-md);
   padding-top: var(--spacing-md);
   border-top: 1px solid var(--glass-border);
-  position: relative;
-  z-index: 1;
+}
+
+[data-theme="neumorphism"] .card-footer {
+  border-top: 1px solid rgba(163, 177, 198, 0.2);
 }
 </style>
