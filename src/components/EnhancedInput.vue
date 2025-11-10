@@ -1,23 +1,23 @@
 <template>
-  <div class="input-wrapper" :class="{ 'input-wrapper-error': error, 'input-wrapper-success': success }">
+  <div class="refined-input-wrapper" :class="{ 'refined-input-wrapper-error': error, 'refined-input-wrapper-success': success }">
     <!-- Floating label -->
     <label
       v-if="label"
       :for="inputId"
-      class="input-label"
+      class="refined-input-label"
       :class="{
-        'input-label-float': isFocused || hasValue,
-        'input-label-error': error,
-        'input-label-success': success,
-        'input-label-with-prefix': prefixIcon
+        'refined-input-label-float': isFocused || hasValue,
+        'refined-input-label-error': error,
+        'refined-input-label-success': success,
+        'refined-input-label-with-prefix': prefixIcon
       }"
     >
       {{ label }}
     </label>
 
-    <div class="input-container">
+    <div class="refined-input-container">
       <!-- Prefix icon -->
-      <span v-if="prefixIcon" class="input-prefix-icon">
+      <span v-if="prefixIcon" class="refined-input-prefix-icon">
         <i :class="prefixIcon"></i>
       </span>
 
@@ -32,12 +32,12 @@
         :maxlength="maxLength"
         :aria-invalid="error ? 'true' : 'false'"
         :aria-describedby="helperTextId"
-        class="input"
+        class="refined-input"
         :class="{
-          'input-error': error,
-          'input-success': success,
-          'input-with-prefix': prefixIcon,
-          'input-with-suffix': suffixIcon || error || success || (maxLength && showCharCount)
+          'refined-input-error': error,
+          'refined-input-success': success,
+          'refined-input-with-prefix': prefixIcon,
+          'refined-input-with-suffix': suffixIcon || error || success || (maxLength && showCharCount)
         }"
         @input="handleInput"
         @focus="handleFocus"
@@ -45,7 +45,7 @@
       />
 
       <!-- Suffix icons and character count -->
-      <span v-if="suffixIcon || error || success || (maxLength && showCharCount)" class="input-suffix">
+      <span v-if="suffixIcon || error || success || (maxLength && showCharCount)" class="refined-input-suffix">
         <!-- Validation icons -->
         <i v-if="error" class="bx bx-error-circle validation-icon error-icon"></i>
         <i v-else-if="success" class="bx bx-check-circle validation-icon success-icon"></i>
@@ -74,9 +74,9 @@
     </div>
 
     <!-- Helper/Error/Success message -->
-    <p v-if="helperText || error || success" :id="helperTextId" class="input-helper-text" :class="{
-      'input-helper-error': error,
-      'input-helper-success': success
+    <p v-if="helperText || error || success" :id="helperTextId" class="refined-input-helper-text" :class="{
+      'refined-input-helper-error': error,
+      'refined-input-helper-success': success
     }">
       <i v-if="error" class="bx bx-error-circle"></i>
       <i v-if="success" class="bx bx-check-circle"></i>
@@ -201,13 +201,13 @@ function handleBlur(event) {
 </script>
 
 <style scoped>
-.input-wrapper {
+.refined-input-wrapper {
   width: 100%;
   position: relative;
 }
 
 /* Floating label */
-.input-label {
+.refined-input-label {
   position: absolute;
   left: 12px;
   top: 50%;
@@ -222,7 +222,7 @@ function handleBlur(event) {
   z-index: 2;
 }
 
-.input-label-float {
+.refined-input-label-float {
   top: 0;
   transform: translateY(-50%);
   font-size: 11px;
@@ -234,32 +234,32 @@ function handleBlur(event) {
 }
 
 /* Matrix theme - tone down neon label */
-[data-theme="matrix"] .input-label-float {
+[data-theme="matrix"] .refined-input-label-float {
   color: #00AA00;
   filter: brightness(0.9);
 }
 
 /* Shift label when prefix icon exists */
-.input-label-with-prefix {
+.refined-input-label-with-prefix {
   left: 38px;
 }
 
-.input-label-error {
+.refined-input-label-error {
   color: var(--color-error);
 }
 
-.input-label-success {
+.refined-input-label-success {
   color: var(--color-success);
 }
 
-.input-container {
+.refined-input-container {
   position: relative;
   width: 100%;
 }
 
 /* Prefix and suffix icons */
-.input-prefix-icon,
-.input-suffix {
+.refined-input-prefix-icon,
+.refined-input-suffix {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -273,11 +273,11 @@ function handleBlur(event) {
   z-index: 2;
 }
 
-.input-prefix-icon {
+.refined-input-prefix-icon {
   left: var(--spacing-sm);
 }
 
-.input-suffix {
+.refined-input-suffix {
   right: var(--spacing-sm);
 }
 
@@ -331,7 +331,7 @@ function handleBlur(event) {
 }
 
 /* Input field */
-.input {
+.refined-input {
   width: 100%;
   padding: 10px 12px;
   background: var(--glass-bg);
@@ -347,20 +347,20 @@ function handleBlur(event) {
   z-index: 1;
 }
 
-.input-with-prefix {
+.refined-input-with-prefix {
   padding-left: 38px;
 }
 
-.input-with-suffix {
+.refined-input-with-suffix {
   padding-right: 80px;
 }
 
-.input::placeholder {
+.refined-input::placeholder {
   color: var(--color-text-dim);
   transition: opacity 0.2s ease;
 }
 
-.input:focus {
+.refined-input:focus {
   outline: none;
   border-color: var(--color-accent-primary);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1),
@@ -369,23 +369,23 @@ function handleBlur(event) {
 }
 
 /* Matrix theme - tone down focus glow */
-[data-theme="matrix"] .input:focus {
+[data-theme="matrix"] .refined-input:focus {
   border-color: #00AA00;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1),
               0 0 0 2px rgba(0, 170, 0, 0.15);
 }
 
-.input:disabled {
+.refined-input:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
 /* Error state */
-.input-error {
+.refined-input-error {
   border-color: var(--color-error);
 }
 
-.input-error:focus {
+.refined-input-error:focus {
   border-color: var(--color-error);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15),
               inset 0 0 0 1px rgba(255, 255, 255, 0.05),
@@ -393,11 +393,11 @@ function handleBlur(event) {
 }
 
 /* Success state */
-.input-success {
+.refined-input-success {
   border-color: var(--color-success);
 }
 
-.input-success:focus {
+.refined-input-success:focus {
   border-color: var(--color-success);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15),
               inset 0 0 0 1px rgba(255, 255, 255, 0.05),
@@ -405,19 +405,19 @@ function handleBlur(event) {
 }
 
 /* Neumorphism theme overrides */
-[data-theme="neumorphism"] .input {
+[data-theme="neumorphism"] .refined-input {
   background: var(--color-bg-primary);
   border: none;
   box-shadow: inset 1px 1px 3px rgba(163, 177, 198, 0.3),
               inset -1px -1px 3px rgba(255, 255, 255, 0.4);
 }
 
-[data-theme="neumorphism"] .input:focus {
+[data-theme="neumorphism"] .refined-input:focus {
   box-shadow: inset 2px 2px 4px rgba(163, 177, 198, 0.3),
               inset -2px -2px 4px rgba(255, 255, 255, 0.4);
 }
 
-[data-theme="neumorphism"] .input-label-float {
+[data-theme="neumorphism"] .refined-input-label-float {
   background: transparent;
   color: #5865F2;
 }
@@ -483,7 +483,7 @@ function handleBlur(event) {
 }
 
 /* Helper text */
-.input-helper-text {
+.refined-input-helper-text {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
@@ -504,15 +504,15 @@ function handleBlur(event) {
   }
 }
 
-.input-helper-error {
+.refined-input-helper-error {
   color: var(--color-error);
 }
 
-.input-helper-success {
+.refined-input-helper-success {
   color: var(--color-success);
 }
 
-.input-helper-text i {
+.refined-input-helper-text i {
   font-size: 14px;
 }
 </style>

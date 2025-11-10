@@ -1,28 +1,28 @@
 <template>
   <div
     ref="cardRef"
-    :class="['card', { 'card-hover': hoverable, 'card-visible': isVisible }]"
+    :class="['refined-card', { 'refined-card-hover': hoverable, 'refined-card-visible': isVisible }]"
   >
-    <div v-if="$slots.icon || icon" class="card-icon">
+    <div v-if="$slots.icon || icon" class="refined-card-icon">
       <slot name="icon">
         <i :class="icon"></i>
       </slot>
     </div>
 
-    <div v-if="$slots.header || title || description" class="card-header">
-      <h3 v-if="title || $slots.title" class="card-title">
+    <div v-if="$slots.header || title || description" class="refined-card-header">
+      <h3 v-if="title || $slots.title" class="refined-card-title">
         <slot name="title">{{ title }}</slot>
       </h3>
-      <p v-if="description || $slots.description" class="card-description">
+      <p v-if="description || $slots.description" class="refined-card-description">
         <slot name="description">{{ description }}</slot>
       </p>
     </div>
 
-    <div class="card-content">
+    <div class="refined-card-content">
       <slot />
     </div>
 
-    <div v-if="$slots.footer" class="card-footer">
+    <div v-if="$slots.footer" class="refined-card-footer">
       <slot name="footer" />
     </div>
   </div>
@@ -93,7 +93,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.card {
+.refined-card {
   background: var(--glass-bg);
   backdrop-filter: blur(20px) saturate(180%);
   border-radius: 6px;
@@ -109,34 +109,34 @@ onMounted(() => {
 }
 
 /* Scroll-reveal animation - when visible */
-.card-visible {
+.refined-card-visible {
   opacity: 1;
   transform: translateY(0);
 }
 
 /* Subtle hover effect */
-.card-hover:hover {
+.refined-card-hover:hover {
   border-color: var(--glass-border-bright);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
   transform: translateY(-2px);
 }
 
 /* Neumorphism theme overrides */
-[data-theme="neumorphism"] .card {
+[data-theme="neumorphism"] .refined-card {
   background: var(--color-bg-primary);
   border: none;
   box-shadow: 4px 4px 8px rgba(163, 177, 198, 0.35),
               -4px -4px 8px rgba(255, 255, 255, 0.45);
 }
 
-[data-theme="neumorphism"] .card-hover:hover {
+[data-theme="neumorphism"] .refined-card-hover:hover {
   box-shadow: 3px 3px 6px rgba(163, 177, 198, 0.35),
               -3px -3px 6px rgba(255, 255, 255, 0.45);
   transform: translateY(0);
 }
 
 /* Card content */
-.card-icon {
+.refined-card-icon {
   width: 40px;
   height: 40px;
   background: var(--glass-bg-medium);
@@ -152,18 +152,18 @@ onMounted(() => {
   backdrop-filter: blur(20px);
 }
 
-[data-theme="neumorphism"] .card-icon {
+[data-theme="neumorphism"] .refined-card-icon {
   background: var(--color-bg-primary);
   border: none;
   box-shadow: 2px 2px 4px rgba(163, 177, 198, 0.35),
               -2px -2px 4px rgba(255, 255, 255, 0.45);
 }
 
-.card-header {
+.refined-card-header {
   margin-bottom: 12px;
 }
 
-.card-title {
+.refined-card-title {
   font-size: var(--font-size-xl);
   font-weight: 600;
   margin-bottom: 6px;
@@ -172,24 +172,24 @@ onMounted(() => {
   letter-spacing: 0.02em;
 }
 
-.card-description {
+.refined-card-description {
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
   margin: 0;
   line-height: 1.5;
 }
 
-.card-content {
+.refined-card-content {
   color: var(--color-text-primary);
 }
 
-.card-footer {
+.refined-card-footer {
   margin-top: var(--spacing-md);
   padding-top: var(--spacing-md);
   border-top: 1px solid var(--glass-border);
 }
 
-[data-theme="neumorphism"] .card-footer {
+[data-theme="neumorphism"] .refined-card-footer {
   border-top: 1px solid rgba(163, 177, 198, 0.2);
 }
 </style>

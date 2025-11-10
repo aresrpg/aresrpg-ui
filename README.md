@@ -713,46 +713,6 @@ const menuItems = [
 
 ---
 
-### Toast
-
-Toast notification component with auto-dismiss and variants.
-
-```vue
-<script setup>
-import { ref } from 'vue'
-import { Toast, Button } from '@aresrpg/ui'
-
-const showToast = ref(false)
-</script>
-
-<template>
-  <Button @click="showToast = true">Show Toast</Button>
-
-  <Toast
-    v-model="showToast"
-    variant="success"
-    title="Success"
-    message="Operation completed successfully!"
-    :duration="5000"
-    :closable="true"
-  />
-</template>
-```
-
-**Props:**
-- `modelValue`: boolean - v-model for visibility
-- `variant`: 'success' | 'error' | 'warning' | 'info' (default: 'info')
-- `title`: string - Toast title
-- `message`: string - Toast message
-- `duration`: number (default: 5000) - Auto-dismiss duration in ms (0 = no auto-dismiss)
-- `closable`: boolean (default: true) - Show close button
-
-**Events:**
-- `@update:modelValue`: Emitted when toast visibility changes
-- `@close`: Emitted when toast is closed
-
----
-
 ### Skeleton
 
 Skeleton loader component for loading states.

@@ -1,12 +1,12 @@
 <template>
   <button
     :class="[
-      'btn',
+      'refined-btn',
       variantClass,
       sizeClass,
       {
-        'btn-disabled': disabled,
-        'btn-loading': loading
+        'refined-btn-disabled': disabled,
+        'refined-btn-loading': loading
       }
     ]"
     :disabled="disabled || loading"
@@ -56,8 +56,8 @@ const props = defineProps({
 
 const emit = defineEmits(['click'])
 
-const variantClass = computed(() => `btn-${props.variant}`)
-const sizeClass = computed(() => `btn-${props.size}`)
+const variantClass = computed(() => `refined-btn-${props.variant}`)
+const sizeClass = computed(() => `refined-btn-${props.size}`)
 
 function handleClick(event) {
   if (props.disabled || props.loading) return
@@ -66,7 +66,7 @@ function handleClick(event) {
 </script>
 
 <style scoped>
-.btn {
+.refined-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -110,118 +110,118 @@ function handleClick(event) {
 }
 
 /* Variant styles */
-.btn-primary {
+.refined-btn-primary {
   background: var(--glass-bg);
   backdrop-filter: blur(20px) saturate(180%);
   color: var(--color-text-primary);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 }
 
-.btn-primary:hover:not(:disabled) {
+.refined-btn-primary:hover:not(:disabled) {
   background: var(--glass-bg-medium);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
   transform: translateY(-1px);
 }
 
-.btn-gradient {
+.refined-btn-gradient {
   background: var(--gradient-primary);
   border: none;
   color: var(--color-text-primary);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
-.btn-gradient:hover:not(:disabled) {
+.refined-btn-gradient:hover:not(:disabled) {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   transform: translateY(-1px);
   filter: brightness(1.05);
 }
 
-.btn-success {
+.refined-btn-success {
   background: var(--color-success);
   border: none;
   color: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
-.btn-success:hover:not(:disabled) {
+.refined-btn-success:hover:not(:disabled) {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   transform: translateY(-1px);
 }
 
-.btn-error {
+.refined-btn-error {
   background: var(--color-error);
   border: none;
   color: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
-.btn-error:hover:not(:disabled) {
+.refined-btn-error:hover:not(:disabled) {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   transform: translateY(-1px);
 }
 
 /* Matrix theme - tone down neon green */
-[data-theme="matrix"] .btn-gradient {
+[data-theme="matrix"] .refined-btn-gradient {
   background: linear-gradient(135deg, #00AA00 0%, #00DD00 100%);
   filter: brightness(0.85);
 }
 
-[data-theme="matrix"] .btn-success {
+[data-theme="matrix"] .refined-btn-success {
   background: #00AA00;
   filter: brightness(0.9);
 }
 
 /* Neumorphism theme - boost button saturation */
-[data-theme="neumorphism"] .btn-success {
+[data-theme="neumorphism"] .refined-btn-success {
   background: #2ecc71;
   color: white;
   filter: saturate(1.2);
 }
 
-[data-theme="neumorphism"] .btn-error {
+[data-theme="neumorphism"] .refined-btn-error {
   background: #e74c3c;
   color: white;
   filter: saturate(1.2);
 }
 
-.btn-outline {
+.refined-btn-outline {
   background: transparent;
   color: var(--color-accent-primary);
   border: 1px solid var(--color-accent-primary);
 }
 
-.btn-outline:hover:not(:disabled) {
+.refined-btn-outline:hover:not(:disabled) {
   background: var(--color-accent-primary);
   color: var(--color-bg-primary);
 }
 
 /* Neumorphism theme overrides */
-[data-theme="neumorphism"] .btn {
+[data-theme="neumorphism"] .refined-btn {
   background: var(--color-bg-primary);
   border: none;
   box-shadow: 4px 4px 8px rgba(163, 177, 198, 0.4),
               -4px -4px 8px rgba(255, 255, 255, 0.5);
 }
 
-[data-theme="neumorphism"] .btn:hover:not(:disabled) {
+[data-theme="neumorphism"] .refined-btn:hover:not(:disabled) {
   box-shadow: 2px 2px 4px rgba(163, 177, 198, 0.4),
               -2px -2px 4px rgba(255, 255, 255, 0.5);
   transform: translateY(0);
 }
 
-[data-theme="neumorphism"] .btn:active:not(:disabled) {
+[data-theme="neumorphism"] .refined-btn:active:not(:disabled) {
   box-shadow: inset 2px 2px 4px rgba(163, 177, 198, 0.4),
               inset -2px -2px 4px rgba(255, 255, 255, 0.5);
 }
 
-[data-theme="neumorphism"] .btn-gradient {
+[data-theme="neumorphism"] .refined-btn-gradient {
   background: var(--gradient-primary);
   color: white;
   box-shadow: 3px 3px 6px rgba(163, 177, 198, 0.4),
               -3px -3px 6px rgba(255, 255, 255, 0.3);
 }
 
-[data-theme="neumorphism"] .btn-outline {
+[data-theme="neumorphism"] .refined-btn-outline {
   background: transparent;
   border: 1px solid var(--color-accent-primary);
   color: var(--color-accent-primary);
@@ -229,26 +229,26 @@ function handleClick(event) {
 }
 
 /* Size variants */
-.btn-sm {
+.refined-btn-sm {
   padding: 6px 14px;
   font-size: var(--font-size-sm);
 }
 
-.btn-lg {
+.refined-btn-lg {
   padding: 10px 24px;
   font-size: var(--font-size-lg);
 }
 
 /* Disabled state */
-.btn-disabled,
-.btn:disabled {
+.refined-btn-disabled,
+.refined-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   pointer-events: none;
 }
 
 /* Loading state */
-.btn-loading {
+.refined-btn-loading {
   cursor: wait;
 }
 </style>

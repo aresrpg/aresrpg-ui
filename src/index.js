@@ -16,12 +16,14 @@ import Avatar from './components/Avatar.vue'
 import Alert from './components/Alert.vue'
 import Toggle from './components/Toggle.vue'
 import Tabs from './components/Tabs.vue'
-import Toast from './components/Toast.vue'
 import Skeleton from './components/Skeleton.vue'
 import EmptyState from './components/EmptyState.vue'
 import ProgressBar from './components/ProgressBar.vue'
 import Chart from './components/Chart.vue'
 import AuthForm from './components/AuthForm.vue'
+import EnhancedButton from './components/EnhancedButton.vue'
+import EnhancedCard from './components/EnhancedCard.vue'
+import EnhancedInput from './components/EnhancedInput.vue'
 
 // Import composables
 import { useTheme } from './composables/useTheme.js'
@@ -42,12 +44,14 @@ const components = {
   Alert,
   Toggle,
   Tabs,
-  Toast,
   Skeleton,
   EmptyState,
   ProgressBar,
   Chart,
-  AuthForm
+  AuthForm,
+  EnhancedButton,
+  EnhancedCard,
+  EnhancedInput
 }
 
 /**
@@ -77,12 +81,14 @@ export {
   Alert,
   Toggle,
   Tabs,
-  Toast,
   Skeleton,
   EmptyState,
   ProgressBar,
   Chart,
   AuthForm,
+  EnhancedButton,
+  EnhancedCard,
+  EnhancedInput,
   useTheme
 }
 
