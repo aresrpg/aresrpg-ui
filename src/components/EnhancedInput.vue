@@ -208,7 +208,7 @@ function handleBlur(event) {
 /* Floating label */
 .refined-input-label {
   position: absolute;
-  left: var(--spacing-sm);
+  left: 12px;
   top: 50%;
   transform: translateY(-50%);
   font-size: var(--font-size-base);
@@ -217,19 +217,25 @@ function handleBlur(event) {
   pointer-events: none;
   transition: all 0.2s ease;
   background: transparent;
-  padding: 0 var(--spacing-xs);
+  padding: 0 4px;
   z-index: 2;
 }
 
 .refined-input-label-float {
   top: 0;
   transform: translateY(-50%);
-  font-size: var(--font-size-xs);
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.02em;
   color: var(--color-accent-primary);
   background: var(--color-bg-primary);
+}
+
+/* Matrix theme - tone down neon label */
+[data-theme="matrix"] .refined-input-label-float {
+  color: #00AA00;
+  filter: brightness(0.9);
 }
 
 .refined-input-label-error {
@@ -321,27 +327,26 @@ function handleBlur(event) {
 /* Input field */
 .refined-input {
   width: 100%;
-  padding: var(--spacing-sm);
+  padding: 10px 12px;
   background: var(--glass-bg);
   backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid var(--glass-border);
-  border-radius: var(--radius-sm);
+  border-radius: 4px;
   color: var(--color-text-primary);
   font-size: var(--font-size-base);
   font-family: var(--font-family);
   transition: all 0.2s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
-              inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
   position: relative;
   z-index: 1;
 }
 
 .refined-input-with-prefix {
-  padding-left: calc(var(--spacing-sm) * 2 + 18px);
+  padding-left: 38px;
 }
 
 .refined-input-with-suffix {
-  padding-right: calc(var(--spacing-sm) * 3 + 50px);
+  padding-right: 80px;
 }
 
 .refined-input::placeholder {
@@ -352,10 +357,16 @@ function handleBlur(event) {
 .refined-input:focus {
   outline: none;
   border-color: var(--color-accent-primary);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15),
-              inset 0 0 0 1px rgba(255, 255, 255, 0.05),
-              0 0 0 2px rgba(255, 202, 40, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1),
+              0 0 0 2px rgba(255, 202, 40, 0.08);
   background: var(--glass-bg-medium);
+}
+
+/* Matrix theme - tone down focus glow */
+[data-theme="matrix"] .refined-input:focus {
+  border-color: #00AA00;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1),
+              0 0 0 2px rgba(0, 170, 0, 0.15);
 }
 
 .refined-input:disabled {
@@ -391,17 +402,18 @@ function handleBlur(event) {
 [data-theme="neumorphism"] .refined-input {
   background: var(--color-bg-primary);
   border: none;
-  box-shadow: inset 2px 2px 4px rgba(163, 177, 198, 0.4),
-              inset -2px -2px 4px rgba(255, 255, 255, 0.5);
+  box-shadow: inset 1px 1px 3px rgba(163, 177, 198, 0.3),
+              inset -1px -1px 3px rgba(255, 255, 255, 0.4);
 }
 
 [data-theme="neumorphism"] .refined-input:focus {
-  box-shadow: inset 3px 3px 6px rgba(163, 177, 198, 0.4),
-              inset -3px -3px 6px rgba(255, 255, 255, 0.5);
+  box-shadow: inset 2px 2px 4px rgba(163, 177, 198, 0.3),
+              inset -2px -2px 4px rgba(255, 255, 255, 0.4);
 }
 
 [data-theme="neumorphism"] .refined-input-label-float {
   background: transparent;
+  color: #5865F2;
 }
 
 /* Animated bottom border */

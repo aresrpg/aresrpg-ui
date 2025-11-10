@@ -71,13 +71,13 @@ function handleClick(event) {
   align-items: center;
   justify-content: center;
   gap: var(--spacing-xs);
-  padding: var(--spacing-sm) var(--spacing-lg);
-  border-radius: var(--radius-sm);
+  padding: 8px 20px;
+  border-radius: 4px;
   font-size: var(--font-size-base);
-  font-weight: 700;
+  font-weight: 500;
   text-decoration: none;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.02em;
   border: 1px solid var(--glass-border);
   cursor: pointer;
   transition: all 0.2s ease;
@@ -114,14 +114,12 @@ function handleClick(event) {
   background: var(--glass-bg);
   backdrop-filter: blur(20px) saturate(180%);
   color: var(--color-text-primary);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
-              inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 }
 
 .refined-btn-primary:hover:not(:disabled) {
   background: var(--glass-bg-medium);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15),
-              inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
   transform: translateY(-1px);
 }
 
@@ -129,11 +127,11 @@ function handleClick(event) {
   background: var(--gradient-primary);
   border: none;
   color: var(--color-text-primary);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
 .refined-btn-gradient:hover:not(:disabled) {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   transform: translateY(-1px);
   filter: brightness(1.05);
 }
@@ -142,11 +140,11 @@ function handleClick(event) {
   background: var(--color-success);
   border: none;
   color: white;
-  box-shadow: 0 2px 8px rgba(46, 204, 113, 0.25);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
 .refined-btn-success:hover:not(:disabled) {
-  box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   transform: translateY(-1px);
 }
 
@@ -154,12 +152,36 @@ function handleClick(event) {
   background: var(--color-error);
   border: none;
   color: white;
-  box-shadow: 0 2px 8px rgba(239, 83, 80, 0.25);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
 .refined-btn-error:hover:not(:disabled) {
-  box-shadow: 0 4px 12px rgba(239, 83, 80, 0.3);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   transform: translateY(-1px);
+}
+
+/* Matrix theme - tone down neon green */
+[data-theme="matrix"] .refined-btn-gradient {
+  background: linear-gradient(135deg, #00AA00 0%, #00DD00 100%);
+  filter: brightness(0.85);
+}
+
+[data-theme="matrix"] .refined-btn-success {
+  background: #00AA00;
+  filter: brightness(0.9);
+}
+
+/* Neumorphism theme - boost button saturation */
+[data-theme="neumorphism"] .refined-btn-success {
+  background: #2ecc71;
+  color: white;
+  filter: saturate(1.2);
+}
+
+[data-theme="neumorphism"] .refined-btn-error {
+  background: #e74c3c;
+  color: white;
+  filter: saturate(1.2);
 }
 
 .refined-btn-outline {
@@ -208,12 +230,12 @@ function handleClick(event) {
 
 /* Size variants */
 .refined-btn-sm {
-  padding: var(--spacing-xs) var(--spacing-md);
+  padding: 6px 14px;
   font-size: var(--font-size-sm);
 }
 
 .refined-btn-lg {
-  padding: var(--spacing-md) var(--spacing-xl);
+  padding: 10px 24px;
   font-size: var(--font-size-lg);
 }
 

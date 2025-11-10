@@ -96,13 +96,12 @@ onMounted(() => {
 .refined-card {
   background: var(--glass-bg);
   backdrop-filter: blur(20px) saturate(180%);
-  border-radius: var(--radius-lg);
+  border-radius: 6px;
   border: 1px solid var(--glass-border);
-  padding: var(--spacing-lg);
+  padding: 20px;
   transition: all 0.2s ease;
   position: relative;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12),
-              inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 
   /* Subtle scroll-reveal animation - starts hidden */
   opacity: 0;
@@ -118,8 +117,7 @@ onMounted(() => {
 /* Subtle hover effect */
 .refined-card-hover:hover {
   border-color: var(--glass-border-bright);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15),
-              inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
   transform: translateY(-2px);
 }
 
@@ -127,52 +125,51 @@ onMounted(() => {
 [data-theme="neumorphism"] .refined-card {
   background: var(--color-bg-primary);
   border: none;
-  box-shadow: 6px 6px 12px rgba(163, 177, 198, 0.4),
-              -6px -6px 12px rgba(255, 255, 255, 0.5);
+  box-shadow: 4px 4px 8px rgba(163, 177, 198, 0.35),
+              -4px -4px 8px rgba(255, 255, 255, 0.45);
 }
 
 [data-theme="neumorphism"] .refined-card-hover:hover {
-  box-shadow: 4px 4px 8px rgba(163, 177, 198, 0.4),
-              -4px -4px 8px rgba(255, 255, 255, 0.5);
+  box-shadow: 3px 3px 6px rgba(163, 177, 198, 0.35),
+              -3px -3px 6px rgba(255, 255, 255, 0.45);
   transform: translateY(0);
 }
 
 /* Card content */
 .refined-card-icon {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   background: var(--glass-bg-medium);
   border: 1px solid var(--glass-border);
-  border-radius: var(--radius-md);
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
-  margin-bottom: var(--spacing-md);
+  font-size: 20px;
+  margin-bottom: 12px;
   color: var(--color-accent-primary);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
-              inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
   backdrop-filter: blur(20px);
 }
 
 [data-theme="neumorphism"] .refined-card-icon {
   background: var(--color-bg-primary);
   border: none;
-  box-shadow: 3px 3px 6px rgba(163, 177, 198, 0.4),
-              -3px -3px 6px rgba(255, 255, 255, 0.5);
+  box-shadow: 2px 2px 4px rgba(163, 177, 198, 0.35),
+              -2px -2px 4px rgba(255, 255, 255, 0.45);
 }
 
 .refined-card-header {
-  margin-bottom: var(--spacing-md);
+  margin-bottom: 12px;
 }
 
 .refined-card-title {
   font-size: var(--font-size-xl);
-  font-weight: 700;
-  margin-bottom: var(--spacing-xs);
+  font-weight: 600;
+  margin-bottom: 6px;
   text-transform: uppercase;
   color: var(--color-text-primary);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.02em;
 }
 
 .refined-card-description {
