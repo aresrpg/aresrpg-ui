@@ -6,18 +6,6 @@
     <div class="gradient-orb orb-3"></div>
     <div class="gradient-orb orb-4"></div>
 
-    <!-- Toast Container -->
-    <div class="toast-container">
-      <Toast
-        v-for="toast in toasts"
-        :key="toast.id"
-        v-model="toast.show"
-        :variant="toast.variant"
-        :title="toast.title"
-        :message="toast.message"
-      />
-    </div>
-
     <!-- Layout Container -->
     <div class="layout">
       <!-- Mobile Menu Button -->
@@ -91,6 +79,128 @@
             <h1 class="title">AresRPG UI Component Library</h1>
             <p class="subtitle">Glassmorphism Vue 3 Components with 5 Themes</p>
           </header>
+
+          <!-- Enhanced Components (2025) Section -->
+          <section class="section featured-section">
+            <h2 class="section-title">
+              <i class="bx bx-sparkle"></i>
+              Enhanced Components (2025 Design Trends)
+            </h2>
+            <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-lg);">
+              Modern components featuring cursor-tracking glow, ripple effects, 3D hover, scroll-reveal animations, and micro-interactions.
+            </p>
+
+            <!-- Enhanced Buttons -->
+            <div class="component-demo">
+              <h3 class="demo-subtitle">Enhanced Buttons (Ripple + Cursor Tracking)</h3>
+              <div class="demo-group">
+                <EnhancedButton variant="primary">
+                  <i class="bx bx-rocket"></i>
+                  Primary
+                </EnhancedButton>
+                <EnhancedButton variant="gradient">
+                  <i class="bx bx-star"></i>
+                  Gradient
+                </EnhancedButton>
+                <EnhancedButton variant="success">
+                  <i class="bx bx-check"></i>
+                  Success
+                </EnhancedButton>
+                <EnhancedButton variant="error">
+                  <i class="bx bx-x"></i>
+                  Error
+                </EnhancedButton>
+                <EnhancedButton variant="outline">
+                  <i class="bx bx-border-all"></i>
+                  Outline
+                </EnhancedButton>
+              </div>
+
+              <h3 class="demo-subtitle">Loading States</h3>
+              <div class="demo-group">
+                <EnhancedButton variant="primary" :loading="true">Loading</EnhancedButton>
+                <EnhancedButton variant="gradient" :loading="true">Processing</EnhancedButton>
+              </div>
+            </div>
+
+            <!-- Enhanced Cards -->
+            <div class="component-demo">
+              <h3 class="demo-subtitle">Enhanced Cards (3D Tilt + Light Tracking + Scroll Reveal)</h3>
+              <div class="grid">
+                <EnhancedCard
+                  title="Cursor Tracking"
+                  description="Move your mouse over this card to see 3D tilt and light effects"
+                  icon="bx bx-mouse"
+                >
+                  <p style="margin-bottom: var(--spacing-md); color: var(--color-text-secondary);">
+                    Card follows cursor position with 3D perspective transforms and dynamic light reflection.
+                  </p>
+                  <EnhancedButton variant="outline" size="sm">Explore</EnhancedButton>
+                </EnhancedCard>
+
+                <EnhancedCard
+                  title="Scroll Reveal"
+                  description="Animated entrance with fade-in and slide-up effect"
+                  icon="bx bx-show"
+                >
+                  <p style="margin-bottom: var(--spacing-md); color: var(--color-text-secondary);">
+                    Uses Intersection Observer for smooth scroll-triggered animations.
+                  </p>
+                  <EnhancedButton variant="outline" size="sm">Details</EnhancedButton>
+                </EnhancedCard>
+
+                <EnhancedCard
+                  title="Organic Shapes"
+                  description="Morphing background with noise texture overlay"
+                  icon="bx bx-customize"
+                >
+                  <p style="margin-bottom: var(--spacing-md); color: var(--color-text-secondary);">
+                    Animated organic shapes and gradient noise create visual depth.
+                  </p>
+                  <EnhancedButton variant="outline" size="sm">Learn More</EnhancedButton>
+                </EnhancedCard>
+              </div>
+            </div>
+
+            <!-- Enhanced Inputs -->
+            <div class="component-demo">
+              <h3 class="demo-subtitle">Enhanced Inputs (Floating Labels + Breathing Glow)</h3>
+              <div class="form-demo">
+                <EnhancedInput
+                  v-model="enhancedFormData.username"
+                  label="Username"
+                  placeholder="Enter username"
+                  prefix-icon="bx bx-user"
+                />
+                <EnhancedInput
+                  v-model="enhancedFormData.email"
+                  type="email"
+                  label="Email Address"
+                  placeholder="your.email@example.com"
+                  prefix-icon="bx bx-envelope"
+                  :success="enhancedFormData.email.includes('@')"
+                  success-message="Valid email format"
+                />
+                <EnhancedInput
+                  v-model="enhancedFormData.password"
+                  type="password"
+                  label="Password"
+                  placeholder="Enter secure password"
+                  suffix-icon="bx bx-lock-alt"
+                  :max-length="20"
+                  :show-char-count="true"
+                />
+                <EnhancedInput
+                  v-model="enhancedFormData.bio"
+                  label="Bio"
+                  placeholder="Tell us about yourself"
+                  :max-length="100"
+                  :show-char-count="true"
+                  helper-text="Maximum 100 characters"
+                />
+              </div>
+            </div>
+          </section>
 
           <!-- Buttons Section -->
           <section class="section">
@@ -524,35 +634,6 @@
             </div>
           </section>
 
-          <!-- Toast Section -->
-          <section class="section">
-            <h2 class="section-title">
-              <i class="bx bx-message-square-dots"></i>
-              Toast Notifications
-            </h2>
-            <div class="component-demo">
-              <h3 class="demo-subtitle">Toast Variants</h3>
-              <div class="demo-group">
-                <Button variant="success" @click="showToast('success', 'Success!', 'Operation completed successfully.')">
-                  <i class="bx bx-check"></i>
-                  Show Success Toast
-                </Button>
-                <Button variant="error" @click="showToast('error', 'Error!', 'Something went wrong.')">
-                  <i class="bx bx-x"></i>
-                  Show Error Toast
-                </Button>
-                <Button variant="primary" @click="showToast('info', 'Info', 'Here is some information.')">
-                  <i class="bx bx-info-circle"></i>
-                  Show Info Toast
-                </Button>
-                <Button variant="gradient" @click="showToast('warning', 'Warning', 'Please be careful!')">
-                  <i class="bx bx-error"></i>
-                  Show Warning Toast
-                </Button>
-              </div>
-            </div>
-          </section>
-
           <!-- Skeleton Section -->
           <section class="section">
             <h2 class="section-title">
@@ -675,7 +756,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { Button, Card, Input, Badge, Modal, ThemeSwitcher, Navbar, Sidebar, Dropdown, Tooltip, Avatar, Alert, Toggle, Tabs, Toast, Skeleton, EmptyState, ProgressBar, Chart, AuthForm } from '../src/index.js'
+import { Button, Card, Input, Badge, Modal, ThemeSwitcher, Navbar, Sidebar, Dropdown, Tooltip, Avatar, Alert, Toggle, Tabs, Skeleton, EmptyState, ProgressBar, Chart, AuthForm, EnhancedButton, EnhancedCard, EnhancedInput } from '../src/index.js'
 
 const sidebarOpen = ref(false)
 const showModal = ref(false)
@@ -686,6 +767,14 @@ const formData = ref({
   email: '',
   password: '',
   disabled: 'Cannot edit this field'
+})
+
+// Enhanced form data
+const enhancedFormData = ref({
+  username: '',
+  email: '',
+  password: '',
+  bio: ''
 })
 
 // Dropdown state
@@ -713,10 +802,6 @@ const tabsList = [
   { label: 'Tab 2', icon: 'bx bx-user' },
   { label: 'Tab 3', icon: 'bx bx-cog' }
 ]
-
-// Toast state
-const toasts = ref([])
-let toastId = 0
 
 // Progress bar state
 const progressValue = ref(65)
@@ -751,38 +836,12 @@ function confirmAction() {
   console.log('Action confirmed!')
   showConfirmModal.value = false
 }
-
-function showToast(variant, title, message) {
-  const id = toastId++
-  toasts.value.push({
-    id,
-    variant,
-    title,
-    message,
-    show: true
-  })
-}
 </script>
 
 <style scoped>
 .app {
   min-height: 100vh;
   position: relative;
-}
-
-.toast-container {
-  position: fixed;
-  top: var(--spacing-lg);
-  right: var(--spacing-lg);
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-  pointer-events: none;
-}
-
-.toast-container > * {
-  pointer-events: auto;
 }
 
 .layout {
