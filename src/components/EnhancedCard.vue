@@ -1,51 +1,39 @@
 <template>
   <div
     ref="cardRef"
-    :class="['enhanced-card', { 'enhanced-card-hover': hoverable, 'enhanced-card-visible': isVisible }]"
-    :style="tiltStyle"
-    @mousemove="handleMouseMove"
-    @mouseleave="handleMouseLeave"
+    :class="['refined-card', { 'refined-card-hover': hoverable, 'refined-card-visible': isVisible }]"
   >
-    <!-- Cursor-tracking light reflection -->
-    <div class="light-reflection" :style="lightReflectionStyle"></div>
-
-    <!-- Gradient noise overlay -->
-    <div class="noise-overlay"></div>
-
-    <!-- Organic shape background -->
-    <div class="organic-shape"></div>
-
-    <div v-if="$slots.icon || icon" class="enhanced-card-icon">
+    <div v-if="$slots.icon || icon" class="refined-card-icon">
       <slot name="icon">
         <i :class="icon"></i>
       </slot>
     </div>
 
-    <div v-if="$slots.header || title || description" class="enhanced-card-header">
-      <h3 v-if="title || $slots.title" class="enhanced-card-title">
+    <div v-if="$slots.header || title || description" class="refined-card-header">
+      <h3 v-if="title || $slots.title" class="refined-card-title">
         <slot name="title">{{ title }}</slot>
       </h3>
-      <p v-if="description || $slots.description" class="enhanced-card-description">
+      <p v-if="description || $slots.description" class="refined-card-description">
         <slot name="description">{{ description }}</slot>
       </p>
     </div>
 
-    <div class="enhanced-card-content">
+    <div class="refined-card-content">
       <slot />
     </div>
 
-    <div v-if="$slots.footer" class="enhanced-card-footer">
+    <div v-if="$slots.footer" class="refined-card-footer">
       <slot name="footer" />
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 /**
- * Enhanced glassmorphism card with 2025 design trends
- * Features: 3D tilt, cursor-tracking light, scroll-reveal, noise texture
+ * Refined glassmorphism card with subtle improvements
+ * Clean design with thin borders, better spacing, and refined shadows
  * @param {string} title - Card title
  * @param {string} description - Card description
  * @param {string} icon - Icon class (e.g., 'bx bx-star')
@@ -72,55 +60,9 @@ const props = defineProps({
 
 const cardRef = ref(null)
 const isVisible = ref(false)
-const mouseX = ref(0)
-const mouseY = ref(0)
-const isHovered = ref(false)
-
-// 3D tilt effect based on mouse position
-const tiltStyle = computed(() => {
-  if (!isHovered.value || !props.hoverable) return {}
-
-  const xRotation = ((mouseY.value - 0.5) * 10).toFixed(2) // -5 to 5 degrees
-  const yRotation = ((mouseX.value - 0.5) * -10).toFixed(2) // -5 to 5 degrees
-
-  return {
-    transform: `perspective(1000px) rotateX(${xRotation}deg) rotateY(${yRotation}deg) translateZ(10px)`,
-    '--mouse-x': mouseX.value,
-    '--mouse-y': mouseY.value
-  }
-})
-
-// Light reflection that follows cursor
-const lightReflectionStyle = computed(() => {
-  if (!isHovered.value) return { opacity: 0 }
-
-  return {
-    background: `radial-gradient(circle at ${mouseX.value * 100}% ${mouseY.value * 100}%, rgba(255, 255, 255, 0.2) 0%, transparent 50%)`,
-    opacity: 1
-  }
-})
 
 /**
- * Handle mouse move for tilt and light effects
- */
-function handleMouseMove(event) {
-  if (!cardRef.value || !props.hoverable) return
-
-  const rect = cardRef.value.getBoundingClientRect()
-  mouseX.value = (event.clientX - rect.left) / rect.width
-  mouseY.value = (event.clientY - rect.top) / rect.height
-  isHovered.value = true
-}
-
-/**
- * Reset effects on mouse leave
- */
-function handleMouseLeave() {
-  isHovered.value = false
-}
-
-/**
- * Scroll-reveal animation using Intersection Observer
+ * Subtle scroll-reveal animation using Intersection Observer
  */
 function setupScrollReveal() {
   if (!cardRef.value) return
@@ -151,141 +93,56 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.enhanced-card {
+.refined-card {
   background: var(--glass-bg);
   backdrop-filter: blur(20px) saturate(180%);
   border-radius: var(--radius-lg);
   border: 1px solid var(--glass-border);
   padding: var(--spacing-lg);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s ease;
   position: relative;
-  overflow: hidden;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05),
-              0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  transform-style: preserve-3d;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.05);
 
-  /* Scroll-reveal animation - starts hidden */
+  /* Subtle scroll-reveal animation - starts hidden */
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(10px);
 }
 
 /* Scroll-reveal animation - when visible */
-.enhanced-card-visible {
+.refined-card-visible {
   opacity: 1;
   transform: translateY(0);
-  animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Cursor-tracking light reflection */
-.light-reflection {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  border-radius: var(--radius-lg);
-  transition: opacity 0.3s ease;
-  z-index: 1;
-}
-
-/* Gradient noise texture overlay */
-.noise-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image:
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
-  opacity: 0.3;
-  pointer-events: none;
-  border-radius: var(--radius-lg);
-  z-index: 0;
-}
-
-/* Organic shape background */
-.organic-shape {
-  position: absolute;
-  bottom: -50%;
-  right: -30%;
-  width: 150%;
-  height: 150%;
-  background: radial-gradient(circle, rgba(255, 202, 40, 0.1) 0%, transparent 70%);
-  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-  opacity: 0;
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  pointer-events: none;
-  z-index: 0;
-  animation: morphShape 10s ease-in-out infinite;
-}
-
-@keyframes morphShape {
-  0%, 100% {
-    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-  }
-  50% {
-    border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
-  }
-}
-
-/* Gradient border effect */
-.enhanced-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--gradient-border);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 2;
-}
-
-/* Enhanced hover effects */
-.enhanced-card-hover:hover {
+/* Subtle hover effect */
+.refined-card-hover:hover {
   border-color: var(--glass-border-bright);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1),
-              0 20px 60px 0 rgba(0, 0, 0, 0.5),
-              var(--glow-primary);
-  backdrop-filter: blur(24px) saturate(200%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
 }
 
-.enhanced-card-hover:hover::before {
-  opacity: 1;
+/* Neumorphism theme overrides */
+[data-theme="neumorphism"] .refined-card {
+  background: var(--color-bg-primary);
+  border: none;
+  box-shadow: 6px 6px 12px rgba(163, 177, 198, 0.4),
+              -6px -6px 12px rgba(255, 255, 255, 0.5);
 }
 
-.enhanced-card-hover:hover .organic-shape {
-  opacity: 1;
-  transform: rotate(5deg) scale(1.1);
+[data-theme="neumorphism"] .refined-card-hover:hover {
+  box-shadow: 4px 4px 8px rgba(163, 177, 198, 0.4),
+              -4px -4px 8px rgba(255, 255, 255, 0.5);
+  transform: translateY(0);
 }
 
 /* Card content */
-.enhanced-card-icon,
-.enhanced-card-header,
-.enhanced-card-content,
-.enhanced-card-footer {
-  position: relative;
-  z-index: 3;
-}
-
-.enhanced-card-icon {
+.refined-card-icon {
   width: 48px;
   height: 48px;
-  background: var(--gradient-glass);
-  border: 1px solid var(--glass-border-bright);
+  background: var(--glass-bg-medium);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
@@ -293,46 +150,49 @@ onMounted(() => {
   font-size: 24px;
   margin-bottom: var(--spacing-md);
   color: var(--color-accent-primary);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05),
-              0 0 20px rgba(255, 202, 40, 0.15);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(20px);
-  animation: iconFloat 3s ease-in-out infinite;
 }
 
-@keyframes iconFloat {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
+[data-theme="neumorphism"] .refined-card-icon {
+  background: var(--color-bg-primary);
+  border: none;
+  box-shadow: 3px 3px 6px rgba(163, 177, 198, 0.4),
+              -3px -3px 6px rgba(255, 255, 255, 0.5);
 }
 
-.enhanced-card-header {
+.refined-card-header {
   margin-bottom: var(--spacing-md);
 }
 
-.enhanced-card-title {
+.refined-card-title {
   font-size: var(--font-size-xl);
   font-weight: 700;
   margin-bottom: var(--spacing-xs);
   text-transform: uppercase;
   color: var(--color-text-primary);
-  background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-accent-primary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  letter-spacing: 0.05em;
 }
 
-.enhanced-card-description {
+.refined-card-description {
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
   margin: 0;
+  line-height: 1.5;
 }
 
-.enhanced-card-footer {
+.refined-card-content {
+  color: var(--color-text-primary);
+}
+
+.refined-card-footer {
   margin-top: var(--spacing-md);
   padding-top: var(--spacing-md);
   border-top: 1px solid var(--glass-border);
+}
+
+[data-theme="neumorphism"] .refined-card-footer {
+  border-top: 1px solid rgba(163, 177, 198, 0.2);
 }
 </style>

@@ -1,25 +1,22 @@
 <template>
-  <div class="enhanced-input-wrapper" :class="{ 'enhanced-input-wrapper-error': error, 'enhanced-input-wrapper-success': success }">
+  <div class="refined-input-wrapper" :class="{ 'refined-input-wrapper-error': error, 'refined-input-wrapper-success': success }">
     <!-- Floating label -->
     <label
       v-if="label"
       :for="inputId"
-      class="enhanced-input-label"
+      class="refined-input-label"
       :class="{
-        'enhanced-input-label-float': isFocused || hasValue,
-        'enhanced-input-label-error': error,
-        'enhanced-input-label-success': success
+        'refined-input-label-float': isFocused || hasValue,
+        'refined-input-label-error': error,
+        'refined-input-label-success': success
       }"
     >
       {{ label }}
     </label>
 
-    <div class="enhanced-input-container">
-      <!-- Breathing glow effect -->
-      <div class="glow-effect" :class="{ 'glow-active': isFocused }"></div>
-
+    <div class="refined-input-container">
       <!-- Prefix icon -->
-      <span v-if="prefixIcon" class="enhanced-input-prefix-icon">
+      <span v-if="prefixIcon" class="refined-input-prefix-icon">
         <i :class="prefixIcon"></i>
       </span>
 
@@ -34,12 +31,12 @@
         :maxlength="maxLength"
         :aria-invalid="error ? 'true' : 'false'"
         :aria-describedby="helperTextId"
-        class="enhanced-input"
+        class="refined-input"
         :class="{
-          'enhanced-input-error': error,
-          'enhanced-input-success': success,
-          'enhanced-input-with-prefix': prefixIcon,
-          'enhanced-input-with-suffix': suffixIcon || error || success || (maxLength && showCharCount)
+          'refined-input-error': error,
+          'refined-input-success': success,
+          'refined-input-with-prefix': prefixIcon,
+          'refined-input-with-suffix': suffixIcon || error || success || (maxLength && showCharCount)
         }"
         @input="handleInput"
         @focus="handleFocus"
@@ -47,7 +44,7 @@
       />
 
       <!-- Suffix icons and character count -->
-      <span v-if="suffixIcon || error || success || (maxLength && showCharCount)" class="enhanced-input-suffix">
+      <span v-if="suffixIcon || error || success || (maxLength && showCharCount)" class="refined-input-suffix">
         <!-- Validation icons -->
         <i v-if="error" class="bx bx-error-circle validation-icon error-icon"></i>
         <i v-else-if="success" class="bx bx-check-circle validation-icon success-icon"></i>
@@ -76,9 +73,9 @@
     </div>
 
     <!-- Helper/Error/Success message -->
-    <p v-if="helperText || error || success" :id="helperTextId" class="enhanced-input-helper-text" :class="{
-      'enhanced-input-helper-error': error,
-      'enhanced-input-helper-success': success
+    <p v-if="helperText || error || success" :id="helperTextId" class="refined-input-helper-text" :class="{
+      'refined-input-helper-error': error,
+      'refined-input-helper-success': success
     }">
       <i v-if="error" class="bx bx-error-circle"></i>
       <i v-if="success" class="bx bx-check-circle"></i>
@@ -91,8 +88,8 @@
 import { ref, computed } from 'vue'
 
 /**
- * Enhanced glassmorphism input with 2025 design trends
- * Features: floating label, breathing glow, character count, smooth animations
+ * Refined glassmorphism input with subtle improvements
+ * Features: floating label, character count, validation states, progress bar
  * @param {string} modelValue - v-model binding
  * @param {string} type - Input type (text/email/password/number)
  * @param {string} label - Input label (floats on focus)
@@ -203,13 +200,13 @@ function handleBlur(event) {
 </script>
 
 <style scoped>
-.enhanced-input-wrapper {
+.refined-input-wrapper {
   width: 100%;
   position: relative;
 }
 
 /* Floating label */
-.enhanced-input-label {
+.refined-input-label {
   position: absolute;
   left: var(--spacing-sm);
   top: 50%;
@@ -218,13 +215,13 @@ function handleBlur(event) {
   font-weight: 500;
   color: var(--color-text-secondary);
   pointer-events: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s ease;
   background: transparent;
   padding: 0 var(--spacing-xs);
   z-index: 2;
 }
 
-.enhanced-input-label-float {
+.refined-input-label-float {
   top: 0;
   transform: translateY(-50%);
   font-size: var(--font-size-xs);
@@ -235,53 +232,22 @@ function handleBlur(event) {
   background: var(--color-bg-primary);
 }
 
-.enhanced-input-label-error {
+.refined-input-label-error {
   color: var(--color-error);
 }
 
-.enhanced-input-label-success {
+.refined-input-label-success {
   color: var(--color-success);
 }
 
-.enhanced-input-container {
+.refined-input-container {
   position: relative;
   width: 100%;
 }
 
-/* Breathing glow effect */
-.glow-effect {
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  border-radius: var(--radius-sm);
-  background: linear-gradient(135deg, var(--color-accent-primary), transparent);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.glow-active {
-  opacity: 0.3;
-  animation: breathe 2s ease-in-out infinite;
-}
-
-@keyframes breathe {
-  0%, 100% {
-    opacity: 0.2;
-    filter: blur(4px);
-  }
-  50% {
-    opacity: 0.4;
-    filter: blur(8px);
-  }
-}
-
 /* Prefix and suffix icons */
-.enhanced-input-prefix-icon,
-.enhanced-input-suffix {
+.refined-input-prefix-icon,
+.refined-input-suffix {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -295,11 +261,11 @@ function handleBlur(event) {
   z-index: 2;
 }
 
-.enhanced-input-prefix-icon {
+.refined-input-prefix-icon {
   left: var(--spacing-sm);
 }
 
-.enhanced-input-suffix {
+.refined-input-suffix {
   right: var(--spacing-sm);
 }
 
@@ -353,7 +319,7 @@ function handleBlur(event) {
 }
 
 /* Input field */
-.enhanced-input {
+.refined-input {
   width: 100%;
   padding: var(--spacing-sm);
   background: var(--glass-bg);
@@ -363,58 +329,79 @@ function handleBlur(event) {
   color: var(--color-text-primary);
   font-size: var(--font-size-base);
   font-family: var(--font-family);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.03);
   position: relative;
   z-index: 1;
 }
 
-.enhanced-input-with-prefix {
+.refined-input-with-prefix {
   padding-left: calc(var(--spacing-sm) * 2 + 18px);
 }
 
-.enhanced-input-with-suffix {
+.refined-input-with-suffix {
   padding-right: calc(var(--spacing-sm) * 3 + 50px);
 }
 
-.enhanced-input::placeholder {
+.refined-input::placeholder {
   color: var(--color-text-dim);
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease;
 }
 
-.enhanced-input:focus {
+.refined-input:focus {
   outline: none;
   border-color: var(--color-accent-primary);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08),
-              0 0 0 3px rgba(255, 202, 40, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+              0 0 0 2px rgba(255, 202, 40, 0.1);
   background: var(--glass-bg-medium);
 }
 
-.enhanced-input:disabled {
+.refined-input:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
 /* Error state */
-.enhanced-input-error {
+.refined-input-error {
   border-color: var(--color-error);
 }
 
-.enhanced-input-error:focus {
+.refined-input-error:focus {
   border-color: var(--color-error);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08),
-              0 0 0 3px rgba(239, 68, 68, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+              0 0 0 2px rgba(239, 68, 68, 0.1);
 }
 
 /* Success state */
-.enhanced-input-success {
+.refined-input-success {
   border-color: var(--color-success);
 }
 
-.enhanced-input-success:focus {
+.refined-input-success:focus {
   border-color: var(--color-success);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08),
-              0 0 0 3px rgba(34, 197, 94, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+              0 0 0 2px rgba(34, 197, 94, 0.1);
+}
+
+/* Neumorphism theme overrides */
+[data-theme="neumorphism"] .refined-input {
+  background: var(--color-bg-primary);
+  border: none;
+  box-shadow: inset 2px 2px 4px rgba(163, 177, 198, 0.4),
+              inset -2px -2px 4px rgba(255, 255, 255, 0.5);
+}
+
+[data-theme="neumorphism"] .refined-input:focus {
+  box-shadow: inset 3px 3px 6px rgba(163, 177, 198, 0.4),
+              inset -3px -3px 6px rgba(255, 255, 255, 0.5);
+}
+
+[data-theme="neumorphism"] .refined-input-label-float {
+  background: transparent;
 }
 
 /* Animated bottom border */
@@ -478,14 +465,14 @@ function handleBlur(event) {
 }
 
 /* Helper text */
-.enhanced-input-helper-text {
+.refined-input-helper-text {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
   margin-top: var(--spacing-xs);
   font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
-  animation: slideIn 0.3s ease;
+  animation: slideIn 0.2s ease;
 }
 
 @keyframes slideIn {
@@ -499,15 +486,15 @@ function handleBlur(event) {
   }
 }
 
-.enhanced-input-helper-error {
+.refined-input-helper-error {
   color: var(--color-error);
 }
 
-.enhanced-input-helper-success {
+.refined-input-helper-success {
   color: var(--color-success);
 }
 
-.enhanced-input-helper-text i {
+.refined-input-helper-text i {
   font-size: 14px;
 }
 </style>

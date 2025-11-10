@@ -84,15 +84,15 @@
           <section class="section featured-section">
             <h2 class="section-title">
               <i class="bx bx-sparkle"></i>
-              Enhanced Components (2025 Design Trends)
+              Refined Components (Subtle Improvements)
             </h2>
             <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-lg);">
-              Modern components featuring cursor-tracking glow, ripple effects, 3D hover, scroll-reveal animations, and micro-interactions.
+              Refined components with permanent glassmorphism, thin elegant borders, clean shadows, and better contrast. Subtle improvements focused on lean design.
             </p>
 
             <!-- Enhanced Buttons -->
             <div class="component-demo">
-              <h3 class="demo-subtitle">Enhanced Buttons (Ripple + Cursor Tracking)</h3>
+              <h3 class="demo-subtitle">Refined Buttons (Clean Shadows + Thin Borders)</h3>
               <div class="demo-group">
                 <EnhancedButton variant="primary">
                   <i class="bx bx-rocket"></i>
@@ -125,37 +125,37 @@
 
             <!-- Enhanced Cards -->
             <div class="component-demo">
-              <h3 class="demo-subtitle">Enhanced Cards (3D Tilt + Light Tracking + Scroll Reveal)</h3>
+              <h3 class="demo-subtitle">Refined Cards (Permanent Glassmorphism + Subtle Shadows)</h3>
               <div class="grid">
                 <EnhancedCard
-                  title="Cursor Tracking"
-                  description="Move your mouse over this card to see 3D tilt and light effects"
+                  title="Clean Design"
+                  description="Thin elegant borders with refined shadow depth"
                   icon="bx bx-mouse"
                 >
                   <p style="margin-bottom: var(--spacing-md); color: var(--color-text-secondary);">
-                    Card follows cursor position with 3D perspective transforms and dynamic light reflection.
+                    Permanent glassmorphism with better contrast and lean visual hierarchy.
                   </p>
                   <EnhancedButton variant="outline" size="sm">Explore</EnhancedButton>
                 </EnhancedCard>
 
                 <EnhancedCard
                   title="Scroll Reveal"
-                  description="Animated entrance with fade-in and slide-up effect"
+                  description="Subtle fade-in animation on scroll"
                   icon="bx bx-show"
                 >
                   <p style="margin-bottom: var(--spacing-md); color: var(--color-text-secondary);">
-                    Uses Intersection Observer for smooth scroll-triggered animations.
+                    Uses Intersection Observer for smooth entrance animations.
                   </p>
                   <EnhancedButton variant="outline" size="sm">Details</EnhancedButton>
                 </EnhancedCard>
 
                 <EnhancedCard
-                  title="Organic Shapes"
-                  description="Morphing background with noise texture overlay"
+                  title="Better Contrast"
+                  description="Improved typography and spacing"
                   icon="bx bx-customize"
                 >
                   <p style="margin-bottom: var(--spacing-md); color: var(--color-text-secondary);">
-                    Animated organic shapes and gradient noise create visual depth.
+                    Clean shadows and thin borders create refined visual depth.
                   </p>
                   <EnhancedButton variant="outline" size="sm">Learn More</EnhancedButton>
                 </EnhancedCard>
@@ -164,7 +164,7 @@
 
             <!-- Enhanced Inputs -->
             <div class="component-demo">
-              <h3 class="demo-subtitle">Enhanced Inputs (Floating Labels + Breathing Glow)</h3>
+              <h3 class="demo-subtitle">Refined Inputs (Floating Labels + Character Count)</h3>
               <div class="form-demo">
                 <EnhancedInput
                   v-model="enhancedFormData.username"
