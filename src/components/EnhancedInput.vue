@@ -8,7 +8,8 @@
       :class="{
         'refined-input-label-float': isFocused || hasValue,
         'refined-input-label-error': error,
-        'refined-input-label-success': success
+        'refined-input-label-success': success,
+        'refined-input-label-with-prefix': prefixIcon
       }"
     >
       {{ label }}
@@ -236,6 +237,11 @@ function handleBlur(event) {
 [data-theme="matrix"] .refined-input-label-float {
   color: #00AA00;
   filter: brightness(0.9);
+}
+
+/* Shift label when prefix icon exists */
+.refined-input-label-with-prefix {
+  left: 38px;
 }
 
 .refined-input-label-error {
