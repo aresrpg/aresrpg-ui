@@ -677,7 +677,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { Button, Card, Input, Badge, Modal, ThemeSwitcher, Navbar, Sidebar, Dropdown, Tooltip, Avatar, Alert, Toggle, Tabs, Skeleton, EmptyState, ProgressBar, Chart, AuthForm, EnhancedButton, EnhancedCard, EnhancedInput, NotificationContainer, useNotification } from '../src/index.js'
+import { Button, Card, Input, Badge, Modal, ThemeSwitcher, Navbar, Sidebar, Dropdown, Tooltip, Avatar, Alert, Toggle, Tabs, Skeleton, EmptyState, ProgressBar, Chart, AuthForm, NotificationContainer, useNotification } from '../src/index.js'
 
 // Notification system
 const { notifications, removeNotification, success, error, info, warning, dark, create } = useNotification()
@@ -691,14 +691,6 @@ const formData = ref({
   email: '',
   password: '',
   disabled: 'Cannot edit this field'
-})
-
-// Enhanced form data
-const enhancedFormData = ref({
-  username: '',
-  email: '',
-  password: '',
-  bio: ''
 })
 
 // Dropdown state
