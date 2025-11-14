@@ -24,9 +24,12 @@ import AuthForm from './components/AuthForm.vue'
 import EnhancedButton from './components/EnhancedButton.vue'
 import EnhancedCard from './components/EnhancedCard.vue'
 import EnhancedInput from './components/EnhancedInput.vue'
+import Notification from './components/Notification.vue'
+import NotificationContainer from './components/NotificationContainer.vue'
 
 // Import composables
 import { useTheme } from './composables/useTheme.js'
+import { useNotification } from './composables/useNotification.js'
 
 // Component map for global registration
 const components = {
@@ -51,7 +54,9 @@ const components = {
   AuthForm,
   EnhancedButton,
   EnhancedCard,
-  EnhancedInput
+  EnhancedInput,
+  Notification,
+  NotificationContainer
 }
 
 /**
@@ -89,7 +94,10 @@ export {
   EnhancedButton,
   EnhancedCard,
   EnhancedInput,
-  useTheme
+  Notification,
+  NotificationContainer,
+  useTheme,
+  useNotification
 }
 
 // Export install function and components

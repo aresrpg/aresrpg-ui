@@ -333,7 +333,7 @@ function handleBlur(event) {
 /* Input field */
 .input {
   width: 100%;
-  padding: 10px 12px;
+  padding: 12px 14px;
   background: var(--glass-bg);
   backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid var(--glass-border);
@@ -348,11 +348,11 @@ function handleBlur(event) {
 }
 
 .input-with-prefix {
-  padding-left: 38px;
+  padding-left: 42px;
 }
 
 .input-with-suffix {
-  padding-right: 80px;
+  padding-right: 45px;
 }
 
 .input::placeholder {

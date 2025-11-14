@@ -200,26 +200,22 @@ watch(() => props.open, (newValue) => {
 </script>
 
 <style scoped>
+/* Vuesax sidebar base styles */
 .sidebar {
+  position: relative;
   display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   flex-direction: column;
   width: 260px;
   min-height: 100vh;
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
-  border-right: 1px solid var(--glass-border);
-  position: relative;
-  transition: width var(--transition-base);
-  z-index: 50;
-}
-
-.sidebar::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--gradient-glass);
-  opacity: 0.2;
-  pointer-events: none;
+  border-radius: 0 30px 30px 0;
+  box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.05);
+  /* aresrpg-dapp custom override */
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  transition: all 0.25s ease;
+  z-index: 10;
 }
 
 /* Collapsed state */
@@ -227,13 +223,15 @@ watch(() => props.open, (newValue) => {
   width: 70px;
 }
 
-/* Header */
+/* Vuesax header (logo section) */
 .sidebar-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-lg);
-  border-bottom: 1px solid var(--glass-border);
+  width: 100%;
+  padding: 15px 0;
+  min-height: 60px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   position: relative;
   z-index: 1;
 }
@@ -247,26 +245,30 @@ watch(() => props.open, (newValue) => {
 .sidebar-brand {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: var(--spacing-sm);
   font-size: var(--font-size-lg);
   font-weight: 900;
-  color: var(--color-text-primary);
+  color: #fff;
   white-space: nowrap;
+  padding: 0 1em;
+  width: 100%;
 }
 
 .sidebar-brand i {
   font-size: 1.5em;
   min-width: 1.5em;
-  color: var(--color-accent-primary);
+  color: #fff;
 }
 
+/* aresrpg-dapp logo style with drop shadow */
 .sidebar-title {
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #fff;
+  /* aresrpg-dapp override: drop shadow */
+  filter: drop-shadow(1px 2px 3px black);
+  max-width: 100%;
 }
 
 .sidebar.collapsed .sidebar-title {
@@ -280,78 +282,93 @@ watch(() => props.open, (newValue) => {
   justify-content: center;
   width: 32px;
   height: 32px;
-  background: var(--glass-bg-light);
-  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-md);
-  color: var(--color-text-secondary);
+  color: rgba(255, 255, 255, 0.7);
   cursor: pointer;
   transition: var(--transition-fast);
   flex-shrink: 0;
 }
 
 .collapse-btn:hover {
-  background: var(--glass-bg-medium);
-  color: var(--color-accent-primary);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
   transform: scale(1.1);
 }
 
-/* Navigation */
+/* Vuesax navigation body */
 .sidebar-nav {
-  flex: 1;
-  padding: var(--spacing-md);
-  overflow-y: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
   overflow-x: hidden;
+  overflow-y: auto;
+  width: 100%;
+  flex-grow: 1;
+  flex-direction: column;
   z-index: 1;
 }
 
+/* Hide scrollbar like vuesax */
+.sidebar-nav::-webkit-scrollbar {
+  width: 0;
+}
+
+/* Vuesax sidebar item styles */
 .nav-item {
+  transition: all 0.25s ease;
   display: flex;
+  justify-content: flex-start;
   align-items: center;
-  gap: var(--spacing-md);
-  padding: var(--spacing-md);
-  margin-bottom: var(--spacing-xs);
-  color: var(--color-text-secondary);
-  font-size: var(--font-size-sm);
+  width: 100%;
+  padding: 10px 12px;
+  text-align: left;
+  background: transparent;
+  font-size: 0.9rem;
   font-weight: 600;
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  transition: var(--transition-fast);
+  opacity: 0.7;
   position: relative;
+  /* aresrpg-dapp override: white text */
+  color: rgba(255, 255, 255, 0.7);
+  border: 0;
+  cursor: pointer;
   white-space: nowrap;
   overflow: hidden;
 }
 
-.nav-item::before {
+/* Active indicator bar on LEFT side (vuesax pattern) */
+.nav-item::after {
   content: '';
   position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 3px;
-  height: 0;
-  background: var(--gradient-primary);
-  border-radius: var(--radius-sm);
-  transition: var(--transition-fast);
+  left: -4px;
+  top: 0;
+  width: 10px;
+  height: 100%;
+  /* aresrpg-dapp override: white bar */
+  background: #fff;
+  border-radius: 0 20px 20px 0;
+  transform: translate(-7px);
+  transition: all 0.25s ease;
+  z-index: 60;
 }
 
 .nav-item:hover {
-  background: var(--glass-bg-medium);
-  color: var(--color-text-primary);
-  transform: translateX(4px);
-}
-
-.nav-item:hover::before {
-  height: 70%;
+  opacity: 1;
+  padding-left: 18px;
 }
 
 .nav-item.active {
-  background: var(--glass-bg-medium);
-  color: var(--color-accent-primary);
-  box-shadow: inset 0 0 0 1px var(--glass-border-bright);
+  opacity: 1;
+  padding-left: 18px;
+  /* aresrpg-dapp override: white text when active */
+  color: #fff !important;
 }
 
-.nav-item.active::before {
-  height: 70%;
+.nav-item.active::after {
+  transform: translate(-1px);
+  /* aresrpg-dapp override: white bar */
+  background: #fff !important;
 }
 
 .nav-item.disabled {
@@ -360,14 +377,26 @@ watch(() => props.open, (newValue) => {
   pointer-events: none;
 }
 
+/* Vuesax icon styling */
 .nav-item i {
-  font-size: 1.5em;
-  min-width: 1.5em;
-  text-align: center;
-  flex-shrink: 0;
+  min-width: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+  z-index: 50;
+  /* aresrpg-dapp override: no background */
+  background: none;
 }
 
+/* Vuesax text label */
 .nav-label {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  z-index: 10;
+  transition: all 0.25s ease;
+  font-size: 0.9rem;
   flex: 1;
 }
 
@@ -416,7 +445,7 @@ watch(() => props.open, (newValue) => {
   align-items: center;
   gap: var(--spacing-sm);
   padding: var(--spacing-sm) var(--spacing-md) var(--spacing-sm) var(--spacing-2xl);
-  color: var(--color-text-tertiary);
+  color: rgba(255, 255, 255, 0.6);
   font-size: var(--font-size-xs);
   font-weight: 600;
   border-radius: var(--radius-sm);
@@ -436,29 +465,29 @@ watch(() => props.open, (newValue) => {
   transform: translateY(-50%);
   width: 6px;
   height: 6px;
-  background: var(--color-text-tertiary);
+  background: rgba(255, 255, 255, 0.6);
   border-radius: 50%;
   transition: var(--transition-fast);
 }
 
 .nav-subitem:hover {
-  background: var(--glass-bg-light);
-  color: var(--color-text-primary);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.9);
   padding-left: calc(var(--spacing-2xl) + var(--spacing-xs));
 }
 
 .nav-subitem:hover::before {
-  background: var(--color-accent-primary);
+  background: #fff;
   transform: translateY(-50%) scale(1.3);
 }
 
 .nav-subitem.active {
-  background: var(--glass-bg-light);
-  color: var(--color-accent-primary);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
 }
 
 .nav-subitem.active::before {
-  background: var(--color-accent-primary);
+  background: #fff;
   transform: translateY(-50%) scale(1.3);
 }
 
@@ -495,10 +524,15 @@ watch(() => props.open, (newValue) => {
   transform: translateY(0);
 }
 
-/* Footer */
+/* Vuesax footer */
 .sidebar-footer {
-  padding: var(--spacing-lg);
-  border-top: 1px solid var(--glass-border);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-self: flex-start;
+  width: 100%;
+  padding: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   z-index: 1;
 }
 
@@ -521,13 +555,4 @@ watch(() => props.open, (newValue) => {
   }
 }
 
-/* Scrollbar */
-.sidebar-nav::-webkit-scrollbar {
-  width: 6px;
-}
-
-.sidebar-nav::-webkit-scrollbar-thumb {
-  background: var(--glass-bg-medium);
-  border-radius: var(--radius-sm);
-}
 </style>

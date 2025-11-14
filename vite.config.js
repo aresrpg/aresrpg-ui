@@ -24,20 +24,43 @@ export default defineConfig(({ mode }) => {
       lib: {
         entry: resolve(__dirname, 'src/index.js'),
         name: 'AresRPGUI',
-        fileName: (format) => `aresrpg-ui.${format === 'es' ? 'js' : 'umd.cjs'}`
+        formats: ['es', 'umd']
       },
       rollupOptions: {
         external: ['vue', 'lucide-vue-next'],
-        output: {
-          exports: 'named',
-          globals: {
-            vue: 'Vue',
-            'lucide-vue-next': 'LucideVueNext'
+        output: [
+          // ES module build with preserved modules for tree shaking
+          {
+            format: 'es',
+            exports: 'named',
+            preserveModules: true, // Keep module structure for tree shaking
+            preserveModulesRoot: 'src',
+            entryFileNames: '[name].js',
+            globals: {
+              vue: 'Vue',
+              'lucide-vue-next': 'LucideVueNext'
+            }
           },
-          assetFileNames: (assetInfo) => {
-            if (assetInfo.name === 'style.css') return 'style.css'
-            return assetInfo.name
+          // UMD build (single bundle, no tree shaking)
+          {
+            format: 'umd',
+            name: 'AresRPGUI',
+            exports: 'named',
+            globals: {
+              vue: 'Vue',
+              'lucide-vue-next': 'LucideVueNext'
+            },
+            entryFileNames: 'aresrpg-ui.umd.cjs',
+            assetFileNames: 'ui.css'
           }
+        ],
+        // Shared asset file naming for ES build
+        assetFileNames: (assetInfo) => {
+          // CSS files use their original names for tree shaking
+          if (assetInfo.name && assetInfo.name.endsWith('.css')) {
+            return 'styles/[name][extname]'
+          }
+          return 'assets/[name][extname]'
         }
       }
     }

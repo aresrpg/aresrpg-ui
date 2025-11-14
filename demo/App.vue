@@ -80,128 +80,6 @@
             <p class="subtitle">Glassmorphism Vue 3 Components with 5 Themes</p>
           </header>
 
-          <!-- Enhanced Components (2025) Section -->
-          <section class="section featured-section">
-            <h2 class="section-title">
-              <i class="bx bx-sparkle"></i>
-              Refined Components (Subtle Improvements)
-            </h2>
-            <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-lg);">
-              Refined components with permanent glassmorphism, thin elegant borders, clean shadows, and better contrast. Subtle improvements focused on lean design.
-            </p>
-
-            <!-- Enhanced Buttons -->
-            <div class="component-demo">
-              <h3 class="demo-subtitle">Refined Buttons (Clean Shadows + Thin Borders)</h3>
-              <div class="demo-group">
-                <EnhancedButton variant="primary">
-                  <i class="bx bx-rocket"></i>
-                  Primary
-                </EnhancedButton>
-                <EnhancedButton variant="gradient">
-                  <i class="bx bx-star"></i>
-                  Gradient
-                </EnhancedButton>
-                <EnhancedButton variant="success">
-                  <i class="bx bx-check"></i>
-                  Success
-                </EnhancedButton>
-                <EnhancedButton variant="error">
-                  <i class="bx bx-x"></i>
-                  Error
-                </EnhancedButton>
-                <EnhancedButton variant="outline">
-                  <i class="bx bx-border-all"></i>
-                  Outline
-                </EnhancedButton>
-              </div>
-
-              <h3 class="demo-subtitle">Loading States</h3>
-              <div class="demo-group">
-                <EnhancedButton variant="primary" :loading="true">Loading</EnhancedButton>
-                <EnhancedButton variant="gradient" :loading="true">Processing</EnhancedButton>
-              </div>
-            </div>
-
-            <!-- Enhanced Cards -->
-            <div class="component-demo">
-              <h3 class="demo-subtitle">Refined Cards (Permanent Glassmorphism + Subtle Shadows)</h3>
-              <div class="grid">
-                <EnhancedCard
-                  title="Clean Design"
-                  description="Thin elegant borders with refined shadow depth"
-                  icon="bx bx-mouse"
-                >
-                  <p style="margin-bottom: var(--spacing-md); color: var(--color-text-secondary);">
-                    Permanent glassmorphism with better contrast and lean visual hierarchy.
-                  </p>
-                  <EnhancedButton variant="outline" size="sm">Explore</EnhancedButton>
-                </EnhancedCard>
-
-                <EnhancedCard
-                  title="Scroll Reveal"
-                  description="Subtle fade-in animation on scroll"
-                  icon="bx bx-show"
-                >
-                  <p style="margin-bottom: var(--spacing-md); color: var(--color-text-secondary);">
-                    Uses Intersection Observer for smooth entrance animations.
-                  </p>
-                  <EnhancedButton variant="outline" size="sm">Details</EnhancedButton>
-                </EnhancedCard>
-
-                <EnhancedCard
-                  title="Better Contrast"
-                  description="Improved typography and spacing"
-                  icon="bx bx-customize"
-                >
-                  <p style="margin-bottom: var(--spacing-md); color: var(--color-text-secondary);">
-                    Clean shadows and thin borders create refined visual depth.
-                  </p>
-                  <EnhancedButton variant="outline" size="sm">Learn More</EnhancedButton>
-                </EnhancedCard>
-              </div>
-            </div>
-
-            <!-- Enhanced Inputs -->
-            <div class="component-demo">
-              <h3 class="demo-subtitle">Refined Inputs (Floating Labels + Character Count)</h3>
-              <div class="form-demo">
-                <EnhancedInput
-                  v-model="enhancedFormData.username"
-                  label="Username"
-                  placeholder="Enter username"
-                  prefix-icon="bx bx-user"
-                />
-                <EnhancedInput
-                  v-model="enhancedFormData.email"
-                  type="email"
-                  label="Email Address"
-                  placeholder="your.email@example.com"
-                  prefix-icon="bx bx-envelope"
-                  :success="enhancedFormData.email.includes('@')"
-                  success-message="Valid email format"
-                />
-                <EnhancedInput
-                  v-model="enhancedFormData.password"
-                  type="password"
-                  label="Password"
-                  placeholder="Enter secure password"
-                  suffix-icon="bx bx-lock-alt"
-                  :max-length="20"
-                  :show-char-count="true"
-                />
-                <EnhancedInput
-                  v-model="enhancedFormData.bio"
-                  label="Bio"
-                  placeholder="Tell us about yourself"
-                  :max-length="100"
-                  :show-char-count="true"
-                  helper-text="Maximum 100 characters"
-                />
-              </div>
-            </div>
-          </section>
-
           <!-- Buttons Section -->
           <section class="section">
             <h2 class="section-title">
@@ -736,6 +614,46 @@
             </div>
           </section>
 
+          <!-- Notifications Section -->
+          <section class="section">
+            <h2 class="section-title">
+              <i class="bx bx-bell"></i>
+              Notifications
+            </h2>
+            <div class="component-demo">
+              <h3 class="demo-subtitle">Vuesax-style Toasts</h3>
+              <div class="demo-group">
+                <Button variant="success" @click="success('Operation completed successfully!', 'Success')">
+                  <i class="bx bx-check"></i>
+                  Success
+                </Button>
+                <Button variant="error" @click="error('Something went wrong!', 'Error')">
+                  <i class="bx bx-error"></i>
+                  Error
+                </Button>
+                <Button variant="primary" @click="info('Here is some information', 'Info')">
+                  <i class="bx bx-info-circle"></i>
+                  Info
+                </Button>
+                <Button variant="outline" @click="warning('Please be careful!', 'Warning')">
+                  <i class="bx bx-error-circle"></i>
+                  Warning
+                </Button>
+                <Button variant="outline" @click="dark('Dark notification', 'Notice')">
+                  <i class="bx bx-moon"></i>
+                  Dark
+                </Button>
+              </div>
+              <h3 class="demo-subtitle" style="margin-top: var(--spacing-lg);">Updatable (Loading State)</h3>
+              <div class="demo-group">
+                <Button variant="gradient" @click="showLoadingNotification">
+                  <i class="bx bx-loader-alt"></i>
+                  Loading Demo
+                </Button>
+              </div>
+            </div>
+          </section>
+
           <!-- Footer -->
           <footer class="footer">
             <p>Built with Vue 3 + Vite</p>
@@ -751,12 +669,18 @@
         </main>
       </div>
     </div>
+
+    <!-- Notification Container -->
+    <NotificationContainer :notifications="notifications" @remove="removeNotification" />
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import { Button, Card, Input, Badge, Modal, ThemeSwitcher, Navbar, Sidebar, Dropdown, Tooltip, Avatar, Alert, Toggle, Tabs, Skeleton, EmptyState, ProgressBar, Chart, AuthForm, EnhancedButton, EnhancedCard, EnhancedInput } from '../src/index.js'
+import { Button, Card, Input, Badge, Modal, ThemeSwitcher, Navbar, Sidebar, Dropdown, Tooltip, Avatar, Alert, Toggle, Tabs, Skeleton, EmptyState, ProgressBar, Chart, AuthForm, EnhancedButton, EnhancedCard, EnhancedInput, NotificationContainer, useNotification } from '../src/index.js'
+
+// Notification system
+const { notifications, removeNotification, success, error, info, warning, dark, create } = useNotification()
 
 const sidebarOpen = ref(false)
 const showModal = ref(false)
@@ -835,6 +759,26 @@ function handleNavClick({ link }) {
 function confirmAction() {
   console.log('Action confirmed!')
   showConfirmModal.value = false
+}
+
+// Notification demo: updatable loading state
+function showLoadingNotification() {
+  const notif = create({
+    title: 'Processing',
+    content: 'Please wait...',
+    loading: true
+  })
+
+  // Simulate async operation
+  setTimeout(() => {
+    notif.update({
+      loading: false,
+      color: 'success',
+      title: 'Complete',
+      content: 'Operation successful!',
+      duration: 3000
+    })
+  }, 2000)
 }
 </script>
 
