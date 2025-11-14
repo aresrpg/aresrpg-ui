@@ -75,7 +75,9 @@ Now all components are available with `Ares` prefix:
 </template>
 ```
 
-### Import on Demand
+### Import on Demand (Tree Shaking)
+
+The library is fully tree-shakeable. Named imports only bundle what you use:
 
 ```vue
 <script setup>
@@ -91,6 +93,14 @@ import '@aresrpg/ui/style.css'
   </div>
 </template>
 ```
+
+**Bundle Impact**: Each component is 0.5-6 KB (gzipped). Import only what you need:
+- `Button`: 0.73 KB
+- `Card`: 0.92 KB
+- `Notification`: 1.53 KB
+- `Sidebar`: 1.64 KB
+
+Full UMD bundle: 50 KB (if you need all components).
 
 ## 🎨 Theme System
 
