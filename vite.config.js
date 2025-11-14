@@ -9,10 +9,12 @@ export default defineConfig(({ mode }) => {
   // Demo build for GitHub Pages
   if (mode === 'demo') {
     return {
+      root: 'demo',
       plugins: [vue()],
       base: '/aresrpg-ui/',
       build: {
-        outDir: 'dist-demo'
+        outDir: '../dist-demo',
+        emptyOutDir: true
       }
     }
   }
