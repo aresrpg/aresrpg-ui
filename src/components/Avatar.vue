@@ -37,14 +37,13 @@ const initials = computed(() => {
   background: var(--glass-bg);
   backdrop-filter: blur(20px) saturate(180%);
   border: 2px solid var(--glass-border);
-  overflow: hidden;
   flex-shrink: 0;
 }
 .avatar-sm { width: 32px; height: 32px; font-size: var(--font-size-xs); }
 .avatar-md { width: 48px; height: 48px; font-size: var(--font-size-sm); }
 .avatar-lg { width: 64px; height: 64px; font-size: var(--font-size-base); }
 .avatar-xl { width: 96px; height: 96px; font-size: var(--font-size-lg); }
-.avatar-img { width: 100%; height: 100%; object-fit: cover; }
+.avatar-img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
 .avatar-placeholder {
   width: 100%;
   height: 100%;
