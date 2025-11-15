@@ -26,6 +26,9 @@ import EnhancedCard from './components/EnhancedCard.vue'
 import EnhancedInput from './components/EnhancedInput.vue'
 import Notification from './components/Notification.vue'
 import NotificationContainer from './components/NotificationContainer.vue'
+import ChatMessage from './components/ChatMessage.vue'
+import ChatMessageList from './components/ChatMessageList.vue'
+import ChatInput from './components/ChatInput.vue'
 
 // Import composables
 import { useTheme } from './composables/useTheme.js'
@@ -56,7 +59,10 @@ const components = {
   EnhancedCard,
   EnhancedInput,
   Notification,
-  NotificationContainer
+  NotificationContainer,
+  ChatMessage,
+  ChatMessageList,
+  ChatInput
 }
 
 /**
@@ -96,6 +102,9 @@ export {
   EnhancedInput,
   Notification,
   NotificationContainer,
+  ChatMessage,
+  ChatMessageList,
+  ChatInput,
   useTheme,
   useNotification
 }

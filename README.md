@@ -813,6 +813,172 @@ import { EmptyState, Button } from '@aresrpg/ui'
 
 ---
 
+### ChatMessage
+
+Individual chat message component with avatar, message bubble, and timestamp.
+
+```vue
+<script setup>
+import { ChatMessage } from '@aresrpg/ui'
+</script>
+
+<template>
+  <!-- Incoming message -->
+  <ChatMessage
+    message="Hey! How are you doing?"
+    sender-name="Alice"
+    avatar-icon="bx bx-user"
+    :is-own="false"
+    :timestamp="new Date()"
+    status="online"
+    :show-status="true"
+  />
+
+  <!-- Own message (aligned right) -->
+  <ChatMessage
+    message="I'm doing great, thanks!"
+    sender-name="You"
+    avatar-icon="bx bx-user-circle"
+    :is-own="true"
+    :timestamp="new Date()"
+  />
+
+  <!-- With avatar image -->
+  <ChatMessage
+    message="Check out this feature!"
+    sender-name="Bob"
+    avatar-src="https://example.com/avatar.jpg"
+    :is-own="false"
+    :timestamp="new Date()"
+  />
+</template>
+```
+
+**Props:**
+- `message`: string (required) - Message text content
+- `senderName`: string (default: 'Unknown') - Name of the sender
+- `avatarSrc`: string - Avatar image URL
+- `avatarIcon`: string (default: 'bx bx-user') - Icon class for avatar (if no src)
+- `isOwn`: boolean (default: false) - Whether this message is from the current user
+- `timestamp`: string | Date | number (default: new Date()) - Message timestamp
+- `status`: 'online' | 'offline' | '' - Online status indicator
+- `showStatus`: boolean (default: false) - Whether to show status indicator
+
+---
+
+### ChatMessageList
+
+Scrollable chat message list container with auto-scroll functionality.
+
+```vue
+<script setup>
+import { ref } from 'vue'
+import { ChatMessageList } from '@aresrpg/ui'
+
+const messages = ref([
+  {
+    id: 1,
+    message: 'Welcome to the chat!',
+    senderName: 'System',
+    avatarIcon: 'bx bx-bot',
+    isOwn: false,
+    timestamp: new Date(Date.now() - 3600000)
+  },
+  {
+    id: 2,
+    message: 'Thanks! Great to be here.',
+    senderName: 'You',
+    avatarIcon: 'bx bx-user-circle',
+    isOwn: true,
+    timestamp: new Date()
+  }
+])
+</script>
+
+<template>
+  <div style="height: 500px;">
+    <ChatMessageList
+      :messages="messages"
+      :auto-scroll="true"
+      empty-state-text="No messages yet. Start chatting!"
+      :scroll-threshold="150"
+    />
+  </div>
+</template>
+```
+
+**Props:**
+- `messages`: Array (default: []) - Array of message objects
+  - Each message object should have: `id`, `message`, `senderName`, `avatarSrc`, `avatarIcon`, `isOwn`, `timestamp`, `status`, `showStatus`
+- `autoScroll`: boolean (default: true) - Auto-scroll to bottom on new messages
+- `emptyStateText`: string (default: 'No messages yet. Start the conversation!') - Text shown when no messages
+- `scrollThreshold`: number (default: 150) - Distance from bottom to hide scroll button (px)
+
+**Features:**
+- Auto-scrolls to bottom when new messages arrive
+- Shows "scroll to bottom" button when not at bottom
+- Smooth scrolling animations
+- Custom scrollbar styling
+- Empty state with icon
+
+---
+
+### ChatInput
+
+Chat input component with send button and Enter-to-send functionality.
+
+```vue
+<script setup>
+import { ref } from 'vue'
+import { ChatInput } from '@aresrpg/ui'
+
+const message = ref('')
+
+function handleSendMessage(messageText) {
+  console.log('Sending:', messageText)
+  // Add your send logic here
+  message.value = '' // Clear input after sending
+}
+</script>
+
+<template>
+  <ChatInput
+    v-model="message"
+    placeholder="Type a message..."
+    :max-length="500"
+    :show-char-count="true"
+    :auto-resize="true"
+    :max-rows="5"
+    @send="handleSendMessage"
+  />
+</template>
+```
+
+**Props:**
+- `modelValue`: string - v-model binding for input text
+- `placeholder`: string (default: 'Type a message...') - Placeholder text
+- `disabled`: boolean (default: false) - Disabled state
+- `maxLength`: number - Maximum character length
+- `showCharCount`: boolean (default: false) - Show character counter
+- `rows`: number (default: 1) - Initial number of rows (min height)
+- `autoResize`: boolean (default: true) - Auto-resize textarea based on content
+- `maxRows`: number (default: 5) - Maximum rows before scrolling
+
+**Events:**
+- `@send`: Emitted when user sends message (Enter key or send button)
+- `@update:modelValue`: Emitted when input value changes
+- `@focus`: Emitted when input gains focus
+- `@blur`: Emitted when input loses focus
+
+**Keyboard Shortcuts:**
+- `Enter`: Send message
+- `Shift + Enter`: New line (doesn't send)
+
+**Methods:**
+- `focus()`: Focus the input (accessible via ref)
+
+---
+
 ## 🛠️ Composables
 
 ### useTheme()
