@@ -5,29 +5,31 @@
     role="article"
     :aria-label="`Message from ${senderName}`"
   >
-    <!-- Avatar -->
-    <div v-if="!isOwn" class="message-avatar">
-      <Avatar
-        :src="avatarSrc"
-        :name="senderName"
-        :icon="avatarIcon"
-        size="sm"
-        :status="showStatus ? status : ''"
-      />
-    </div>
-
-    <!-- Message content -->
-    <div class="message-content">
-      <!-- Sender name (only for other's messages) -->
-      <div v-if="!isOwn && senderName" class="message-sender">
-        {{ senderName }}
+    <div class="message-wrapper">
+      <!-- Avatar -->
+      <div class="message-avatar">
+        <Avatar
+          :src="avatarSrc"
+          :name="senderName"
+          :icon="avatarIcon"
+          size="sm"
+          :status="showStatus ? status : ''"
+        />
       </div>
 
-      <!-- Message bubble -->
-      <div class="message-bubble">
-        <p class="message-text">{{ message }}</p>
+      <div class="message-container">
+        <!-- Sender name aligned with avatar (only for other's messages) -->
+        <div v-if="!isOwn && senderName" class="message-sender">
+          {{ senderName }}
+        </div>
 
-        <!-- Timestamp -->
+        <!-- Message bubble -->
+        <div class="message-bubble">
+          <!-- Message text -->
+          <p class="message-text">{{ message }}</p>
+        </div>
+
+        <!-- Timestamp outside bubble -->
         <time
           class="message-timestamp"
           :datetime="timestampISO"
@@ -37,17 +39,6 @@
         </time>
       </div>
     </div>
-
-    <!-- Avatar for own messages (right side) -->
-    <div v-if="isOwn" class="message-avatar">
-      <Avatar
-        :src="avatarSrc"
-        :name="senderName"
-        :icon="avatarIcon"
-        size="sm"
-        :status="showStatus ? status : ''"
-      />
-    </div>
   </article>
 </template>
 
@@ -56,9 +47,8 @@ import { computed } from 'vue'
 import Avatar from './Avatar.vue'
 
 /**
- * Chat message component with glassmorphism styling
- * Displays sender avatar, message content, and timestamp
- * Supports "own" vs "other" message alignment
+ * Messenger-style chat message component
+ * Avatar integrated inside bubble with tail pointing to avatar
  *
  * @param {string} message - Message text content
  * @param {string} senderName - Name of the sender
@@ -127,11 +117,11 @@ const timestampFormatted = computed(() => {
 <style scoped>
 .chat-message {
   display: flex;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
   opacity: 0;
   transform: translateY(10px);
   animation: slideIn 0.3s ease forwards;
+  max-width: 75%;
 }
 
 @keyframes slideIn {
@@ -143,62 +133,100 @@ const timestampFormatted = computed(() => {
 
 /* Own messages aligned to the right */
 .chat-message-own {
+  margin-left: auto;
+}
+
+/* Message wrapper - contains avatar + message container */
+.message-wrapper {
+  display: flex;
+  gap: var(--spacing-xs);
+  align-items: flex-start;
+  width: 100%;
+}
+
+/* Own messages: reverse order (message first, then avatar) */
+.chat-message-own .message-wrapper {
   flex-direction: row-reverse;
 }
 
+/* Avatar */
 .message-avatar {
   flex-shrink: 0;
 }
 
-.message-content {
+/* Message container - contains name, bubble, timestamp */
+.message-container {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xs);
-  max-width: 70%;
-  min-width: 120px;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
 }
 
-.chat-message-own .message-content {
-  align-items: flex-end;
-}
-
-/* Sender name */
+/* Sender name - aligned with avatar */
 .message-sender {
   font-size: var(--font-size-xs);
-  font-weight: 600;
-  color: var(--color-text-secondary);
+  font-weight: 700;
+  color: var(--color-accent-primary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  padding-left: var(--spacing-xs);
+  padding-left: 2px;
 }
 
-/* Message bubble */
+/* Own messages: right-align sender name */
+.chat-message-own .message-sender {
+  text-align: right;
+  padding-left: 0;
+  padding-right: 2px;
+}
+
+/* Message bubble - compact, just the text */
 .message-bubble {
   background: var(--glass-bg);
   backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid var(--glass-border);
-  border-radius: 12px;
-  padding: var(--spacing-sm) var(--spacing-md);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  border-radius: 12px 12px 12px 4px;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
   transition: all 0.2s ease;
-  position: relative;
+  width: fit-content;
+  max-width: 100%;
 }
 
 .message-bubble:hover {
-  border-color: var(--glass-border-bright);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
-/* Own message bubble styling */
+/* Own message styling - accent gradient */
 .chat-message-own .message-bubble {
-  background: linear-gradient(135deg,
-    rgba(255, 202, 40, 0.15) 0%,
-    rgba(255, 202, 40, 0.08) 100%);
-  border-color: rgba(255, 202, 40, 0.3);
+  background: linear-gradient(135deg, var(--glass-bg-medium) 0%, var(--glass-bg-light) 100%);
+  border-color: var(--glass-border-bright);
+  border-radius: 12px 12px 4px 12px;
+  margin-left: auto;
 }
 
-.chat-message-own .message-bubble:hover {
-  border-color: rgba(255, 202, 40, 0.5);
+/* Message text */
+.message-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  margin: 0;
+  line-height: 1.4;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+/* Timestamp - below bubble */
+.message-timestamp {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-dim);
+  padding-left: 2px;
+}
+
+/* Own messages: right-align timestamp */
+.chat-message-own .message-timestamp {
+  text-align: right;
+  padding-left: 0;
+  padding-right: 2px;
 }
 
 /* Neumorphism theme overrides */
@@ -210,56 +238,26 @@ const timestampFormatted = computed(() => {
 }
 
 [data-theme="neumorphism"] .message-bubble:hover {
-  box-shadow: 2px 2px 5px rgba(163, 177, 198, 0.4),
-              -2px -2px 5px rgba(255, 255, 255, 0.5);
+  box-shadow: 2px 2px 4px rgba(163, 177, 198, 0.4),
+              -2px -2px 4px rgba(255, 255, 255, 0.5);
 }
 
 [data-theme="neumorphism"] .chat-message-own .message-bubble {
   background: linear-gradient(135deg, #e0e5ec 0%, #f8f9fc 100%);
 }
 
-/* Matrix theme overrides */
-[data-theme="matrix"] .chat-message-own .message-bubble {
-  background: linear-gradient(135deg,
-    rgba(0, 170, 0, 0.15) 0%,
-    rgba(0, 170, 0, 0.08) 100%);
-  border-color: rgba(0, 170, 0, 0.3);
-}
-
-[data-theme="matrix"] .chat-message-own .message-bubble:hover {
-  border-color: rgba(0, 170, 0, 0.5);
-}
-
-/* Message text */
-.message-text {
-  font-size: var(--font-size-base);
-  color: var(--color-text-primary);
-  margin: 0 0 var(--spacing-xs) 0;
-  line-height: 1.5;
-  word-wrap: break-word;
-  white-space: pre-wrap;
-}
-
-/* Timestamp */
-.message-timestamp {
-  font-size: var(--font-size-xs);
-  color: var(--color-text-dim);
-  display: block;
-  text-align: right;
-}
-
-.chat-message-own .message-timestamp {
-  text-align: left;
-}
-
 /* Responsive adjustments */
 @media (max-width: 640px) {
-  .message-content {
+  .chat-message {
     max-width: 85%;
   }
 
   .message-bubble {
-    padding: var(--spacing-xs) var(--spacing-sm);
+    padding: var(--spacing-xs);
+  }
+
+  .message-text {
+    font-size: var(--font-size-xs);
   }
 }
 </style>

@@ -3,9 +3,9 @@
     ref="cardRef"
     :class="['card', { 'card-hover': hoverable, 'card-visible': isVisible }]"
   >
-    <div v-if="$slots.icon || icon" class="card-icon">
+    <div v-if="$slots.icon || icon !== ''" class="card-icon">
       <slot name="icon">
-        <i :class="icon"></i>
+        <i v-if="icon" :class="icon"></i>
       </slot>
     </div>
 
@@ -96,7 +96,7 @@ onMounted(() => {
 .card {
   background: var(--glass-bg);
   backdrop-filter: blur(20px) saturate(180%);
-  border-radius: 6px;
+  border-radius: 12px;
   border: 1px solid var(--glass-border);
   padding: 20px;
   transition: all 0.2s ease;
@@ -141,7 +141,7 @@ onMounted(() => {
   height: 40px;
   background: var(--glass-bg-medium);
   border: 1px solid var(--glass-border);
-  border-radius: 6px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -100,7 +100,7 @@ const props = defineProps({
   },
   duration: {
     type: [Number, String],
-    default: 4000
+    default: 7000
   },
   flat: {
     type: Boolean,
@@ -197,8 +197,9 @@ onMounted(() => {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  padding: 16px;
-  background: #fff;
+  padding: 12px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   border-radius: 12px;
   min-width: 280px;
@@ -207,14 +208,11 @@ onMounted(() => {
   transition: all 0.3s ease;
 }
 
-.notification:hover {
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
-  transform: translateY(-2px);
-}
+/* Removed hover lift effect for vuesax consistency */
 
 /* Flat mode */
 .notification.flat {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--glass-bg-light);
   backdrop-filter: blur(10px);
 }
 
@@ -229,82 +227,28 @@ onMounted(() => {
 }
 
 /* Color variants using theme colors */
-.notification-primary {
-  border-left: 4px solid var(--color-accent-primary, #FFCA28);
-}
-
-.notification-primary.flat {
-  background: var(--glass-bg, rgba(30, 30, 30, 0.25));
-  border-left-color: var(--color-accent-primary, #FFCA28);
-}
-
 .notification-primary .notification-icon {
-  color: var(--color-accent-primary, #FFCA28);
-}
-
-.notification-success {
-  border-left: 4px solid var(--color-success, #4CAF50);
-}
-
-.notification-success.flat {
-  background: var(--glass-bg, rgba(30, 30, 30, 0.25));
-  border-left-color: var(--color-success, #4CAF50);
+  color: var(--color-accent-primary);
 }
 
 .notification-success .notification-icon {
-  color: var(--color-success, #4CAF50);
-}
-
-.notification-danger {
-  border-left: 4px solid var(--color-error, #EF5350);
-}
-
-.notification-danger.flat {
-  background: var(--glass-bg, rgba(30, 30, 30, 0.25));
-  border-left-color: var(--color-error, #EF5350);
+  color: var(--color-success);
 }
 
 .notification-danger .notification-icon {
-  color: var(--color-error, #EF5350);
-}
-
-.notification-warning {
-  border-left: 4px solid var(--color-warning, #FFA726);
-}
-
-.notification-warning.flat {
-  background: var(--glass-bg, rgba(30, 30, 30, 0.25));
-  border-left-color: var(--color-warning, #FFA726);
+  color: var(--color-error);
 }
 
 .notification-warning .notification-icon {
-  color: var(--color-warning, #FFA726);
-}
-
-.notification-dark {
-  border-left: 4px solid var(--color-text-primary, #eeeeee);
-}
-
-.notification-dark.flat {
-  background: var(--glass-bg, rgba(30, 30, 30, 0.25));
-  border-left-color: var(--color-text-primary, #eeeeee);
+  color: var(--color-warning);
 }
 
 .notification-dark .notification-icon {
-  color: var(--color-text-primary, #eeeeee);
-}
-
-.notification-info {
-  border-left: 4px solid var(--color-info, #42A5F5);
-}
-
-.notification-info.flat {
-  background: var(--glass-bg, rgba(30, 30, 30, 0.25));
-  border-left-color: var(--color-info, #42A5F5);
+  color: var(--color-text-primary);
 }
 
 .notification-info .notification-icon {
-  color: var(--color-info, #42A5F5);
+  color: var(--color-info);
 }
 
 /* Icon */
@@ -428,30 +372,17 @@ onMounted(() => {
   }
 }
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .notification {
-    background: #2c3e50;
-  }
+/* Neumorphism theme support */
+[data-theme="neumorphism"] .notification {
+  background: var(--color-bg-primary);
+  backdrop-filter: none;
+  box-shadow: 4px 4px 8px rgba(163, 177, 198, 0.35),
+              -4px -4px 8px rgba(255, 255, 255, 0.45);
+}
 
-  .notification.flat {
-    background: rgba(44, 62, 80, 0.95);
-  }
-
-  .notification-title {
-    color: #ecf0f1;
-  }
-
-  .notification-text {
-    color: #bdc3c7;
-  }
-
-  .notification-close {
-    color: #7f8c8d;
-  }
-
-  .notification-close:hover {
-    color: #ecf0f1;
-  }
+[data-theme="neumorphism"] .notification.flat {
+  background: var(--color-bg-primary);
+  box-shadow: 2px 2px 4px rgba(163, 177, 198, 0.35),
+              -2px -2px 4px rgba(255, 255, 255, 0.45);
 }
 </style>

@@ -127,15 +127,15 @@ function handleAuthMethod(method) {
 .auth-method-card {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
-  padding: var(--spacing-sm) var(--spacing-xl);
+  gap: var(--spacing-sm);
+  padding: var(--spacing-xs) var(--spacing-md);
   background: var(--glass-bg-light);
   backdrop-filter: blur(10px);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
   color: var(--color-text-primary);
   font-family: var(--font-family);
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-sm);
   font-weight: 600;
   cursor: pointer;
   transition: all var(--transition-fast);

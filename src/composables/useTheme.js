@@ -2,13 +2,13 @@ import { ref, watch, onMounted } from 'vue'
 
 /**
  * Theme composable for managing app themes
- * Supports: dark (default), white, blue, matrix, neumorphism
+ * Supports: dark (default), neumorphism (light)
  *
  * @returns {Object} Theme management utilities
  */
 export function useTheme() {
   const STORAGE_KEY = 'aresrpg-ui-theme'
-  const THEMES = ['dark', 'white', 'blue', 'matrix', 'neumorphism']
+  const THEMES = ['dark', 'neumorphism']
 
   const currentTheme = ref('dark')
 

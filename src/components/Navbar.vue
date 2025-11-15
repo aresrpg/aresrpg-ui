@@ -102,6 +102,7 @@ function handleLinkClick(link, event) {
   background: var(--glass-bg);
   backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid var(--glass-border);
+  border-bottom-left-radius: var(--radius-lg);
   position: relative;
   z-index: 100;
 }
@@ -113,6 +114,7 @@ function handleLinkClick(link, event) {
   background: var(--gradient-glass);
   opacity: 0.3;
   pointer-events: none;
+  border-bottom-left-radius: var(--radius-lg);
 }
 
 /* Brand/Logo */

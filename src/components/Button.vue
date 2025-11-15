@@ -171,19 +171,6 @@ function handleClick(event) {
   filter: brightness(0.9);
 }
 
-/* Neumorphism theme - boost button saturation */
-[data-theme="neumorphism"] .btn-success {
-  background: #2ecc71;
-  color: white;
-  filter: saturate(1.2);
-}
-
-[data-theme="neumorphism"] .btn-error {
-  background: #e74c3c;
-  color: white;
-  filter: saturate(1.2);
-}
-
 .btn-outline {
   background: transparent;
   color: var(--color-accent-primary);
@@ -195,7 +182,7 @@ function handleClick(event) {
   color: var(--color-bg-primary);
 }
 
-/* Neumorphism theme overrides */
+/* Neumorphism theme overrides - general first, then specific */
 [data-theme="neumorphism"] .btn {
   background: var(--color-bg-primary);
   border: none;
@@ -216,6 +203,21 @@ function handleClick(event) {
 
 [data-theme="neumorphism"] .btn-gradient {
   background: var(--gradient-primary);
+  color: white;
+  box-shadow: 3px 3px 6px rgba(163, 177, 198, 0.4),
+              -3px -3px 6px rgba(255, 255, 255, 0.3);
+}
+
+/* Specific color variants for neumorphism - MUST come after general .btn styles */
+[data-theme="neumorphism"] .btn-success {
+  background: var(--color-success);
+  color: white;
+  box-shadow: 3px 3px 6px rgba(163, 177, 198, 0.4),
+              -3px -3px 6px rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="neumorphism"] .btn-error {
+  background: var(--color-error);
   color: white;
   box-shadow: 3px 3px 6px rgba(163, 177, 198, 0.4),
               -3px -3px 6px rgba(255, 255, 255, 0.3);

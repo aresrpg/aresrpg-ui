@@ -149,7 +149,7 @@ function removeNotification(id) {
     right: 0 !important;
     transform: none !important;
     align-items: stretch !important;
-    padding: 0 16px;
+    padding: 0;
   }
 
   .notification-container-top-left,
@@ -161,7 +161,7 @@ function removeNotification(id) {
   .notification-container-bottom-left,
   .notification-container-bottom-center,
   .notification-container-bottom-right {
-    bottom: 16px;
+    bottom: 0;
   }
 }
 </style>

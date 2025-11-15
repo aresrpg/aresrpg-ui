@@ -53,6 +53,8 @@ const initials = computed(() => {
   background: var(--gradient-primary);
   color: var(--color-text-primary);
   font-weight: 700;
+  border-radius: 50%;
+  overflow: hidden;
 }
 .avatar-status {
   position: absolute;

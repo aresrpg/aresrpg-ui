@@ -42,10 +42,7 @@ const { currentTheme, themes, setTheme } = useTheme()
 function getThemeIcon(theme) {
   const icons = {
     dark: 'bx bx-moon',
-    white: 'bx bx-sun',
-    blue: 'bx bx-water',
-    matrix: 'bx bx-code-alt',
-    neumorphism: 'bx bx-cube'
+    neumorphism: 'bx bx-sun'
   }
   return icons[theme] || 'bx bx-palette'
 }
@@ -96,10 +93,7 @@ function capitalizeTheme(theme) {
 /* Theme-specific preview colors (static - represent each theme's signature color) */
 :root {
   --theme-dark-icon: #FFCA28;
-  --theme-white-icon: #3b82f6;
-  --theme-blue-icon: #38bdf8;
-  --theme-matrix-icon: #00ff41;
-  --theme-neumorphism-icon: #8b5cf6;
+  --theme-neumorphism-icon: #667EEA;
 }
 
 .theme-button.active {
@@ -121,18 +115,6 @@ function capitalizeTheme(theme) {
 
 .theme-icon-dark i {
   color: var(--theme-dark-icon);
-}
-
-.theme-icon-white i {
-  color: var(--theme-white-icon);
-}
-
-.theme-icon-blue i {
-  color: var(--theme-blue-icon);
-}
-
-.theme-icon-matrix i {
-  color: var(--theme-matrix-icon);
 }
 
 .theme-icon-neumorphism i {

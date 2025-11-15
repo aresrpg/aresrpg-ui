@@ -220,35 +220,11 @@ defineExpose({
   gap: var(--spacing-xs);
 }
 
-/* Input wrapper */
+/* Input wrapper - just layout, no visual styling */
 .chat-input-wrapper {
+  position: relative;
   display: flex;
   align-items: flex-end;
-  gap: var(--spacing-sm);
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid var(--glass-border);
-  border-radius: 8px;
-  padding: var(--spacing-sm);
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-}
-
-.chat-input-wrapper:hover {
-  border-color: var(--glass-border-bright);
-}
-
-.chat-input-focused {
-  border-color: var(--color-accent-primary);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12),
-              0 0 0 2px rgba(255, 202, 40, 0.1);
-}
-
-/* Matrix theme - tone down focus */
-[data-theme="matrix"] .chat-input-focused {
-  border-color: #00AA00;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12),
-              0 0 0 2px rgba(0, 170, 0, 0.15);
 }
 
 .chat-input-disabled {
@@ -256,34 +232,26 @@ defineExpose({
   cursor: not-allowed;
 }
 
-/* Neumorphism theme override */
-[data-theme="neumorphism"] .chat-input-wrapper {
-  background: var(--color-bg-primary);
-  border: none;
-  box-shadow: inset 2px 2px 4px rgba(163, 177, 198, 0.35),
-              inset -2px -2px 4px rgba(255, 255, 255, 0.45);
-}
-
-[data-theme="neumorphism"] .chat-input-focused {
-  box-shadow: inset 3px 3px 6px rgba(163, 177, 198, 0.4),
-              inset -3px -3px 6px rgba(255, 255, 255, 0.5);
-}
-
-/* Text input */
+/* Text input - this is the main styled box now */
 .chat-input {
   flex: 1;
-  background: transparent;
-  border: none;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: var(--spacing-sm);
+  padding-right: 48px; /* Space for send button */
   outline: none;
   color: var(--color-text-primary);
   font-size: var(--font-size-base);
   font-family: var(--font-family);
   line-height: 1.5;
   resize: none;
-  min-height: 24px;
+  min-height: 44px;
   max-height: 120px;
   overflow-y: auto;
-  padding: 0;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 
   /* Custom scrollbar */
   scrollbar-width: thin;
@@ -307,15 +275,41 @@ defineExpose({
   color: var(--color-text-dim);
 }
 
+.chat-input:hover {
+  border-color: var(--glass-border-bright);
+}
+
+.chat-input:focus {
+  border-color: var(--color-accent-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12),
+              0 0 0 2px rgba(255, 202, 40, 0.1);
+}
+
 .chat-input:disabled {
   cursor: not-allowed;
 }
 
-/* Send button */
+/* Neumorphism theme override for input */
+[data-theme="neumorphism"] .chat-input {
+  background: var(--color-bg-primary);
+  border: none;
+  box-shadow: inset 2px 2px 4px rgba(163, 177, 198, 0.35),
+              inset -2px -2px 4px rgba(255, 255, 255, 0.45);
+}
+
+[data-theme="neumorphism"] .chat-input:focus {
+  box-shadow: inset 3px 3px 6px rgba(163, 177, 198, 0.4),
+              inset -3px -3px 6px rgba(255, 255, 255, 0.5);
+}
+
+/* Send button - positioned absolutely inside input */
 .send-button {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
   flex-shrink: 0;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   background: var(--gradient-primary);
   border: none;
   border-radius: 6px;
@@ -343,11 +337,6 @@ defineExpose({
   opacity: 0.4;
   cursor: not-allowed;
   transform: none;
-}
-
-/* Matrix theme - different button color */
-[data-theme="matrix"] .send-button {
-  background: linear-gradient(135deg, #00AA00 0%, #007700 100%);
 }
 
 /* Neumorphism theme - different button style */
@@ -382,14 +371,21 @@ defineExpose({
 
 /* Responsive adjustments */
 @media (max-width: 640px) {
-  .chat-input-wrapper {
+  .chat-input-container {
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .chat-input {
+    font-size: var(--font-size-sm);
     padding: var(--spacing-xs);
+    padding-right: 42px;
   }
 
   .send-button {
-    width: 32px;
-    height: 32px;
-    font-size: 18px;
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
   }
 }
 </style>

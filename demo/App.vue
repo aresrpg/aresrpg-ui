@@ -662,16 +662,17 @@
             </h2>
             <div class="component-demo">
               <h3 class="demo-subtitle">Interactive Chat Interface</h3>
-              <div style="height: 500px; border: 1px solid var(--glass-border); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; background: var(--glass-bg-light); backdrop-filter: blur(10px);">
+              <div style="position: relative; height: 500px; border: 1px solid var(--glass-border); border-radius: var(--radius-lg); overflow: hidden; background: var(--glass-bg-light); backdrop-filter: blur(10px);">
                 <!-- Chat message list -->
                 <ChatMessageList
                   :messages="chatMessages"
                   :auto-scroll="true"
                   empty-state-text="No messages yet. Start chatting!"
+                  style="height: 100%; padding-bottom: 80px;"
                 />
 
-                <!-- Chat input -->
-                <div style="padding: var(--spacing-md); border-top: 1px solid var(--glass-border); background: var(--glass-bg);">
+                <!-- Chat input - floating overlay -->
+                <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: var(--spacing-md);">
                   <ChatInput
                     v-model="chatInput"
                     placeholder="Type a message..."
@@ -1070,7 +1071,7 @@ function handleSendMessage(message) {
   position: fixed;
   top: var(--spacing-md);
   left: var(--spacing-md);
-  z-index: 100;
+  z-index: 150;
   width: 48px;
   height: 48px;
   background: var(--glass-bg);

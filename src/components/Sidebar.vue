@@ -211,9 +211,10 @@ watch(() => props.open, (newValue) => {
   min-height: 100vh;
   border-radius: 0 30px 30px 0;
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.05);
-  /* aresrpg-dapp custom override */
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
+  /* Theme-adaptive background */
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--glass-border);
   transition: all 0.25s ease;
   z-index: 10;
 }
@@ -289,6 +290,7 @@ watch(() => props.open, (newValue) => {
   cursor: pointer;
   transition: var(--transition-fast);
   flex-shrink: 0;
+  margin-right: var(--spacing-md);
 }
 
 .collapse-btn:hover {
@@ -308,6 +310,7 @@ watch(() => props.open, (newValue) => {
   flex-grow: 1;
   flex-direction: column;
   z-index: 1;
+  padding-top: 30%;
 }
 
 /* Hide scrollbar like vuesax */
@@ -536,6 +539,50 @@ watch(() => props.open, (newValue) => {
   z-index: 1;
 }
 
+/* Neumorphism theme overrides */
+[data-theme="neumorphism"] .sidebar {
+  background: var(--color-bg-primary);
+  backdrop-filter: none;
+  border: none;
+  box-shadow: var(--neuro-shadow-outer);
+}
+
+[data-theme="neumorphism"] .sidebar-header {
+  border-bottom: 1px solid rgba(44, 62, 80, 0.1);
+}
+
+[data-theme="neumorphism"] .sidebar-footer {
+  border-top: 1px solid rgba(44, 62, 80, 0.1);
+}
+
+[data-theme="neumorphism"] .collapse-btn {
+  background: var(--color-bg-primary);
+  border: none;
+  box-shadow: var(--neuro-shadow-outer);
+  color: var(--color-text-secondary);
+}
+
+[data-theme="neumorphism"] .collapse-btn:hover {
+  box-shadow: inset 3px 3px 6px rgba(163, 177, 198, 0.4),
+              inset -3px -3px 6px rgba(255, 255, 255, 0.5);
+  color: var(--color-text-primary);
+  transform: none;
+}
+
+[data-theme="neumorphism"] .nav-item {
+  color: var(--color-text-secondary);
+}
+
+[data-theme="neumorphism"] .nav-item.active {
+  color: var(--color-accent-primary);
+  background: rgba(102, 126, 234, 0.05);
+  border-radius: var(--radius-md);
+}
+
+[data-theme="neumorphism"] .nav-item::after {
+  display: none;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .sidebar {
@@ -544,6 +591,7 @@ watch(() => props.open, (newValue) => {
     left: 0;
     transform: translateX(-100%);
     transition: transform var(--transition-base);
+    z-index: 50;
   }
 
   .sidebar.open {
