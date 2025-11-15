@@ -35,7 +35,7 @@ const initials = computed(() => {
   justify-content: center;
   border-radius: 50%;
   background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(25px) saturate(180%);
   border: 2px solid var(--glass-border);
   flex-shrink: 0;
 }

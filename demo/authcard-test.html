@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AuthCard Test</title>
+  <script type="module">
+    import { createApp } from 'vue';
+    import { AuthCard, Input, Button } from '../dist/index.js';
+    import '../dist/ui.css';
+
+    createApp({
+      components: { AuthCard, Input, Button },
+      template: `
+        <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #000;">
+          <AuthCard title="NOXANT" tagline="Agentic colony systems">
+            <template #logo>
+              <div style="width: 100px; height: 100px; margin: 0 auto 1rem; background: var(--glass-bg-light); border: 1px solid var(--glass-border); border-radius: 50%;"></div>
+            </template>
+            <Input type="text" placeholder="Username" style="margin-bottom: 0.75rem;" />
+            <Input type="password" placeholder="Password" style="margin-bottom: 0.75rem;" />
+            <Button variant="gradient" style="width: 100%;">Login</Button>
+          </AuthCard>
+        </div>
+      `
+    }).mount('#app');
+  </script>
+</head>
+<body>
+  <div id="app"></div>
+</body>
+</html>

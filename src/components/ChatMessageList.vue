@@ -224,7 +224,7 @@ onMounted(() => {
   width: 40px;
   height: 40px;
   background: var(--glass-bg-medium);
-  backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(25px) saturate(180%);
   border: 1px solid var(--glass-border-bright);
   border-radius: 50%;
   color: var(--color-accent-primary);

@@ -33,7 +33,7 @@ const hide = () => isVisible.value = false
   position: absolute;
   padding: var(--spacing-xs) var(--spacing-sm);
   background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(25px) saturate(180%);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-sm);
   color: var(--color-text-primary);

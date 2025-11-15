@@ -71,7 +71,7 @@ function capitalizeTheme(theme) {
   gap: var(--spacing-xs);
   padding: var(--spacing-xs) var(--spacing-md);
   background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(25px) saturate(180%);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
   color: var(--color-text-secondary);
@@ -137,7 +137,7 @@ function capitalizeTheme(theme) {
   z-index: 1000;
   padding: var(--spacing-sm);
   background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(25px) saturate(180%);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);

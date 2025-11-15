@@ -95,7 +95,7 @@ onMounted(() => {
 <style scoped>
 .refined-card {
   background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(25px) saturate(180%);
   border-radius: 6px;
   border: 1px solid var(--glass-border);
   padding: 20px;
@@ -149,7 +149,7 @@ onMounted(() => {
   margin-bottom: 12px;
   color: var(--color-accent-primary);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(25px);
 }
 
 [data-theme="neumorphism"] .refined-card-icon {

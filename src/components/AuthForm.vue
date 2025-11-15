@@ -1,6 +1,6 @@
 <template>
-  <div class="auth-form">
-    <div class="auth-header">
+  <div class="auth-form" :class="{ 'auth-form-no-header': hideHeader }">
+    <div v-if="!hideHeader" class="auth-header">
       <h2 class="auth-title">
         <LockKeyhole :size="28" />
         Sign In
@@ -27,13 +27,25 @@
 
 <script setup>
 import { Mail, Chrome, Github, LockKeyhole, Droplet } from 'lucide-vue-next'
-import { h } from 'vue'
+import { h, computed } from 'vue'
 
 /**
  * Authentication Form Component
  * All authentication methods shown as equal-weight cards
+ * @param {Array<string>} allowedMethods - Filter which methods to show (e.g., ['google', 'discord'])
  * @emits auth-method - Emitted when an auth method is selected
  */
+
+const props = defineProps({
+  allowedMethods: {
+    type: Array,
+    default: () => null // null = show all methods
+  },
+  hideHeader: {
+    type: Boolean,
+    default: false // Show header by default
+  }
+})
 
 const emit = defineEmits(['auth-method'])
 
@@ -50,13 +62,21 @@ const DiscordIcon = (props) => h('svg', {
   })
 ])
 
-const authMethods = [
+const allMethods = [
   { id: 'email', name: 'Email', icon: Mail },
   { id: 'google', name: 'Google', icon: Chrome },
   { id: 'discord', name: 'Discord', icon: DiscordIcon },
   { id: 'github', name: 'GitHub', icon: Github },
   { id: 'sui', name: 'Sui', icon: Droplet }
 ]
+
+// Filter methods based on allowedMethods prop
+const authMethods = computed(() => {
+  if (!props.allowedMethods || props.allowedMethods.length === 0) {
+    return allMethods
+  }
+  return allMethods.filter(method => props.allowedMethods.includes(method.id))
+})
 
 function handleAuthMethod(method) {
   emit('auth-method', method)
@@ -66,14 +86,27 @@ function handleAuthMethod(method) {
 <style scoped>
 .auth-form {
   width: 100%;
-  max-width: 520px;
+  max-width: 400px;
   background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(25px) saturate(180%);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   padding: var(--spacing-2xl);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1);
   position: relative;
+}
+
+/* When header is hidden, make it transparent without borders (just show method cards) */
+.auth-form-no-header {
+  background: transparent;
+  backdrop-filter: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+.auth-form-no-header::before {
+  display: none;
 }
 
 .auth-form::before {

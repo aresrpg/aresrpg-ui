@@ -183,7 +183,7 @@ const timestampFormatted = computed(() => {
 /* Message bubble - compact, just the text */
 .message-bubble {
   background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(25px) saturate(180%);
   border: 1px solid var(--glass-border);
   border-radius: 12px 12px 12px 4px;
   padding: var(--spacing-xs) var(--spacing-sm);

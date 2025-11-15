@@ -335,7 +335,7 @@ function handleBlur(event) {
   width: 100%;
   padding: 10px 12px;
   background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(25px) saturate(180%);
   border: 1px solid var(--glass-border);
   border-radius: 4px;
   color: var(--color-text-primary);

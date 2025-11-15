@@ -199,7 +199,7 @@ onMounted(() => {
   gap: 12px;
   padding: 12px;
   background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(25px) saturate(180%);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   border-radius: 12px;
   min-width: 280px;

@@ -37,7 +37,7 @@ defineEmits(['update:modelValue'])
   width: 48px;
   height: 24px;
   background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(25px) saturate(180%);
   border: 2px solid var(--glass-border);
   border-radius: 24px;
   transition: var(--transition-base);

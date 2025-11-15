@@ -95,13 +95,14 @@ onMounted(() => {
 <style scoped>
 .card {
   background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
   border-radius: 12px;
   border: 1px solid var(--glass-border);
   padding: 20px;
   transition: all 0.2s ease;
   position: relative;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1);
 
   /* Subtle scroll-reveal animation - starts hidden */
   opacity: 0;
@@ -149,7 +150,7 @@ onMounted(() => {
   margin-bottom: 12px;
   color: var(--color-accent-primary);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(25px);
 }
 
 [data-theme="neumorphism"] .card-icon {

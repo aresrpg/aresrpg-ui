@@ -100,7 +100,7 @@ function handleLinkClick(link, event) {
   gap: var(--spacing-lg);
   padding: var(--spacing-md) var(--spacing-lg);
   background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(25px) saturate(180%);
   border-bottom: 1px solid var(--glass-border);
   border-bottom-left-radius: var(--radius-lg);
   position: relative;

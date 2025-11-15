@@ -72,7 +72,7 @@ function handleClick(event) {
   justify-content: center;
   gap: var(--spacing-xs);
   padding: 8px 20px;
-  border-radius: 4px;
+  border-radius: var(--radius-md);
   font-size: var(--font-size-base);
   font-weight: 500;
   text-decoration: none;
@@ -112,7 +112,7 @@ function handleClick(event) {
 /* Variant styles */
 .btn-primary {
   background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(25px) saturate(180%);
   color: var(--color-text-primary);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 }

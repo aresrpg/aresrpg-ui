@@ -33,7 +33,7 @@ const variantClass = computed(() => `badge-${props.variant}`)
   text-transform: uppercase;
   letter-spacing: 0.05em;
   background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(25px) saturate(180%);
   border: 1px solid;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
 }

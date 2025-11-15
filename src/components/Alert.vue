@@ -46,7 +46,7 @@ function close() {
   gap: var(--spacing-md);
   padding: var(--spacing-md);
   background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(25px) saturate(180%);
   border: 1px solid var(--glass-border);
   border-left: 4px solid currentColor;
   border-radius: var(--radius-md);

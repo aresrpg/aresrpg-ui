@@ -236,7 +236,7 @@ defineExpose({
 .chat-input {
   flex: 1;
   background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(25px) saturate(180%);
   border: 1px solid var(--glass-border);
   border-radius: 8px;
   padding: var(--spacing-sm);

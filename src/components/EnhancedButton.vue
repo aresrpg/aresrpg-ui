@@ -112,7 +112,7 @@ function handleClick(event) {
 /* Variant styles */
 .refined-btn-primary {
   background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(25px) saturate(180%);
   color: var(--color-text-primary);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 }

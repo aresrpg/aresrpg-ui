@@ -213,7 +213,7 @@ watch(() => props.open, (newValue) => {
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.05);
   /* Theme-adaptive background */
   background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(25px) saturate(180%);
   border: 1px solid var(--glass-border);
   transition: all 0.25s ease;
   z-index: 10;

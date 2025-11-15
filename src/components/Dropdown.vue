@@ -148,7 +148,7 @@ const vClickOutside = {
   width: 100%;
   padding: var(--spacing-sm) var(--spacing-md);
   background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(25px) saturate(180%);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
   color: var(--color-text-primary);
@@ -183,7 +183,7 @@ const vClickOutside = {
   left: 0;
   right: 0;
   background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(25px) saturate(180%);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-xl);
