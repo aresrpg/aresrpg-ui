@@ -21,6 +21,7 @@ import EmptyState from './components/EmptyState.vue'
 import ProgressBar from './components/ProgressBar.vue'
 import Chart from './components/Chart.vue'
 import AuthForm from './components/AuthForm.vue'
+import AuthCard from './components/AuthCard.vue'
 import EnhancedButton from './components/EnhancedButton.vue'
 import EnhancedCard from './components/EnhancedCard.vue'
 import EnhancedInput from './components/EnhancedInput.vue'
@@ -55,6 +56,7 @@ const components = {
   ProgressBar,
   Chart,
   AuthForm,
+  AuthCard,
   EnhancedButton,
   EnhancedCard,
   EnhancedInput,
@@ -97,6 +99,7 @@ export {
   ProgressBar,
   Chart,
   AuthForm,
+  AuthCard,
   EnhancedButton,
   EnhancedCard,
   EnhancedInput,

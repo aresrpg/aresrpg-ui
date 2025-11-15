@@ -47,52 +47,52 @@ select:focus-visible,
   box-shadow: 0 0 0 4px rgba(var(--color-accent-primary-rgb, 255, 202, 40), 0.2);
 }
 
-/* ===== THEME: DARK (Default - Gaming MMORPG) ===== */
+/* ===== THEME: DARK (Electric Glassy - Inspired by Noxant) ===== */
 [data-theme="dark"] {
-  --color-bg-primary: #121212;
-  --color-bg-secondary: #1a1a1a;
-  --color-bg-tertiary: #222222;
-  --color-bg-elevated: #2a2a2a;
+  --color-bg-primary: #0a0a0a;
+  --color-bg-secondary: #121212;
+  --color-bg-tertiary: #1a1a1a;
+  --color-bg-elevated: #222222;
 
-  /* Glassmorphism */
-  --glass-bg: rgba(30, 30, 30, 0.25);
-  --glass-bg-light: rgba(255, 255, 255, 0.03);
-  --glass-bg-medium: rgba(255, 255, 255, 0.06);
-  --glass-border: rgba(255, 255, 255, 0.15);
-  --glass-border-bright: rgba(255, 255, 255, 0.3);
+  /* Glassmorphism - Enhanced */
+  --glass-bg: rgba(20, 20, 25, 0.35);
+  --glass-bg-light: rgba(255, 255, 255, 0.04);
+  --glass-bg-medium: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(100, 200, 255, 0.2);
+  --glass-border-bright: rgba(100, 200, 255, 0.4);
 
-  --color-text-primary: #eeeeee;
-  --color-text-secondary: rgba(238, 238, 238, 0.7);
-  --color-text-tertiary: rgba(238, 238, 238, 0.5);
-  --color-text-dim: rgba(238, 238, 238, 0.3);
+  --color-text-primary: #f0f0f0;
+  --color-text-secondary: rgba(240, 240, 240, 0.75);
+  --color-text-tertiary: rgba(240, 240, 240, 0.5);
+  --color-text-dim: rgba(240, 240, 240, 0.3);
 
-  /* Accent Colors - Gold/Orange */
-  --color-accent-primary: #FFCA28;
-  --color-accent-secondary: #EF6C00;
+  /* Accent Colors - Electric Cyan/Blue */
+  --color-accent-primary: #00d4ff;
+  --color-accent-secondary: #0099ff;
   --color-accent-blue: #4da2ff;
-  --color-accent-cyan: #26C6DA;
-  --color-accent-purple: #AB47BC;
+  --color-accent-cyan: #00ffea;
+  --color-accent-purple: #8b5cf6;
 
-  --color-success: #2ECC71;
-  --color-warning: #f59e0b;
-  --color-error: #EF5350;
-  --color-info: #3b82f6;
+  --color-success: #00ff88;
+  --color-warning: #ffaa00;
+  --color-error: #ff4466;
+  --color-info: #00d4ff;
 
-  /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #FBC02D 0%, #EF6C00 100%);
-  --gradient-accent: linear-gradient(135deg, #4da2ff 0%, #6b7cff 100%);
-  --gradient-glass: linear-gradient(135deg, rgba(255, 202, 40, 0.1) 0%, rgba(239, 108, 0, 0.1) 100%);
-  --gradient-border: linear-gradient(135deg, rgba(255, 202, 40, 0.3) 0%, rgba(239, 108, 0, 0.3) 100%);
+  /* Gradients - Electric */
+  --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #0099ff 100%);
+  --gradient-accent: linear-gradient(135deg, #00ffea 0%, #4da2ff 100%);
+  --gradient-glass: linear-gradient(135deg, rgba(0, 212, 255, 0.12) 0%, rgba(0, 153, 255, 0.08) 100%);
+  --gradient-border: linear-gradient(135deg, rgba(0, 212, 255, 0.35) 0%, rgba(0, 153, 255, 0.25) 100%);
 
-  /* Gradient Orbs */
-  --orb-1-color: radial-gradient(circle, #FBC02D 0%, #EF6C00 50%, transparent 70%);
-  --orb-2-color: radial-gradient(circle, #AB47BC 0%, #6b7cff 50%, transparent 70%);
-  --orb-3-color: radial-gradient(circle, #26C6DA 0%, #4da2ff 50%, transparent 70%);
-  --orb-4-color: radial-gradient(circle, #EF6C00 0%, #FFCA28 50%, transparent 70%);
+  /* Gradient Orbs - Electric Spectrum */
+  --orb-1-color: radial-gradient(circle, #00d4ff 0%, #0099ff 50%, transparent 70%);
+  --orb-2-color: radial-gradient(circle, #8b5cf6 0%, #4da2ff 50%, transparent 70%);
+  --orb-3-color: radial-gradient(circle, #00ffea 0%, #00d4ff 50%, transparent 70%);
+  --orb-4-color: radial-gradient(circle, #0099ff 0%, #00ffea 50%, transparent 70%);
 
-  /* Shadows & Glows */
-  --glow-primary: 0 0 20px rgba(255, 202, 40, 0.2), 0 0 40px rgba(255, 202, 40, 0.1);
-  --glow-accent: 0 0 20px rgba(77, 162, 255, 0.2), 0 0 40px rgba(77, 162, 255, 0.1);
+  /* Shadows & Glows - Electric */
+  --glow-primary: 0 0 25px rgba(0, 212, 255, 0.25), 0 0 50px rgba(0, 212, 255, 0.12);
+  --glow-accent: 0 0 25px rgba(0, 255, 234, 0.25), 0 0 50px rgba(0, 255, 234, 0.12);
 }
 
 /* ===== THEME: NEUMORPHISM (Soft Extruded UI / Light) ===== */
@@ -303,14 +303,14 @@ select:focus-visible,
 
 /* ===== THEME-SPECIFIC VISUAL EFFECTS ===== */
 
-/* Dark Theme - Gaming Grid Pattern */
+/* Dark Theme - Electric Grid Pattern */
 [data-theme="dark"] body::before {
   content: '';
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255, 202, 40, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 202, 40, 0.02) 1px, transparent 1px);
+    linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
   background-size: 50px 50px;
   pointer-events: none;
   z-index: 0;
@@ -334,23 +334,23 @@ html {
 
 /* Apply default dark theme if no data-theme attribute */
 html:not([data-theme]) {
-  --color-bg-primary: #121212;
-  --color-bg-secondary: #1a1a1a;
-  --color-bg-tertiary: #222222;
-  --color-bg-elevated: #2a2a2a;
-  --glass-bg: rgba(30, 30, 30, 0.25);
-  --glass-bg-light: rgba(255, 255, 255, 0.03);
-  --glass-bg-medium: rgba(255, 255, 255, 0.06);
-  --glass-border: rgba(255, 255, 255, 0.15);
-  --glass-border-bright: rgba(255, 255, 255, 0.3);
-  --color-text-primary: #eeeeee;
-  --color-text-secondary: rgba(238, 238, 238, 0.7);
-  --color-text-tertiary: rgba(238, 238, 238, 0.5);
-  --color-text-dim: rgba(238, 238, 238, 0.3);
-  --color-accent-primary: #FFCA28;
-  --color-accent-secondary: #EF6C00;
-  --gradient-primary: linear-gradient(135deg, #FBC02D 0%, #EF6C00 100%);
-  --glow-primary: 0 0 20px rgba(255, 202, 40, 0.2), 0 0 40px rgba(255, 202, 40, 0.1);
+  --color-bg-primary: #0a0a0a;
+  --color-bg-secondary: #121212;
+  --color-bg-tertiary: #1a1a1a;
+  --color-bg-elevated: #222222;
+  --glass-bg: rgba(20, 20, 25, 0.35);
+  --glass-bg-light: rgba(255, 255, 255, 0.04);
+  --glass-bg-medium: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(100, 200, 255, 0.2);
+  --glass-border-bright: rgba(100, 200, 255, 0.4);
+  --color-text-primary: #f0f0f0;
+  --color-text-secondary: rgba(240, 240, 240, 0.75);
+  --color-text-tertiary: rgba(240, 240, 240, 0.5);
+  --color-text-dim: rgba(240, 240, 240, 0.3);
+  --color-accent-primary: #00d4ff;
+  --color-accent-secondary: #0099ff;
+  --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #0099ff 100%);
+  --glow-primary: 0 0 25px rgba(0, 212, 255, 0.25), 0 0 50px rgba(0, 212, 255, 0.12);
 }
 
 /* ===== MOBILE PERFORMANCE OPTIMIZATIONS ===== */
