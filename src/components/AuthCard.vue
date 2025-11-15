@@ -44,6 +44,7 @@ const props = defineProps({
 </script>
 
 <style scoped>
+/* Match Noxant login card style exactly */
 .auth-card-wrapper {
   display: flex;
   align-items: center;
@@ -57,29 +58,10 @@ const props = defineProps({
   background: var(--glass-bg);
   backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid var(--glass-border);
-  border-radius: 16px;
-  box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.3),
-    0 0 1px rgba(255, 255, 255, 0.1) inset;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   position: relative;
   overflow: hidden;
-}
-
-/* Subtle electric glow around the card */
-.auth-card::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  background: linear-gradient(
-    135deg,
-    transparent,
-    var(--color-accent-primary),
-    transparent
-  );
-  opacity: 0.15;
-  border-radius: 16px;
-  z-index: -1;
-  filter: blur(8px);
 }
 
 .auth-branding {
@@ -101,26 +83,18 @@ const props = defineProps({
 
 .auth-title {
   font-size: 1.75rem;
-  font-weight: 900;
+  font-weight: bold;
   margin: 0 0 0.5rem 0;
   text-transform: uppercase;
   letter-spacing: 0.15em;
   color: var(--color-text-primary);
-  background: linear-gradient(
-    135deg,
-    var(--color-text-primary),
-    var(--color-accent-primary)
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .auth-tagline {
   font-size: 0.85rem;
   color: var(--color-text-secondary);
+  opacity: 0.7;
   margin: 0;
-  font-weight: 500;
 }
 
 .auth-body {

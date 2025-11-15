@@ -47,52 +47,52 @@ select:focus-visible,
   box-shadow: 0 0 0 4px rgba(var(--color-accent-primary-rgb, 255, 202, 40), 0.2);
 }
 
-/* ===== THEME: DARK (Electric Glassy - Inspired by Noxant) ===== */
+/* ===== THEME: DARK (Subtle Dark Grey Blueish - Noxant Style) ===== */
 [data-theme="dark"] {
-  --color-bg-primary: #0a0a0a;
-  --color-bg-secondary: #121212;
-  --color-bg-tertiary: #1a1a1a;
-  --color-bg-elevated: #222222;
+  --color-bg-primary: #000000;
+  --color-bg-secondary: #0a0a0a;
+  --color-bg-tertiary: #121212;
+  --color-bg-elevated: #1a1a1a;
 
-  /* Glassmorphism - Enhanced */
-  --glass-bg: rgba(20, 20, 25, 0.35);
-  --glass-bg-light: rgba(255, 255, 255, 0.04);
-  --glass-bg-medium: rgba(255, 255, 255, 0.08);
-  --glass-border: rgba(100, 200, 255, 0.2);
-  --glass-border-bright: rgba(100, 200, 255, 0.4);
+  /* Glassmorphism - Subtle & Dark */
+  --glass-bg: rgba(10, 10, 15, 0.4);
+  --glass-bg-light: rgba(255, 255, 255, 0.02);
+  --glass-bg-medium: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-bright: rgba(255, 255, 255, 0.15);
 
-  --color-text-primary: #f0f0f0;
-  --color-text-secondary: rgba(240, 240, 240, 0.75);
-  --color-text-tertiary: rgba(240, 240, 240, 0.5);
-  --color-text-dim: rgba(240, 240, 240, 0.3);
+  --color-text-primary: #eeeeee;
+  --color-text-secondary: rgba(238, 238, 238, 0.7);
+  --color-text-tertiary: rgba(238, 238, 238, 0.5);
+  --color-text-dim: rgba(238, 238, 238, 0.3);
 
-  /* Accent Colors - Electric Cyan/Blue */
-  --color-accent-primary: #00d4ff;
-  --color-accent-secondary: #0099ff;
-  --color-accent-blue: #4da2ff;
-  --color-accent-cyan: #00ffea;
-  --color-accent-purple: #8b5cf6;
+  /* Accent Colors - Subtle Grey-Blue */
+  --color-accent-primary: #6b9bd1;
+  --color-accent-secondary: #5a8ac4;
+  --color-accent-blue: #7ba5d8;
+  --color-accent-cyan: #6ba8c4;
+  --color-accent-purple: #8b7cb8;
 
-  --color-success: #00ff88;
-  --color-warning: #ffaa00;
-  --color-error: #ff4466;
-  --color-info: #00d4ff;
+  --color-success: #5cb85c;
+  --color-warning: #f0ad4e;
+  --color-error: #d9534f;
+  --color-info: #6b9bd1;
 
-  /* Gradients - Electric */
-  --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #0099ff 100%);
-  --gradient-accent: linear-gradient(135deg, #00ffea 0%, #4da2ff 100%);
-  --gradient-glass: linear-gradient(135deg, rgba(0, 212, 255, 0.12) 0%, rgba(0, 153, 255, 0.08) 100%);
-  --gradient-border: linear-gradient(135deg, rgba(0, 212, 255, 0.35) 0%, rgba(0, 153, 255, 0.25) 100%);
+  /* Gradients - Subtle */
+  --gradient-primary: linear-gradient(135deg, #6b9bd1 0%, #5a8ac4 100%);
+  --gradient-accent: linear-gradient(135deg, #7ba5d8 0%, #6ba8c4 100%);
+  --gradient-glass: linear-gradient(135deg, rgba(107, 155, 209, 0.08) 0%, rgba(90, 138, 196, 0.05) 100%);
+  --gradient-border: linear-gradient(135deg, rgba(107, 155, 209, 0.15) 0%, rgba(90, 138, 196, 0.1) 100%);
 
-  /* Gradient Orbs - Electric Spectrum */
-  --orb-1-color: radial-gradient(circle, #00d4ff 0%, #0099ff 50%, transparent 70%);
-  --orb-2-color: radial-gradient(circle, #8b5cf6 0%, #4da2ff 50%, transparent 70%);
-  --orb-3-color: radial-gradient(circle, #00ffea 0%, #00d4ff 50%, transparent 70%);
-  --orb-4-color: radial-gradient(circle, #0099ff 0%, #00ffea 50%, transparent 70%);
+  /* Gradient Orbs - Very Subtle */
+  --orb-1-color: radial-gradient(circle, rgba(107, 155, 209, 0.15) 0%, rgba(90, 138, 196, 0.08) 50%, transparent 70%);
+  --orb-2-color: radial-gradient(circle, rgba(139, 124, 184, 0.12) 0%, rgba(123, 165, 216, 0.06) 50%, transparent 70%);
+  --orb-3-color: radial-gradient(circle, rgba(107, 168, 196, 0.15) 0%, rgba(107, 155, 209, 0.08) 50%, transparent 70%);
+  --orb-4-color: radial-gradient(circle, rgba(90, 138, 196, 0.12) 0%, rgba(107, 168, 196, 0.06) 50%, transparent 70%);
 
-  /* Shadows & Glows - Electric */
-  --glow-primary: 0 0 25px rgba(0, 212, 255, 0.25), 0 0 50px rgba(0, 212, 255, 0.12);
-  --glow-accent: 0 0 25px rgba(0, 255, 234, 0.25), 0 0 50px rgba(0, 255, 234, 0.12);
+  /* Shadows & Glows - Minimal */
+  --glow-primary: 0 0 15px rgba(107, 155, 209, 0.15), 0 0 30px rgba(107, 155, 209, 0.08);
+  --glow-accent: 0 0 15px rgba(123, 165, 216, 0.15), 0 0 30px rgba(123, 165, 216, 0.08);
 }
 
 /* ===== THEME: NEUMORPHISM (Soft Extruded UI / Light) ===== */
@@ -303,14 +303,14 @@ select:focus-visible,
 
 /* ===== THEME-SPECIFIC VISUAL EFFECTS ===== */
 
-/* Dark Theme - Electric Grid Pattern */
+/* Dark Theme - Subtle Grid Pattern */
 [data-theme="dark"] body::before {
   content: '';
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(107, 155, 209, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(107, 155, 209, 0.015) 1px, transparent 1px);
   background-size: 50px 50px;
   pointer-events: none;
   z-index: 0;
@@ -334,23 +334,23 @@ html {
 
 /* Apply default dark theme if no data-theme attribute */
 html:not([data-theme]) {
-  --color-bg-primary: #0a0a0a;
-  --color-bg-secondary: #121212;
-  --color-bg-tertiary: #1a1a1a;
-  --color-bg-elevated: #222222;
-  --glass-bg: rgba(20, 20, 25, 0.35);
-  --glass-bg-light: rgba(255, 255, 255, 0.04);
-  --glass-bg-medium: rgba(255, 255, 255, 0.08);
-  --glass-border: rgba(100, 200, 255, 0.2);
-  --glass-border-bright: rgba(100, 200, 255, 0.4);
-  --color-text-primary: #f0f0f0;
-  --color-text-secondary: rgba(240, 240, 240, 0.75);
-  --color-text-tertiary: rgba(240, 240, 240, 0.5);
-  --color-text-dim: rgba(240, 240, 240, 0.3);
-  --color-accent-primary: #00d4ff;
-  --color-accent-secondary: #0099ff;
-  --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #0099ff 100%);
-  --glow-primary: 0 0 25px rgba(0, 212, 255, 0.25), 0 0 50px rgba(0, 212, 255, 0.12);
+  --color-bg-primary: #000000;
+  --color-bg-secondary: #0a0a0a;
+  --color-bg-tertiary: #121212;
+  --color-bg-elevated: #1a1a1a;
+  --glass-bg: rgba(10, 10, 15, 0.4);
+  --glass-bg-light: rgba(255, 255, 255, 0.02);
+  --glass-bg-medium: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-bright: rgba(255, 255, 255, 0.15);
+  --color-text-primary: #eeeeee;
+  --color-text-secondary: rgba(238, 238, 238, 0.7);
+  --color-text-tertiary: rgba(238, 238, 238, 0.5);
+  --color-text-dim: rgba(238, 238, 238, 0.3);
+  --color-accent-primary: #6b9bd1;
+  --color-accent-secondary: #5a8ac4;
+  --gradient-primary: linear-gradient(135deg, #6b9bd1 0%, #5a8ac4 100%);
+  --glow-primary: 0 0 15px rgba(107, 155, 209, 0.15), 0 0 30px rgba(107, 155, 209, 0.08);
 }
 
 /* ===== MOBILE PERFORMANCE OPTIMIZATIONS ===== */
