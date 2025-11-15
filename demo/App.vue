@@ -654,6 +654,56 @@
             </div>
           </section>
 
+          <!-- Chat Components Section -->
+          <section class="section">
+            <h2 class="section-title">
+              <i class="bx bx-message-dots"></i>
+              Chat Components
+            </h2>
+            <div class="component-demo">
+              <h3 class="demo-subtitle">Interactive Chat Interface</h3>
+              <div style="height: 500px; border: 1px solid var(--glass-border); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; background: var(--glass-bg-light); backdrop-filter: blur(10px);">
+                <!-- Chat message list -->
+                <ChatMessageList
+                  :messages="chatMessages"
+                  :auto-scroll="true"
+                  empty-state-text="No messages yet. Start chatting!"
+                />
+
+                <!-- Chat input -->
+                <div style="padding: var(--spacing-md); border-top: 1px solid var(--glass-border); background: var(--glass-bg);">
+                  <ChatInput
+                    v-model="chatInput"
+                    placeholder="Type a message..."
+                    :max-length="500"
+                    :show-char-count="true"
+                    @send="handleSendMessage"
+                  />
+                </div>
+              </div>
+
+              <h3 class="demo-subtitle" style="margin-top: var(--spacing-lg);">Individual Chat Message</h3>
+              <div style="display: flex; flex-direction: column; gap: var(--spacing-md); padding: var(--spacing-md); background: var(--glass-bg-light); border-radius: var(--radius-lg); border: 1px solid var(--glass-border);">
+                <ChatMessage
+                  message="This is an incoming message from another user"
+                  sender-name="Alice"
+                  avatar-icon="bx bx-user"
+                  :is-own="false"
+                  :timestamp="new Date()"
+                  status="online"
+                  :show-status="true"
+                />
+                <ChatMessage
+                  message="This is your own message with different styling"
+                  sender-name="You"
+                  avatar-icon="bx bx-user-circle"
+                  :is-own="true"
+                  :timestamp="new Date()"
+                />
+              </div>
+            </div>
+          </section>
+
           <!-- Footer -->
           <footer class="footer">
             <p>Built with Vue 3 + Vite</p>
@@ -676,8 +726,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { Button, Card, Input, Badge, Modal, ThemeSwitcher, Navbar, Sidebar, Dropdown, Tooltip, Avatar, Alert, Toggle, Tabs, Skeleton, EmptyState, ProgressBar, Chart, AuthForm, NotificationContainer, useNotification } from '../src/index.js'
+import { ref, computed } from 'vue'
+import { Button, Card, Input, Badge, Modal, ThemeSwitcher, Navbar, Sidebar, Dropdown, Tooltip, Avatar, Alert, Toggle, Tabs, Skeleton, EmptyState, ProgressBar, Chart, AuthForm, NotificationContainer, ChatMessage, ChatMessageList, ChatInput, useNotification } from '../src/index.js'
 
 // Notification system
 const { notifications, removeNotification, success, error, info, warning, dark, create } = useNotification()
@@ -726,9 +776,58 @@ const progressValue = ref(65)
 const chartData = ref([30, 45, 28, 60, 75, 50, 85, 70])
 const chartLabels = ref(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'])
 
+// Chat state
+const chatMessages = ref([
+  {
+    id: 1,
+    message: 'Hey! Welcome to the chat component demo.',
+    senderName: 'Alice',
+    avatarSrc: '',
+    avatarIcon: 'bx bx-user',
+    isOwn: false,
+    timestamp: new Date(Date.now() - 3600000),
+    status: 'online',
+    showStatus: true
+  },
+  {
+    id: 2,
+    message: 'Thanks! This glassmorphism design looks amazing.',
+    senderName: 'You',
+    avatarSrc: '',
+    avatarIcon: 'bx bx-user-circle',
+    isOwn: true,
+    timestamp: new Date(Date.now() - 3000000),
+    status: 'online',
+    showStatus: false
+  },
+  {
+    id: 3,
+    message: 'I agree! The chat bubbles with glassmorphism are really sleek. Perfect for AresRPG.',
+    senderName: 'Bob',
+    avatarSrc: '',
+    avatarIcon: 'bx bx-bot',
+    isOwn: false,
+    timestamp: new Date(Date.now() - 2400000),
+    status: 'online',
+    showStatus: true
+  },
+  {
+    id: 4,
+    message: 'The auto-scroll feature works great too!',
+    senderName: 'You',
+    avatarSrc: '',
+    avatarIcon: 'bx bx-user-circle',
+    isOwn: true,
+    timestamp: new Date(Date.now() - 1800000),
+    status: 'online',
+    showStatus: false
+  }
+])
+const chatInput = ref('')
+
 const sidebarItems = [
   { label: 'Dashboard', icon: 'bx bx-home', active: true },
-  { label: 'Components', icon: 'bx bx-layout', badge: '14' },
+  { label: 'Components', icon: 'bx bx-layout', badge: '17' },
   { label: 'Themes', icon: 'bx bx-palette', badge: '5' },
   { label: 'Documentation', icon: 'bx bx-book' },
   { label: 'Settings', icon: 'bx bx-cog' }
@@ -771,6 +870,43 @@ function showLoadingNotification() {
       duration: 3000
     })
   }, 2000)
+}
+
+// Chat demo: send message
+function handleSendMessage(message) {
+  chatMessages.value.push({
+    id: Date.now(),
+    message,
+    senderName: 'You',
+    avatarSrc: '',
+    avatarIcon: 'bx bx-user-circle',
+    isOwn: true,
+    timestamp: new Date(),
+    status: 'online',
+    showStatus: false
+  })
+
+  // Simulate bot response
+  setTimeout(() => {
+    const botResponses = [
+      'That\'s interesting! Tell me more.',
+      'I see what you mean!',
+      'Great point!',
+      'Absolutely agree!',
+      'The glassmorphism really shines here!'
+    ]
+    chatMessages.value.push({
+      id: Date.now(),
+      message: botResponses[Math.floor(Math.random() * botResponses.length)],
+      senderName: 'Bot',
+      avatarSrc: '',
+      avatarIcon: 'bx bx-bot',
+      isOwn: false,
+      timestamp: new Date(),
+      status: 'online',
+      showStatus: true
+    })
+  }, 1000)
 }
 </script>
 
