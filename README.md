@@ -25,11 +25,11 @@
 
 ---
 
-A beautiful, theme-switchable Vue 3 component library featuring glassmorphism effects, animated gradient backgrounds, and a gaming-focused design aesthetic. Try all 5 themes (Dark, White, Blue, Matrix, Neumorphism) in the [live demo](https://aresrpg.github.io/aresrpg-ui/)!
+A beautiful, theme-switchable Vue 3 component library featuring glassmorphism effects, animated gradient backgrounds, and a gaming-focused design aesthetic. Try both themes (Dark, Neumorphism) in the [live demo](https://aresrpg.github.io/aresrpg-ui/)!
 
 ## ✨ Features
 
-- 🎨 **5 Built-in Themes**: Dark (default), White, Blue, Matrix, Neumorphism
+- 🎨 **2 Built-in Themes**: Dark (default), Neumorphism (light)
 - 💎 **True Glassmorphism**: Animated gradient mesh backgrounds with backdrop blur
 - ⚡ **Vue 3 + Vite**: Fast, modern, tree-shakeable
 - 🎮 **Gaming Aesthetic**: MMORPG-inspired design with angular borders and bold typography
@@ -107,10 +107,7 @@ Full UMD bundle: 50 KB (if you need all components).
 ### Available Themes
 
 - **dark** (default): Gold/Orange accents, MMORPG gaming aesthetic
-- **white**: Clean professional look with Blue/Purple accents
-- **blue**: Ocean/Cyberpunk theme with Cyan accents
-- **matrix**: Terminal/Hacker theme with Green accents
-- **neumorphism**: Soft shadows and depth, minimalist design
+- **neumorphism**: Soft extruded UI with subtle shadows, minimalist light design
 
 ### Theme Switcher
 
@@ -135,16 +132,16 @@ import { useTheme } from '@aresrpg/ui'
 const { currentTheme, setTheme, toggleTheme, themes } = useTheme()
 
 // Set specific theme
-setTheme('matrix')
+setTheme('neumorphism')
 
 // Toggle through themes
 toggleTheme()
 
 // Get current theme
-console.log(currentTheme.value) // 'matrix'
+console.log(currentTheme.value) // 'neumorphism'
 
 // Get all available themes
-console.log(themes) // ['dark', 'white', 'blue', 'matrix', 'neumorphism']
+console.log(themes) // ['dark', 'neumorphism']
 </script>
 ```
 
