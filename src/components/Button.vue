@@ -37,7 +37,7 @@ const props = defineProps({
   variant: {
     type: String,
     default: 'primary',
-    validator: (value) => ['primary', 'gradient', 'success', 'error', 'outline'].includes(value)
+    validator: (value) => ['primary', 'secondary', 'gradient', 'success', 'error', 'danger', 'outline'].includes(value)
   },
   size: {
     type: String,
@@ -148,15 +148,33 @@ function handleClick(event) {
   transform: translateY(-1px);
 }
 
-.btn-error {
+.btn-error,
+.btn-danger {
   background: var(--color-error);
   border: none;
   color: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
-.btn-error:hover:not(:disabled) {
+.btn-error:hover:not(:disabled),
+.btn-danger:hover:not(:disabled) {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--glass-bg);
+  backdrop-filter: blur(25px) saturate(180%);
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--glass-bg-medium);
+  color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
   transform: translateY(-1px);
 }
 
@@ -216,11 +234,19 @@ function handleClick(event) {
               -3px -3px 6px rgba(255, 255, 255, 0.3);
 }
 
-[data-theme="neumorphism"] .btn-error {
+[data-theme="neumorphism"] .btn-error,
+[data-theme="neumorphism"] .btn-danger {
   background: var(--color-error);
   color: white;
   box-shadow: 3px 3px 6px rgba(163, 177, 198, 0.4),
               -3px -3px 6px rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="neumorphism"] .btn-secondary {
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  box-shadow: 2px 2px 4px rgba(163, 177, 198, 0.4),
+              -2px -2px 4px rgba(255, 255, 255, 0.5);
 }
 
 [data-theme="neumorphism"] .btn-outline {
