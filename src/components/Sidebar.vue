@@ -446,18 +446,18 @@ watch(() => props.open, (newValue) => {
 .nav-subitem {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-sm) var(--spacing-md) var(--spacing-sm) var(--spacing-2xl);
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm) var(--spacing-xs) var(--spacing-xl);
   color: rgba(255, 255, 255, 0.6);
-  font-size: var(--font-size-xs);
-  font-weight: 600;
+  font-size: 0.8rem;
+  font-weight: 500;
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: var(--transition-fast);
   position: relative;
   white-space: nowrap;
   overflow: hidden;
-  margin: var(--spacing-xs) 0;
+  margin: 2px 0;
 }
 
 .nav-subitem::before {
@@ -473,10 +473,15 @@ watch(() => props.open, (newValue) => {
   transition: var(--transition-fast);
 }
 
+/* Hide dot indicator when subitem has icon (avoid redundancy) */
+.nav-subitem:has(i)::before {
+  display: none;
+}
+
 .nav-subitem:hover {
   background: rgba(255, 255, 255, 0.05);
   color: rgba(255, 255, 255, 0.9);
-  padding-left: calc(var(--spacing-2xl) + var(--spacing-xs));
+  padding-left: calc(var(--spacing-xl) + 4px);
 }
 
 .nav-subitem:hover::before {
@@ -501,7 +506,7 @@ watch(() => props.open, (newValue) => {
 }
 
 .nav-subitem i {
-  font-size: 1.2em;
+  font-size: 1em;
   min-width: 1.2em;
   text-align: center;
   flex-shrink: 0;

@@ -7,6 +7,7 @@ import Card from './components/Card.vue'
 import Modal from './components/Modal.vue'
 import Badge from './components/Badge.vue'
 import Input from './components/Input.vue'
+import Textarea from './components/Textarea.vue'
 import ThemeSwitcher from './components/ThemeSwitcher.vue'
 import Navbar from './components/Navbar.vue'
 import Sidebar from './components/Sidebar.vue'
@@ -42,6 +43,7 @@ const components = {
   Modal,
   Badge,
   Input,
+  Textarea,
   ThemeSwitcher,
   Navbar,
   Sidebar,
@@ -85,6 +87,7 @@ export {
   Modal,
   Badge,
   Input,
+  Textarea,
   ThemeSwitcher,
   Navbar,
   Sidebar,
