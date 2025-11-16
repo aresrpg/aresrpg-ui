@@ -188,7 +188,7 @@ const vClickOutside = {
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-xl);
   overflow: hidden;
-  z-index: 1000;
+  z-index: 9999;
 }
 
 .dropdown-content {
