@@ -25,8 +25,8 @@
 
         <!-- Message bubble -->
         <div class="message-bubble">
-          <!-- Message text -->
-          <p class="message-text">{{ message }}</p>
+          <!-- Message text (with markdown support) -->
+          <div class="message-text" v-html="renderedMessage"></div>
         </div>
 
         <!-- Timestamp outside bubble -->
@@ -44,6 +44,7 @@
 
 <script setup>
 import { computed } from 'vue'
+import { marked } from 'marked'
 import Avatar from './Avatar.vue'
 
 /**
@@ -112,16 +113,24 @@ const timestampFormatted = computed(() => {
   const minutes = String(date.getMinutes()).padStart(2, '0')
   return `${hours}:${minutes}`
 })
+
+/**
+ * Render message with markdown support
+ */
+const renderedMessage = computed(() => {
+  return marked(props.message || '')
+})
 </script>
 
 <style scoped>
 .chat-message {
   display: flex;
+  flex-direction: column;
   margin-bottom: var(--spacing-sm);
   opacity: 0;
   transform: translateY(10px);
   animation: slideIn 0.3s ease forwards;
-  max-width: 75%;
+  max-width: 100%;
 }
 
 @keyframes slideIn {
@@ -139,14 +148,15 @@ const timestampFormatted = computed(() => {
 /* Message wrapper - contains avatar + message container */
 .message-wrapper {
   display: flex;
-  gap: var(--spacing-xs);
+  flex-direction: column;
+  gap: 4px;
   align-items: flex-start;
   width: 100%;
 }
 
-/* Own messages: reverse order (message first, then avatar) */
+/* Own messages: align to the right */
 .chat-message-own .message-wrapper {
-  flex-direction: row-reverse;
+  align-items: flex-end;
 }
 
 /* Avatar */
@@ -159,8 +169,7 @@ const timestampFormatted = computed(() => {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  flex: 1;
-  min-width: 0;
+  width: 100%;
 }
 
 /* Sender name - aligned with avatar */
@@ -209,10 +218,95 @@ const timestampFormatted = computed(() => {
 .message-text {
   font-size: var(--font-size-sm);
   color: var(--color-text-primary);
-  margin: 0;
   line-height: 1.4;
   word-wrap: break-word;
-  white-space: pre-wrap;
+}
+
+/* Markdown content styling */
+.message-text :deep(p) {
+  margin: 0.25rem 0;
+}
+
+.message-text :deep(p:first-child) {
+  margin-top: 0;
+}
+
+.message-text :deep(p:last-child) {
+  margin-bottom: 0;
+}
+
+.message-text :deep(h1),
+.message-text :deep(h2),
+.message-text :deep(h3),
+.message-text :deep(h4),
+.message-text :deep(h5),
+.message-text :deep(h6) {
+  margin: 0.5rem 0 0.25rem;
+  font-weight: 600;
+}
+
+.message-text :deep(h1) { font-size: 1.25em; }
+.message-text :deep(h2) { font-size: 1.15em; }
+.message-text :deep(h3) { font-size: 1.1em; }
+.message-text :deep(h4),
+.message-text :deep(h5),
+.message-text :deep(h6) { font-size: 1em; }
+
+.message-text :deep(ul),
+.message-text :deep(ol) {
+  margin: 0.25rem 0;
+  padding-left: 1.5rem;
+}
+
+.message-text :deep(li) {
+  margin: 0.125rem 0;
+}
+
+.message-text :deep(code) {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-family: 'Courier New', monospace;
+}
+
+.message-text :deep(pre) {
+  background: rgba(0, 0, 0, 0.15);
+  padding: 0.5rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 0.5rem 0;
+}
+
+.message-text :deep(pre code) {
+  background: none;
+  padding: 0;
+}
+
+.message-text :deep(strong) {
+  font-weight: 800;
+  color: var(--color-text-primary);
+  opacity: 1;
+}
+
+.message-text :deep(em) {
+  font-style: italic;
+}
+
+.message-text :deep(a) {
+  color: var(--color-accent-primary);
+  text-decoration: underline;
+}
+
+.message-text :deep(a:hover) {
+  opacity: 0.8;
+}
+
+.message-text :deep(blockquote) {
+  border-left: 3px solid var(--glass-border);
+  padding-left: 0.75rem;
+  margin: 0.5rem 0;
+  opacity: 0.8;
 }
 
 /* Timestamp - below bubble */

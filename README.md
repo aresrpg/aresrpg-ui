@@ -861,6 +861,28 @@ import { ChatMessage } from '@aresrpg/ui'
 - `status`: 'online' | 'offline' | '' - Online status indicator
 - `showStatus`: boolean (default: false) - Whether to show status indicator
 
+**Markdown Support:**
+
+The `message` prop supports full markdown syntax and will be automatically rendered as HTML:
+
+```vue
+<ChatMessage
+  message="**Bold text**, *italic*, `code`, and more!"
+  sender-name="Developer"
+  avatar-icon="bx bx-code"
+  :is-own="false"
+  :timestamp="new Date()"
+/>
+```
+
+Supported markdown features:
+- **Bold** and *italic* text
+- `Inline code` and code blocks
+- Headings (h1-h6)
+- Lists (ordered and unordered)
+- Links
+- Blockquotes
+
 ---
 
 ### ChatMessageList
