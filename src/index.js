@@ -31,7 +31,6 @@ import NotificationContainer from './components/NotificationContainer.vue'
 import ChatMessage from './components/ChatMessage.vue'
 import ChatMessageList from './components/ChatMessageList.vue'
 import ChatInput from './components/ChatInput.vue'
-
 // Import composables
 import { useTheme } from './composables/useTheme.js'
 import { useNotification } from './composables/useNotification.js'
