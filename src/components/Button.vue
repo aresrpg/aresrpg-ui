@@ -6,9 +6,11 @@
       sizeClass,
       {
         'btn-disabled': disabled,
-        'btn-loading': loading
+        'btn-loading': loading,
+        'btn-custom-color': color
       }
     ]"
+    :style="customColorStyle"
     :disabled="disabled || loading"
     @click="handleClick"
   >
@@ -32,6 +34,7 @@ import { computed } from 'vue'
  * @param {string} size - Button size (sm/md/lg)
  * @param {boolean} disabled - Disabled state
  * @param {boolean} loading - Loading state with spinner
+ * @param {string} color - Custom brand color (hex/rgb/hsl) - overrides variant color
  */
 const props = defineProps({
   variant: {
@@ -51,6 +54,10 @@ const props = defineProps({
   loading: {
     type: Boolean,
     default: false
+  },
+  color: {
+    type: String,
+    default: null
   }
 })
 
@@ -58,6 +65,32 @@ const emit = defineEmits(['click'])
 
 const variantClass = computed(() => `btn-${props.variant}`)
 const sizeClass = computed(() => `btn-${props.size}`)
+
+// Custom color style - computes hover and active colors
+const customColorStyle = computed(() => {
+  if (!props.color) return null
+
+  return {
+    '--btn-custom-color': props.color,
+    '--btn-custom-color-hover': adjustColorBrightness(props.color, -10),
+    '--btn-custom-color-active': adjustColorBrightness(props.color, -20)
+  }
+})
+
+// Helper: Adjust color brightness (simple implementation)
+function adjustColorBrightness(color, percent) {
+  // For hex colors
+  if (color.startsWith('#')) {
+    const num = parseInt(color.slice(1), 16)
+    const r = Math.max(0, Math.min(255, (num >> 16) + percent * 2.55))
+    const g = Math.max(0, Math.min(255, ((num >> 8) & 0x00FF) + percent * 2.55))
+    const b = Math.max(0, Math.min(255, (num & 0x0000FF) + percent * 2.55))
+    return `#${((1 << 24) + (Math.round(r) << 16) + (Math.round(g) << 8) + Math.round(b)).toString(16).slice(1)}`
+  }
+
+  // For rgb/rgba colors - fallback to filter
+  return color
+}
 
 function handleClick(event) {
   if (props.disabled || props.loading) return
@@ -278,5 +311,23 @@ function handleClick(event) {
 /* Loading state */
 .btn-loading {
   cursor: wait;
+}
+
+/* Custom color override */
+.btn-custom-color {
+  background: var(--btn-custom-color) !important;
+  border-color: var(--btn-custom-color) !important;
+  color: white !important;
+}
+
+.btn-custom-color:hover:not(:disabled) {
+  background: var(--btn-custom-color-hover) !important;
+  border-color: var(--btn-custom-color-hover) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+.btn-custom-color:active:not(:disabled) {
+  background: var(--btn-custom-color-active) !important;
+  transform: translateY(0) !important;
 }
 </style>
