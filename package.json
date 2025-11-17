@@ -27,6 +27,8 @@
     "build:demo": "vite build --mode demo",
     "preview": "vite preview",
     "preview:demo": "vite preview --outDir dist-demo",
+    "lint": "eslint . && prettier . --check",
+    "format": "prettier . --write && eslint . --fix",
     "postversion": "git push --follow-tags",
     "prepare": "husky"
   },
