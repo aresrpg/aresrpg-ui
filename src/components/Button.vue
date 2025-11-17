@@ -72,19 +72,21 @@ const customColorStyle = computed(() => {
 
   return {
     '--btn-custom-color': props.color,
-    '--btn-custom-color-hover': adjustColorBrightness(props.color, -10),
-    '--btn-custom-color-active': adjustColorBrightness(props.color, -20)
+    '--btn-custom-color-hover': adjustColorBrightness(props.color, -15),
+    '--btn-custom-color-active': adjustColorBrightness(props.color, -25)
   }
 })
 
-// Helper: Adjust color brightness (simple implementation)
+// Helper: Adjust color brightness (improved for better contrast)
 function adjustColorBrightness(color, percent) {
   // For hex colors
   if (color.startsWith('#')) {
     const num = parseInt(color.slice(1), 16)
-    const r = Math.max(0, Math.min(255, (num >> 16) + percent * 2.55))
-    const g = Math.max(0, Math.min(255, ((num >> 8) & 0x00FF) + percent * 2.55))
-    const b = Math.max(0, Math.min(255, (num & 0x0000FF) + percent * 2.55))
+    // Increase brightness adjustment factor for better hover/active contrast
+    const factor = percent < 0 ? 3.5 : 2.55
+    const r = Math.max(0, Math.min(255, (num >> 16) + percent * factor))
+    const g = Math.max(0, Math.min(255, ((num >> 8) & 0x00FF) + percent * factor))
+    const b = Math.max(0, Math.min(255, (num & 0x0000FF) + percent * factor))
     return `#${((1 << 24) + (Math.round(r) << 16) + (Math.round(g) << 8) + Math.round(b)).toString(16).slice(1)}`
   }
 
