@@ -12,8 +12,6 @@
           :key="notification.id"
           :class="[
             'notification-wrapper',
-            { 'is-flat': notification.flat !== false },
-            { 'is-square': notification.square !== false },
             { 'is-not-padding': notification.notPadding !== false }
           ]"
         >
@@ -94,48 +92,25 @@ function removeNotification(id) {
   pointer-events: auto;
 }
 
-/* Vuesax .vs-notification wrapper styles (exact copy from notification.scss line 184-230) */
+/* EXACT dapp .vs-notification wrapper styles (from live computed styles) */
 .notification-wrapper {
   position: relative;
-  max-width: 340px;
-  width: 100%;
+  max-width: none; /* dapp uses width-auto, no max-width constraint */
+  width: auto; /* auto-size to content */
   height: auto;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+  border-radius: 20px; /* dapp uses DEFAULT rounded, NOT square */
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3); /* dapp HAS shadow, NOT flat */
   overflow: hidden;
-  background: var(--color-background-primary, #1a1a1a);
-  color: var(--color-text-primary, #ffffff);
+  background-color: rgb(30, 32, 35); /* EXACT dapp dark background */
+  color: rgb(255, 255, 255);
   margin: 3px 10px;
   transition: all 0.25s ease, transform 0.3s ease 0.1s, max-height 0.25s ease, clip-path 0.5s ease 0.1s;
+  clip-path: circle(145% at 100% 50%);
 }
 
-/* When flat: true (line 236-266) */
-.notification-wrapper.is-flat {
-  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-  background: transparent; /* Let ::after handle background */
-}
-
-.notification-wrapper.is-flat::after {
-  content: '';
-  background: var(--color-background-secondary, rgba(255, 255, 255, 0.1));
-  width: 100%;
-  height: 100%;
-  border-radius: inherit;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  transition: all 0.25s ease;
-}
-
-/* When square: true (line 228-230) */
-.notification-wrapper.is-square {
-  border-radius: 0 !important;
-}
-
-/* When notPadding: true (line 207-209) */
-.notification-wrapper.is-not-padding :deep(.notification) {
-  padding: 0 !important;
+/* notPadding: true - wrapper has padding: 0 */
+.notification-wrapper.is-not-padding {
+  padding: 0;
 }
 
 /* Top positions */
