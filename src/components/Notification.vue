@@ -253,19 +253,19 @@ onMounted(() => {
 
 /* Icon */
 .notification-icon {
-  font-size: 24px;
+  font-size: 50px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  width: 50px;
+  height: 50px;
 }
 
 /* Loading */
 .notification-loading {
-  width: 24px;
-  height: 24px;
+  width: 50px;
+  height: 50px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -273,9 +273,9 @@ onMounted(() => {
 }
 
 .spinner {
-  width: 20px;
-  height: 20px;
-  border: 2px solid rgba(0, 0, 0, 0.1);
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
   border-top-color: currentColor;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
