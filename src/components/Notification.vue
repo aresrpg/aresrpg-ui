@@ -236,7 +236,7 @@ onMounted(() => {
 /* Icon/Spinner - exact dapp .spin sizing */
 .notification-icon,
 .notification-loading {
-  width: 50px;
+  width: 50px; /* Container size for centering */
   height: 50px;
   display: flex;
   justify-content: center;
@@ -245,13 +245,22 @@ onMounted(() => {
 }
 
 .notification-icon {
-  font-size: 50px;
+  font-size: 20px; /* ACTUAL icon size (not container size!) */
+}
+
+.notification-icon i {
+  font-size: 20px; /* Icon element size */
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid rgba(0, 0, 0, 0.1);
+  width: 20px; /* Actual spinner size, not container */
+  height: 20px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
   border-top-color: currentColor;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
