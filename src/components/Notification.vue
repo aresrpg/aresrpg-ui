@@ -192,28 +192,29 @@ onMounted(() => {
 </script>
 
 <style scoped>
+/* Match dapp toast.vue styling exactly */
 .notification {
   position: relative;
   display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 12px;
-  background: var(--glass-bg);
-  backdrop-filter: blur(25px) saturate(180%);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  border-radius: 12px;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 0;
+  padding: 0.25em 0.5em;
+  background: rgba(30, 30, 40, 0.95);
+  backdrop-filter: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
   min-width: 280px;
   max-width: 500px;
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease-in-out;
 }
 
-/* Removed hover lift effect for vuesax consistency */
-
-/* Flat mode */
+/* Flat mode - same as default for dapp style */
 .notification.flat {
-  background: var(--glass-bg-light);
-  backdrop-filter: blur(10px);
+  background: rgba(30, 30, 40, 0.95);
+  backdrop-filter: none;
 }
 
 /* Square mode */
@@ -285,17 +286,20 @@ onMounted(() => {
   to { transform: rotate(360deg); }
 }
 
-/* Content */
+/* Content - match dapp .left styling */
 .notification-content {
   flex: 1;
   min-width: 0;
+  display: flex;
+  flex-flow: column nowrap;
+  padding-right: 0.5em;
 }
 
 .notification-title {
   font-size: 0.7em;
   font-weight: bold;
   text-transform: uppercase;
-  margin-bottom: 4px;
+  margin-bottom: 0;
 }
 
 .notification-text {
