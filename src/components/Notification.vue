@@ -192,37 +192,18 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* Match dapp toast.vue styling exactly */
+/* Copy exact dapp toast.vue .notification-loader styling */
 .notification {
-  position: relative;
+  /* Inner layout only - NO background/border styles (handled by parent) */
   display: flex;
   flex-flow: row nowrap;
-  align-items: center;
   justify-content: space-evenly;
-  gap: 0;
-  padding: 0.25em 0.5em;
-  background: rgba(30, 30, 40, 0.95);
-  backdrop-filter: none;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  border-radius: 6px;
-  min-width: 280px;
-  max-width: 500px;
-  overflow: hidden;
+  align-items: center;
   transition: all 0.3s ease-in-out;
+  padding: 0.25em 0.5em;
 }
 
-/* Flat mode - same as default for dapp style */
-.notification.flat {
-  background: rgba(30, 30, 40, 0.95);
-  backdrop-filter: none;
-}
-
-/* Square mode */
-.notification.square {
-  border-radius: 0;
-}
-
-/* No padding */
+/* No padding mode */
 .notification.notPadding {
   padding: 0;
 }
@@ -252,25 +233,19 @@ onMounted(() => {
   color: var(--color-info);
 }
 
-/* Icon */
-.notification-icon {
-  font-size: 50px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-}
-
-/* Loading */
+/* Icon/Spinner - exact dapp .spin sizing */
+.notification-icon,
 .notification-loading {
   width: 50px;
   height: 50px;
-  flex-shrink: 0;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.notification-icon {
+  font-size: 50px;
 }
 
 .spinner {
@@ -286,30 +261,31 @@ onMounted(() => {
   to { transform: rotate(360deg); }
 }
 
-/* Content - match dapp .left styling */
+/* Content - exact dapp .left styling */
 .notification-content {
-  flex: 1;
-  min-width: 0;
   display: flex;
   flex-flow: column nowrap;
   padding-right: 0.5em;
+  flex: 1;
+  min-width: 0;
 }
 
 .notification-title {
   font-size: 0.7em;
   font-weight: bold;
   text-transform: uppercase;
-  margin-bottom: 0;
 }
 
 .notification-text {
   font-size: 0.8em;
   opacity: 0.7;
-  line-height: 1.4;
 }
 
-/* Close button */
+/* Close button (optional, dapp .right equivalent) */
 .notification-close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: none;
   border: none;
   cursor: pointer;
@@ -317,17 +293,13 @@ onMounted(() => {
   padding: 0;
   width: 24px;
   height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
   flex-shrink: 0;
   opacity: 0.5;
+  transition: opacity 0.2s ease;
 }
 
 .notification-close:hover {
   opacity: 1;
-  transform: scale(1.1);
 }
 
 /* Progress bar */
@@ -355,38 +327,5 @@ onMounted(() => {
 .notification-slide-leave-to {
   opacity: 0;
   transform: translateX(100%) scale(0.8);
-}
-
-/* Mobile responsive - full width */
-@media (max-width: 768px) {
-  .notification {
-    min-width: 100vw;
-    max-width: 100vw;
-    width: 100vw;
-    margin: 0;
-    border-radius: 0;
-  }
-
-  .notification-title {
-    font-size: 13px;
-  }
-
-  .notification-text {
-    font-size: 12px;
-  }
-}
-
-/* Neumorphism theme support */
-[data-theme="neumorphism"] .notification {
-  background: var(--color-bg-primary);
-  backdrop-filter: none;
-  box-shadow: 4px 4px 8px rgba(163, 177, 198, 0.35),
-              -4px -4px 8px rgba(255, 255, 255, 0.45);
-}
-
-[data-theme="neumorphism"] .notification.flat {
-  background: var(--color-bg-primary);
-  box-shadow: 2px 2px 4px rgba(163, 177, 198, 0.35),
-              -2px -2px 4px rgba(255, 255, 255, 0.45);
 }
 </style>
