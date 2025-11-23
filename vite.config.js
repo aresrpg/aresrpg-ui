@@ -30,7 +30,7 @@ export default defineConfig(({ mode }) => {
         formats: ['es', 'umd']
       },
       rollupOptions: {
-        external: ['vue', 'lucide-vue-next'],
+        external: ['vue', 'lucide-vue-next', 'marked'],
         output: [
           // ES module build with preserved modules for tree shaking
           {
