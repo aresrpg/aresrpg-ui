@@ -292,17 +292,15 @@ onMounted(() => {
 }
 
 .notification-title {
-  font-weight: 700;
-  font-size: 14px;
-  margin-bottom: 4px;
-  color: var(--color-text-primary, #fff);
-  text-transform: uppercase;
   font-size: 0.7em;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 4px;
 }
 
 .notification-text {
   font-size: 0.8em;
-  color: var(--color-text-secondary, rgba(255, 255, 255, 0.7));
+  opacity: 0.7;
   line-height: 1.4;
 }
 
@@ -310,7 +308,6 @@ onMounted(() => {
 .notification-close {
   background: none;
   border: none;
-  color: var(--color-text-secondary, rgba(255, 255, 255, 0.5));
   cursor: pointer;
   font-size: 20px;
   padding: 0;
@@ -321,10 +318,11 @@ onMounted(() => {
   justify-content: center;
   transition: all 0.2s ease;
   flex-shrink: 0;
+  opacity: 0.5;
 }
 
 .notification-close:hover {
-  color: var(--color-text-primary, #fff);
+  opacity: 1;
   transform: scale(1.1);
 }
 
