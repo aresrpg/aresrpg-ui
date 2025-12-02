@@ -23,7 +23,7 @@ function addNotification(options) {
   const id = generateId()
   const notification = {
     id,
-    ...options
+    ...options,
   }
 
   notifications.value.push(notification)
@@ -33,11 +33,25 @@ function addNotification(options) {
    * @param {Object} updates - Properties to update
    */
   function update(updates) {
-    const index = notifications.value.findIndex(n => n.id === id)
+    const index = notifications.value.findIndex((n) => n.id === id)
     if (index !== -1) {
-      notifications.value[index] = {
-        ...notifications.value[index],
-        ...updates
+      const current = notifications.value[index]
+
+      // Special handling for componentProps to avoid re-rendering component
+      if (updates.componentProps && !updates.component && current.component) {
+        notifications.value[index] = {
+          ...current,
+          ...updates,
+          componentProps: {
+            ...current.componentProps,
+            ...updates.componentProps,
+          },
+        }
+      } else {
+        notifications.value[index] = {
+          ...current,
+          ...updates,
+        }
       }
     }
   }
@@ -46,7 +60,7 @@ function addNotification(options) {
    * Remove this notification
    */
   function remove() {
-    const index = notifications.value.findIndex(n => n.id === id)
+    const index = notifications.value.findIndex((n) => n.id === id)
     if (index !== -1) {
       notifications.value.splice(index, 1)
     }
@@ -56,7 +70,7 @@ function addNotification(options) {
     id,
     update,
     remove,
-    close: remove
+    close: remove,
   }
 }
 
@@ -65,7 +79,7 @@ function addNotification(options) {
  * @param {number} id - Notification ID
  */
 function removeNotification(id) {
-  const index = notifications.value.findIndex(n => n.id === id)
+  const index = notifications.value.findIndex((n) => n.id === id)
   if (index !== -1) {
     notifications.value.splice(index, 1)
   }
@@ -94,7 +108,7 @@ function success(content, title = 'Success', options = {}) {
     flat: true,
     duration: 7000,
     position: 'bottom-right',
-    ...options
+    ...options,
   })
 }
 
@@ -114,7 +128,7 @@ function error(content, title = 'Error', options = {}) {
     flat: true,
     duration: 7000,
     position: 'bottom-right',
-    ...options
+    ...options,
   })
 }
 
@@ -134,7 +148,7 @@ function info(content, title = 'Info', options = {}) {
     flat: true,
     duration: 7000,
     position: 'bottom-right',
-    ...options
+    ...options,
   })
 }
 
@@ -154,7 +168,7 @@ function warning(content, title = 'Warning', options = {}) {
     flat: true,
     duration: 7000,
     position: 'bottom-right',
-    ...options
+    ...options,
   })
 }
 
@@ -175,7 +189,7 @@ function dark(content, title = 'Notice', options = {}) {
     duration: 7000,
     position: 'bottom-right',
     width: 'auto',
-    ...options
+    ...options,
   })
 }
 
@@ -195,7 +209,7 @@ function primary(content, title = 'Notification', options = {}) {
     flat: true,
     duration: 7000,
     position: 'bottom-right',
-    ...options
+    ...options,
   })
 }
 
@@ -218,7 +232,7 @@ function create(options = {}) {
     position: options.position || 'bottom-right',
     component: options.component || null,
     componentProps: options.componentProps || {},
-    ...options
+    ...options,
   })
 }
 
@@ -238,7 +252,7 @@ export function useNotification() {
     warning,
     dark,
     primary,
-    create
+    create,
   }
 }
 
@@ -252,5 +266,5 @@ export default {
   dark,
   primary,
   create,
-  tx: create // Alias for transaction-style notifications
+  tx: create, // Alias for transaction-style notifications
 }
